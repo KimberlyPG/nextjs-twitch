@@ -13,8 +13,8 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET,  
   session: {
-    strategy: 'jwt',
-  },
+    strategy: "jwt"
+ },
   pages: {
     signIn: '/login'
   },
@@ -22,10 +22,10 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       // initial sign in
       if (account && user) {
+        console.log("TOKEN", token);
         return{
           ...token,
           accessToken: account.access_token,
-          refreshToken: account.refresh_token,
           username: token.name,
           accessTokenExpires: account.expires_at * 1000,
         };
@@ -36,15 +36,12 @@ export default NextAuth({
         console.log("EXISTING ACCESS TOKEN IS VALID");
         return token;
       }
-
-      console.log("ACCESS TOKEN HAS EXPIRED, REFRESHING...");
     },
 
     async session({ session, token }) {      
-      
       session.user.token = token.accessToken;
       session.user.name = token.username;
-      session.user.id = token.sub;
+
       return session;
     },
   },

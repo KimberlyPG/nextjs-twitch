@@ -9,20 +9,14 @@ const Home: NextPage = () => {
   // const { data: getToken } = useSession()
   // console.log(getToken)
 
-  // const { data: session, status } = useSession()
+  const { data: session, status } = useSession()
   // console.log(session)
   // const user = getSession();
   // console.log("user:",  session?.user);
 
-  // const getToken = () => {
-  //   axios.get("https://id.twitch.tv/oauth2/token",
-  //   {
-  //     headers: {
-  //       "content-type": "ap"
-  //     }
-  //   }
-  //   ) 
-  // }
+  if (!session) {
+    console.log("Not Authenticated" );
+  }
 
   return (
     <div>

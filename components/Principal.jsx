@@ -24,42 +24,42 @@ const Principal = () => {
     //     getValidation();
     // }, [])
 
-    // useEffect(() => {
-    //         const getStreams = async () => {
-    //             if(currentToken) {
-    //                 const information = await fetch(`https://api.twitch.tv/helix/streams?first=8`,
-    //                 {
-    //                     headers: {
-    //                         "Authorization": `Bearer ${currentToken}`,
-    //                         "Client-Id": 'vg45al0z1c3d2awrv8zqh1rxx9pqwq',
-    //                     }
-    //                 }
-    //                 ).then(res => res.json());
-    
-    //                 setData(information.data);
-    //             }
-    //             }
-    //         getStreams();
-    //         console.log("a");
-    // }, [])
-
     useEffect(() => {
-        const getStreams = async () => {
-            if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=${useId}`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
+            const getStreams = async () => {
+                if(currentToken) {
+                    const information = await fetch(`https://api.twitch.tv/helix/streams?first=8`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${currentToken}`,
+                            "Client-Id": 'vg45al0z1c3d2awrv8zqh1rxx9pqwq',
+                        }
                     }
+                    ).then(res => res.json());
+    
+                    setData(information.data);
                 }
-                ).then(res => res.json());
-
-                setData(information);
-            }
-            }
-        getStreams();
+                }
+            getStreams();
+            console.log("a");
     }, [])
+
+    // useEffect(() => {
+    //     const getStreams = async () => {
+    //         if(currentToken) {
+    //             const information = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=${useId}`,
+    //             {
+    //                 headers: {
+    //                     "Authorization": `Bearer ${currentToken}`,
+    //                     "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
+    //                 }
+    //             }
+    //             ).then(res => res.json());
+
+    //             setData(information);
+    //         }
+    //         }
+    //     getStreams();
+    // }, [])
 
     console.log("data2: ", list);
     return (
@@ -75,7 +75,7 @@ const Principal = () => {
                 }
             </div> */}
 
-            <div className="grid grid-cols-4 grid-flow-row">
+            {/* <div className="grid grid-cols-4 grid-flow-row">
                 {list && list?.map((streams) => (
                     <div>
                     <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
@@ -85,7 +85,7 @@ const Principal = () => {
                     </div>
                     ))
                 }
-            </div>
+            </div> */}
         </div>
     )
 } 
