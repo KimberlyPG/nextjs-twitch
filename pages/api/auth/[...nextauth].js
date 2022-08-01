@@ -5,24 +5,29 @@ export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     TwitchProvider({
-      clientId: 'vdad16o4rb91nnzy9bnawjqqprhan6',
-      clientSecret: 'x8wp1ayix527lhe9zinnzaikdp1ffs',
+      clientId: process.env.TWITCH_CLIENT_ID,
+      clientSecret: process.env.TWITCH_CLIENT_SECRET,
       authorization: LOGIN_URL,
     }),
     // ...add more providers here
   ],
   secret: process.env.JWT_SECRET,  
+  session: {
+    strategy: 'jwt',
+  },
   pages: {
     signIn: '/login'
   },
   callbacks: {
-    async jwt({ token, account, user }){
+    async jwt({ token, account, user }) {
       // initial sign in
       if (account && user) {
-        return {
+        return{
           ...token,
           accessToken: account.access_token,
-          username: account.providerAccountId,
+          refreshToken: account.refresh_token,
+          username: token.name,
+          accessTokenExpires: account.expires_at * 1000,
         };
       }
 
@@ -31,13 +36,16 @@ export default NextAuth({
         console.log("EXISTING ACCESS TOKEN IS VALID");
         return token;
       }
+
+      console.log("ACCESS TOKEN HAS EXPIRED, REFRESHING...");
     },
 
-    async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.username = token.username;
-
+    async session({ session, token }) {      
+      
+      session.user.token = token.accessToken;
+      session.user.name = token.username;
+      session.user.id = token.sub;
       return session;
-    }
+    },
   },
 })
