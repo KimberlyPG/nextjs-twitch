@@ -1,8 +1,6 @@
 import type { NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react';
 import Principal from "../components/Principal";
-import Topbar from "../components/Topbar";
-import axios from 'axios';
 
 const Home: NextPage = () => {
 
@@ -20,9 +18,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Topbar />
       <Principal />
-      <h1 className="text-3xl font-bold underline">Hello</h1>
     </div>
   );
 }
