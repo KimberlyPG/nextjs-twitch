@@ -4,8 +4,8 @@ export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     {
-      clientId: 'vdad16o4rb91nnzy9bnawjqqprhan6',
-      clientSecret: 'guyueda45vxywnynlajhowkv2ooggh',
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
       wellKnown: "https://id.twitch.tv/oauth2/.well-known/openid-configuration",
       id: "twitch",
       name: "Twitch",
