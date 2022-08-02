@@ -1,20 +1,45 @@
 import NextAuth from "next-auth"
-import TwitchProvider from "next-auth/providers/twitch";
-import { LOGIN_URL } from "../../../lib/twitch";
+
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
-    TwitchProvider({
-      clientId: process.env.TWITCH_CLIENT_ID,
-      clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      authorization: LOGIN_URL,
-    }),
-    // ...add more providers here
+    {
+      clientId: 'vdad16o4rb91nnzy9bnawjqqprhan6',
+      clientSecret: 'guyueda45vxywnynlajhowkv2ooggh',
+      wellKnown: "https://id.twitch.tv/oauth2/.well-known/openid-configuration",
+      id: "twitch",
+      name: "Twitch",
+      type: "oauth",
+      authorization: {
+        params: {
+          scope: "openid user:read:email",
+          claims: {
+            id_token: {
+              email: null,
+              picture: null,
+              preferred_username: null,
+            },
+          },
+        },
+      },
+    idToken: true,
+    profile(profile) {
+      return {
+        id: profile.sub,
+        name: profile.preferred_username,
+        email: profile.email,
+        image: profile.picture,
+      }
+    },
+    },
   ],
-  secret: process.env.JWT_SECRET,  
+  secret: 'some_super_secret_value',  
   session: {
-    strategy: "jwt"
- },
+    strategy: 'jwt',
+  },
+  jwt: {
+     secret: 'some_super_secret_value',
+  },
   pages: {
     signIn: '/login'
   },
@@ -22,6 +47,8 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       // initial sign in
       if (account && user) {
+        console.log("token", token);
+        console.log("account", account);
         console.log("TOKEN", token);
         return{
           ...token,
@@ -45,4 +72,4 @@ export default NextAuth({
       return session;
     },
   },
-})
+});
