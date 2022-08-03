@@ -34,9 +34,6 @@ export default NextAuth({
     },
   ],
   secret: 'some_super_secret_value',  
-  session: {
-    strategy: 'jwt',
-  },
   jwt: {
      secret: 'some_super_secret_value',
   },

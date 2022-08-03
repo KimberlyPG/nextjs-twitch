@@ -65,7 +65,7 @@ const Principal = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=4`,
+        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=5`,
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
@@ -84,7 +84,7 @@ const Principal = () => {
     }
 
     return (
-        <div className="text-white w-screen">
+        <div className="text-white w-screen h-screen overflow-y-scroll scrollbar-hide">
             <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
                  <div className="flex flex-col pt-10">
                     {result?.map((streams) => (

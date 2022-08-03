@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className='bg-black h-screen'>
+    <div className='bg-black h-100 w-100'>
       <Principal />
     </div>
   );
