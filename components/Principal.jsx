@@ -61,7 +61,6 @@ const Principal = () => {
                 }
                 }
             getStreams();
-            console.log("a");
     }, []);
 
     const handleSubmit = (event) => {
@@ -76,6 +75,7 @@ const Principal = () => {
         ).then((data) => {
             setResults(data.data.data);
         })
+        console.log("results: ", result);
     }
 
     const handleChange = (event) => {
@@ -84,9 +84,9 @@ const Principal = () => {
     }
 
     return (
-        <div className="text-white">
+        <div className="text-white w-screen">
             <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
-                 <div className="grid grid-cols-4 grid-flow-row place-items-center pt-10">
+                 <div className="flex flex-col pt-10">
                     {result?.map((streams) => (
                         <SearchList key={streams.id} streams={streams}/>
                         )
@@ -96,11 +96,11 @@ const Principal = () => {
                 <h1 className="pl-8 pb-5">Recommended channels</h1> 
                 <div className="grid grid-cols-4 grid-flow-row place-items-center">
                     {data &&  data?.map((streams) => (
-                        <div>
-                        <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                        <h4 className="w-80 truncate">{streams.title}</h4>
-                        <h4>{streams.user_name}</h4>
-                        <h4 key={streams.id}>{streams.game_name}</h4>
+                        <div className="cursor-pointer text-xs text-slate-400">
+                            <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                            <h4 className="w-80 truncate text-white text-sm">{streams.title}</h4>
+                            <h4>{streams.user_name}</h4>
+                            <h4>{streams.game_name}</h4>
                         </div>
                         ))
                     }
