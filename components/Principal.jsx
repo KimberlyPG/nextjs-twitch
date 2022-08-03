@@ -84,25 +84,27 @@ const Principal = () => {
     }
 
     return (
-        <div>
+        <div className="text-white">
             <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
-                 <div className="grid grid-cols-4 grid-flow-row">
+                 <div className="grid grid-cols-4 grid-flow-row place-items-center pt-10">
                     {result?.map((streams) => (
                         <SearchList key={streams.id} streams={streams}/>
                         )
                     )}
+            </div>
+            <div className="pt-10">
+                <h1 className="pl-8 pb-5">Recommended channels</h1> 
+                <div className="grid grid-cols-4 grid-flow-row place-items-center">
+                    {data &&  data?.map((streams) => (
+                        <div>
+                        <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                        <h4 className="w-80 truncate">{streams.title}</h4>
+                        <h4>{streams.user_name}</h4>
+                        <h4 key={streams.id}>{streams.game_name}</h4>
+                        </div>
+                        ))
+                    }
                 </div>
-      
-            <div className="grid grid-cols-4 grid-flow-row">
-                {data &&  data?.map((streams) => (
-                    <div>
-                    <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                    <h4 className="w-80 truncate">{streams.title}</h4>
-                    <h4>{streams.user_name}</h4>
-                    <h4 key={streams.id}>{streams.game_name}</h4>
-                    </div>
-                    ))
-                }
             </div>
         </div>
     )

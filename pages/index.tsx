@@ -3,21 +3,14 @@ import { getSession, useSession } from 'next-auth/react';
 import Principal from "../components/Principal";
 
 const Home: NextPage = () => {
-
-  // const { data: getToken } = useSession()
-  // console.log(getToken)
-
   const { data: session, status } = useSession()
-  // console.log(session)
-  // const user = getSession();
-  // console.log("user:",  session?.user);
 
   if (!session) {
     console.log("Not Authenticated" );
   }
 
   return (
-    <div>
+    <div className='bg-black h-screen'>
       <Principal />
     </div>
   );
