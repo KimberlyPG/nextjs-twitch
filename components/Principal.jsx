@@ -1,19 +1,22 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { RiRadioButtonLine } from "react-icons/ri";
 import SearchList from "./Search-list";
 import { useSession } from "next-auth/react";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
+import axios from "axios";
 // import ReactTwitchEmbedVideo from "react-twitch-embed-video"
 
 const Principal = () => {
+    const { data: session, status } = useSession();
+
     const [data, setData] = useState([]);
     const [name, setName] = useState("");
     const [result, setResults] = useState([]);
     const [gamesTop, setGamesTop] = useState([]);
+    const [followed, setFollowed] = useState([]);
 
-    const { data: session, status } = useSession()
-    console.log('session', session);
+    const userId = session?.user.id;
     const currentToken = session?.user.token;
     // const userId = session.user.id;
     // console.log("userId", session.user.id)
@@ -29,24 +32,6 @@ const Principal = () => {
     //         )
     //     }
     //     getValidation();
-    // }, [])
-
-    // useEffect(() => {
-    //     const getStreams = async () => {
-    //         if(currentToken) {
-    //             const information = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=${useId}`,
-    //             {
-    //                 headers: {
-    //                     "Authorization": `Bearer ${currentToken}`,
-    //                     "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
-    //                 }
-    //             }
-    //             ).then(res => res.json());
-
-    //             setData(information);
-    //         }
-    //         }
-    //     getStreams();
     // }, [])
 
     useEffect(() => {
@@ -66,6 +51,25 @@ const Principal = () => {
                 }
             getStreams();
     }, []);
+
+    useEffect(() => {
+        const getFollowed = async () => {
+            if(currentToken) {
+                const information = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=${userId}`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${currentToken}`,
+                        "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
+                    }
+                }
+                ).then(res => res.json());
+
+                setFollowed(information.data);
+            }
+            }
+        getFollowed();
+    }, [])
+    console.log("followed", followed);
 
     useEffect(() => {
         const getGames = async () => {
@@ -108,7 +112,7 @@ const Principal = () => {
     return (
         // <div className="flex">
         //     <Sidebar />
-            <div className="text-white overflow-y-scroll scrollbar-hide">
+            <div className="text-white h-screen overflow-y-scroll scrollbar-hide">
                 <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
                     <div className="flex flex-col pt-10">
                         {result?.map((streams) => (
@@ -116,6 +120,23 @@ const Principal = () => {
                             )
                         )}
                     </div>
+                
+                <div className="pt-10">
+                    <h1 className="pl-8 pb-5">Followed Live Channels</h1> 
+                    <div className="grid grid-cols-4 grid-flow-row place-items-center">
+                        {followed?.map((streamer) => (
+                            <div className="cursor-pointer text-xs text-slate-400">
+                                <img className="w-80" src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                                <h4 className="text-white text-sm">{streamer.user_name}</h4>
+                                <h4>{streamer.game_name}</h4>
+                                <div className="flex flex-inline items-center">
+                                    <RiRadioButtonLine className="text-red-500"/>
+                                    <h4 className="ml-2">{streamer.viewer_count}</h4>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 

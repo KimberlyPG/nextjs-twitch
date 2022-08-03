@@ -12,7 +12,7 @@ export default NextAuth({
       type: "oauth",
       authorization: {
         params: {
-          scope: "openid user:read:email",
+          scope: "openid user:read:email user:read:follows",
           claims: {
             id_token: {
               email: null,
@@ -52,6 +52,7 @@ export default NextAuth({
           accessToken: account.access_token,
           username: token.name,
           accessTokenExpires: account.expires_at * 1000,
+          id: token.sub
         };
       }
 
@@ -65,7 +66,7 @@ export default NextAuth({
     async session({ session, token }) {      
       session.user.token = token.accessToken;
       session.user.name = token.username;
-
+      session.user.id = token.sub;
       return session;
     },
   },
