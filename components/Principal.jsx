@@ -110,8 +110,8 @@ const Principal = () => {
     }
 
     return (
-        // <div className="flex">
-        //     <Sidebar />
+        <div className="flex">
+            <Sidebar />
             <div className="text-white h-screen overflow-y-scroll scrollbar-hide">
                 <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
                     <div className="flex flex-col pt-10">
@@ -157,7 +157,7 @@ const Principal = () => {
                     <div className="grid grid-cols-6 grid-flow-row place-items-center">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <div className="cursor-pointer place-items-center pl-20">
-                                <img className="w-60" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
+                                <img className="w-52" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
                                 <h4 className="w-80 truncate text-white text-sm">{games.name}</h4>
                             </div>
                             ))
@@ -165,7 +165,7 @@ const Principal = () => {
                     </div>
                 </div>
             </div>
-        // </div>
+        </div>
     )
 } 
 
