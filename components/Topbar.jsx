@@ -5,7 +5,7 @@ const Topbar = ({ handleChange, handleSubmit}) => {
     const { data: session, status } = useSession()
     
     return (
-        <div className="flex flex-row w-screen justify-between pt-2 pb-1 items-center pl-5 pr-5">
+        <div className="flex flex-row justify-between pt-2 pb-1 items-center pl-5 pr-5">
             <BsTwitch className="text-purple-800 text-2xl justify-start"/>
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
