@@ -29,22 +29,26 @@ const Sidebar = () => {
     console.log("followed channels", followed);
 
     // useEffect(() => {
-    //     const getFollowedInfo = async () => {
-    //         if(followed) {
-    //             followed.map((streamer) => (
+    //     followed.map((streamer) => {
+    //     const getFollowedInfo = async() => {
     //                 await fetch(`https://api.twitch.tv/helix/users?id=${streamer.to_id}`,
     //                 {
     //                     headers: {
     //                         "Authorization": `Bearer ${currentToken}`,
-    //                         "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
+    //                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
     //                     }
     //                 }
-    //                 ).then((data) => setFollowedInfo.push(data));    
-    //             ))
-    //         }}
-    //         getFollowedInfo();
+    //                 ).then((data) => setFollowedInfo(followed => ({
+    //                     setFollowedInfo: [...followed.setFollowedInfo, {data}]
+    //                 }))
+    //                 );
+                    
+    //                 // setFollowedInfo.concat(information);   
+    //             };
+    //             getFollowedInfo();
+    //         })
     // }, [])
-    // console.log("followed info", followed);
+    // console.log("followed info", followedInfo);
 
     return (
         <div className="flex flex-col text-white pt-10 overflow-y-scroll scrollbar-hide h-scree w-60">

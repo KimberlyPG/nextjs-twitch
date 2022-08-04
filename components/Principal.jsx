@@ -18,21 +18,6 @@ const Principal = () => {
 
     const userId = session?.user.id;
     const currentToken = session?.user.token;
-    // const userId = session.user.id;
-    // console.log("userId", session.user.id)
-
-    // useEffect(() => {
-    //     const getValidation = async() => {
-    //         await fetch("https://id.twitch.tv/oauth2/validate",
-    //             {
-    //                 headers: {
-    //                     "Authorization": `OAuth ${currentToken}`,
-    //                 }
-    //             }
-    //         )
-    //     }
-    //     getValidation();
-    // }, [])
 
     useEffect(() => {
             const getStreams = async () => {
@@ -126,7 +111,7 @@ const Principal = () => {
                     <div className="grid grid-cols-4 grid-flow-row place-items-center">
                         {followed?.map((streamer) => (
                             <div className="cursor-pointer text-xs text-slate-400">
-                                <img className="w-80" src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                                <img className="w-80 hover:w-96 hover:opacity-80" src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
                                 <h4 className="text-white text-sm">{streamer.user_name}</h4>
                                 <h4>{streamer.game_name}</h4>
                                 <div className="flex flex-inline items-center">
@@ -143,7 +128,7 @@ const Principal = () => {
                     <div className="grid grid-cols-4 grid-flow-row place-items-center">
                         {data &&  data?.map((streams) => (
                             <div className="cursor-pointer text-xs text-slate-400">
-                                <img className="w-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                                <img className="w-80 hover:w-96 hover:opacity-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
                                 <h4 className="w-80 truncate text-white text-sm">{streams.title}</h4>
                                 <h4>{streams.user_name}</h4>
                                 <h4>{streams.game_name}</h4>
@@ -157,7 +142,7 @@ const Principal = () => {
                     <div className="grid grid-cols-6 grid-flow-row place-items-center">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <div className="cursor-pointer place-items-center pl-20">
-                                <img className="w-52" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
+                                <img className="w-52 hover:w-56 hover:opacity-80" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
                                 <h4 className="w-80 truncate text-white text-sm">{games.name}</h4>
                             </div>
                             ))
