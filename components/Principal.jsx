@@ -107,7 +107,7 @@ const Principal = () => {
                         )}
                     </div>
                 
-                <div className="pt-10">
+                <div className="pt-2">
                     <h1 className="pl-8 pb-5">Followed Live Channels</h1> 
                     <div className="grid grid-cols-4 grid-flow-row place-items-center">
                         {followed?.map((streamer) => (
