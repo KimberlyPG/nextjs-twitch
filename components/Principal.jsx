@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { RiRadioButtonLine } from "react-icons/ri";
 import SearchList from "./Search-list";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import axios from "axios";
@@ -111,9 +112,16 @@ const Principal = () => {
                     <div className="grid grid-cols-4 grid-flow-row place-items-center">
                         {followed?.map((streamer) => (
                             <div className="cursor-pointer text-xs text-slate-400">
-                                <img className="w-80 hover:w-96 hover:opacity-80" src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                                <h4 className="text-white text-sm">{streamer.user_name}</h4>
-                                <h4>{streamer.game_name}</h4>
+                                <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
+                                    <div>
+                                        <img 
+                                            className="w-80 hover:w-96 hover:opacity-80" 
+                                            src={streamer.thumbnail_url.slice(0, -21)+".jpg"} 
+                                        />
+                                        <h4 className="text-white text-sm hover:text-purple-400">{streamer.user_name}</h4>
+                                        <h4>{streamer.game_name}</h4>
+                                    </div>
+                                </Link>
                                 <div className="flex flex-inline items-center">
                                     <RiRadioButtonLine className="text-red-500"/>
                                     <h4 className="ml-2">{streamer.viewer_count}</h4>
@@ -127,12 +135,14 @@ const Principal = () => {
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 
                     <div className="grid grid-cols-4 grid-flow-row place-items-center">
                         {data &&  data?.map((streams) => (
-                            <div className="cursor-pointer text-xs text-slate-400">
-                                <img className="w-80 hover:w-96 hover:opacity-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                                <h4 className="w-80 truncate text-white text-sm">{streams.title}</h4>
-                                <h4>{streams.user_name}</h4>
-                                <h4>{streams.game_name}</h4>
-                            </div>
+                            <Link href={{pathname: '/stream', query:{streamer: (streams.user_name) }}}>
+                                <div className="cursor-pointer text-xs text-slate-400">
+                                    <img className="w-80 hover:w-96 hover:opacity-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                                    <h4 className="w-80 truncate text-white text-sm">{streams.title}</h4>
+                                    <h4>{streams.user_name}</h4>
+                                    <h4>{streams.game_name}</h4>
+                                </div>
+                            </Link>
                             ))
                         }
                     </div>

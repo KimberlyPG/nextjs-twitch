@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react';
 import Principal from "../components/Principal";
-import Sidebar from "../components/Sidebar";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
