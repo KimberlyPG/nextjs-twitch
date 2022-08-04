@@ -8,7 +8,6 @@ const Home: NextPage = () => {
   if (!session) {
     console.log("Not Authenticated" );
   }
-
   return (
     <div className='bg-black h-100 w-100'>
       <Principal />

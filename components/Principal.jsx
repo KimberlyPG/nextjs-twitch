@@ -6,7 +6,6 @@ import Link from "next/link";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import axios from "axios";
-// import ReactTwitchEmbedVideo from "react-twitch-embed-video"
 
 const Principal = () => {
     const { data: session, status } = useSession();
