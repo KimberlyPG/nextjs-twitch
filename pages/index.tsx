@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react';
 import Principal from "../components/Principal";
+import Sidebar from '../components/Sidebar';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -9,7 +10,8 @@ const Home: NextPage = () => {
     console.log("Not Authenticated" );
   }
   return (
-    <div className='bg-black h-100 w-100'>
+    <div className='bg-black h-100 w-100 flex'>
+      <Sidebar />
       <Principal />
     </div>
   );

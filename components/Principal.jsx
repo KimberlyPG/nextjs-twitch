@@ -6,6 +6,8 @@ import Link from "next/link";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addFollowedData, selectFollowedLive, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 
 const Principal = () => {
     const { data: session, status } = useSession();
@@ -16,8 +18,13 @@ const Principal = () => {
     const [gamesTop, setGamesTop] = useState([]);
     const [followed, setFollowed] = useState([]);
 
+    const liveData = useAppSelector(selectFollowedLive);
+    console.log("liveData", liveData);
+
     const userId = session?.user.id;
     const currentToken = session?.user.token;
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
             const getStreams = async () => {
@@ -44,18 +51,19 @@ const Principal = () => {
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": 'vdad16o4rb91nnzy9bnawjqqprhan6',
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                     }
                 }
-                ).then(res => res.json());
-
-                setFollowed(information.data);
+                ).then(res => res.json())
+                dispatch(cleanState({}));
+                dispatch(addFollowedData(information.data))
+                setFollowed(information.data)
+                
             }
             }
         getFollowed();
     }, [])
-    console.log("followed", followed);
-
+ 
     useEffect(() => {
         const getGames = async () => {
             if(currentToken) {
@@ -73,7 +81,6 @@ const Principal = () => {
             }
         getGames();
     }, []);
-    console.log("games top list", gamesTop);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -96,7 +103,6 @@ const Principal = () => {
 
     return (
         <div className="flex">
-            <Sidebar />
             <div className="text-white h-screen overflow-y-scroll scrollbar-hide">
                 <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
                     <div className="flex flex-col pt-10">
@@ -114,7 +120,7 @@ const Principal = () => {
                                 <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                                     <div>
                                         <img 
-                                            className="w-80 hover:w-96 hover:opacity-80" 
+                                            className="w-80 hover:w-96 ease-in duration-200 hover:opacity-80" 
                                             src={streamer.thumbnail_url.slice(0, -21)+".jpg"} 
                                         />
                                         <h4 className="text-white text-sm hover:text-purple-400">{streamer.user_name}</h4>
@@ -136,7 +142,7 @@ const Principal = () => {
                         {data &&  data?.map((streams) => (
                             <Link href={{pathname: '/stream', query:{streamer: (streams.user_name) }}}>
                                 <div className="cursor-pointer text-xs text-slate-400">
-                                    <img className="w-80 hover:w-96 hover:opacity-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                                    <img className="w-80 hover:w-96 ease-in duration-200 hover:opacity-80" src={streams.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
                                     <h4 className="w-80 truncate text-white text-sm">{streams.title}</h4>
                                     <h4>{streams.user_name}</h4>
                                     <h4>{streams.game_name}</h4>
@@ -151,7 +157,7 @@ const Principal = () => {
                     <div className="grid grid-cols-6 grid-flow-row place-items-center">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <div className="cursor-pointer place-items-center pl-20">
-                                <img className="w-52 hover:w-56 hover:opacity-80" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
+                                <img className="w-52 hover:w-56 ease-in duration-200 hover:opacity-80" src={games.box_art_url.slice(0, -21)+".jpg"} alt="" />
                                 <h4 className="w-80 truncate text-white text-sm">{games.name}</h4>
                             </div>
                             ))

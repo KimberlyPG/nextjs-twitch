@@ -15,7 +15,9 @@ const Topbar = ({ handleChange, handleSubmit}) => {
                         onChange={handleChange} 
                     />
                     <button type="submit">
-                        <BsSearch className="text-l ml-2 align-middle cursor-pointer hover:opacity-80"/>
+                        <BsSearch 
+                            className="text-l ml-2 align-middle cursor-pointer hover:opacity-80"
+                        />
                     </button>
                 </form>   
             </div>
