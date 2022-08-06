@@ -19,7 +19,7 @@ const Principal = () => {
     const [followed, setFollowed] = useState([]);
 
     const liveData = useAppSelector(selectFollowedLive);
-    console.log("liveData", liveData);
+    // console.log("liveData", liveData);
 
     const userId = session?.user.id;
     const currentToken = session?.user.token;
