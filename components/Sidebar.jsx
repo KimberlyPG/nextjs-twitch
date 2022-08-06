@@ -70,7 +70,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="flex flex-col text-white pt-10  h-screen overflow-y-scroll scrollbar-hide  w-80
+        <div className="flex flex-col text-white pt-10  h-96 overflow-y-scroll scrollbar-hide  w-96
         sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
             <h4>Followed</h4>
             <div className="w-30 text-gray-200 p-5 text-xs lg:text-sm border-r
@@ -80,9 +80,9 @@ const Sidebar = () => {
                                     <StreamerLive key={data.id} data={data}/>
                             ):(
                                 // <h1>offline</h1>
-                                <div>
-                                    <h1>{data.display_name}</h1>
-                                    <img className="grayscale" src={data.profile_image_url} alt="" />
+                                <div className="flex flex-row pb-3">
+                                    <img className="grayscale rounded-full h-10" src={data.profile_image_url} alt="" />
+                                    <h1 className="pl-2">{data.display_name}</h1>
                                 </div>
                             )
                         ))  }
