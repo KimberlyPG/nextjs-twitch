@@ -4,10 +4,9 @@ import SearchList from "./Search-list";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Topbar from "./Topbar";
-import Sidebar from "./Sidebar";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addFollowedData, selectFollowedLive, cleanState } from "../store/slices/followedLive/followedLiveSlice";
+import { useAppDispatch } from "../store/hooks";
+import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 
 const Principal = () => {
     const { data: session, status } = useSession();
@@ -17,9 +16,6 @@ const Principal = () => {
     const [result, setResults] = useState([]);
     const [gamesTop, setGamesTop] = useState([]);
     const [followed, setFollowed] = useState([]);
-
-    const liveData = useAppSelector(selectFollowedLive);
-    // console.log("liveData", liveData);
 
     const userId = session?.user.id;
     const currentToken = session?.user.token;

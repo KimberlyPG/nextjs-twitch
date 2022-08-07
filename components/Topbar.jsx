@@ -1,12 +1,22 @@
 import { useSession, signOut } from "next-auth/react";
 import { BsTwitch, BsSearch } from "react-icons/bs";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { selectToggle, createToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 
 const Topbar = ({ handleChange, handleSubmit}) => { 
     const { data: session, status } = useSession()
     
+    const dispatch = useAppDispatch()
+    const toggleSidebar = useAppSelector(selectToggle);
+    console.log(toggleSidebar);
+    const toggleButton = () => dispatch(createToggle(!toggleSidebar));
+
     return (
         <div className="flex flex-row justify-between pt-2 pb-1 items-center pl-5 pr-5">
-            <BsTwitch className="text-purple-800 text-2xl justify-start cursor-pointer hover:opacity-80"/>
+            <BsTwitch 
+                className="text-purple-800 text-2xl justify-start cursor-pointer hover:opacity-80"
+                onClick={toggleButton}
+            />
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
                     <input 
