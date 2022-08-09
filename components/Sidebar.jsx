@@ -74,29 +74,29 @@ const Sidebar = () => {
     return (
         <div>
         {toggleSidebar && 
-        <div className="flex flex-col text-white pt-10  h-96 overflow-y-scroll scrollbar-hide w-96
-        sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
-                <h4 className="text-sm">Followed</h4>
-                <div className="p-5 border-r border-gray-900">
-                        {streamerData.map((data) => (
-                                validateLive(data.id) === true && (
-                                    <div>
-                                        <StreamerLive key={data.id} data={data}/>
+            <div className="flex flex-col text-white pt-10  h-96 overflow-y-scroll scrollbar-hide w-96
+            sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
+                    <h4 className="text-sm">Followed</h4>
+                    <div className="p-5 border-r border-gray-900">
+                            {streamerData.map((data) => (
+                                    validateLive(data.id) === true && (
+                                        <div>
+                                            <StreamerLive key={data.id} data={data}/>
+                                        </div>
+                                    )
+                                ))
+                            }
+                            {streamerData.map((data) => (
+                                validateLive(data.id) === false && (
+                                    <div className="flex flex-row pb-3">
+                                        <img className="grayscale rounded-full h-10" src={data.profile_image_url} alt="" />
+                                        <h4 className="pl-2 truncate text-xs">{data.display_name}</h4>
+                                        <span className="text-right text-xs">Offline</span>
                                     </div>
-                                )
-                            ))
-                        }
-                        {streamerData.map((data) => (
-                            validateLive(data.id) === false && (
-                                <div className="flex flex-row pb-3">
-                                    <img className="grayscale rounded-full h-10" src={data.profile_image_url} alt="" />
-                                    <h4 className="pl-2 truncate text-xs">{data.display_name}</h4>
-                                    <span className="text-right text-xs">Offline</span>
-                                </div>
-                                )
-                            ))
-                        }
-                </div>
+                                    )
+                                ))
+                            }
+                    </div>
                 </div>  
             }
         </div>

@@ -3,17 +3,15 @@ import { RiRadioButtonLine } from "react-icons/ri";
 import SearchList from "./Search-list";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import Topbar from "./Topbar";
 import axios from "axios";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
+import { selectSearch } from "../store/slices/searchSlice/searchSlice";
 
 const Principal = () => {
     const { data: session, status } = useSession();
 
     const [data, setData] = useState([]);
-    const [name, setName] = useState("");
-    const [result, setResults] = useState([]);
     const [gamesTop, setGamesTop] = useState([]);
     const [followed, setFollowed] = useState([]);
 
@@ -21,6 +19,8 @@ const Principal = () => {
     const currentToken = session?.user.token;
 
     const dispatch = useAppDispatch();
+
+    const results = useAppSelector(selectSearch);
 
     useEffect(() => {
             const getStreams = async () => {
@@ -78,31 +78,11 @@ const Principal = () => {
         getGames();
     }, []);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=5`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-                }
-            }
-        ).then((data) => {
-            setResults(data.data.data);
-        })
-    }
-
-    const handleChange = (event) => {
-        event.preventDefault();
-        setName(event.target.value);
-    }
-
     return (
         <div className="flex">
             <div className="text-white h-screen overflow-y-scroll scrollbar-hide">
-                <Topbar handleChange={handleChange} handleSubmit={handleSubmit}/>
                     <div className="flex flex-col pt-10">
-                        {result?.map((streams) => (
+                        {results?.map((streams) => (
                             <SearchList key={streams.id} streams={streams}/>
                             )
                         )}

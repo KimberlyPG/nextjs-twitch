@@ -1,16 +1,52 @@
 import { useSession, signOut } from "next-auth/react";
+import { useState } from "react";
 import { BsTwitch, BsSearch } from "react-icons/bs";
+import { useRouter } from 'next/router'
+
+import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { selectToggle, createToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
+import { addSearchData } from "../store/slices/searchSlice/searchSlice";
 
-const Topbar = ({ handleChange, handleSubmit}) => { 
+const Topbar = () => { 
     const { data: session, status } = useSession()
+    const currentToken = session?.user.token;
+    
+    const [name, setName] = useState("");
     
     const dispatch = useAppDispatch()
+
     const toggleSidebar = useAppSelector(selectToggle);
-    console.log(toggleSidebar);
     const toggleButton = () => dispatch(createToggle(!toggleSidebar));
 
+    const router = useRouter()
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=5`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${currentToken}`,
+                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                }
+            }
+            ).then((data) => {
+                data.data.data.map((info) => {
+                    dispatch(addSearchData(info)); 
+                })
+            }); 
+            router.push('/')
+    }
+           
+    const handleChange = (event) => {
+        event.preventDefault();
+        setName(event.target.value);
+    }
+
+    const RedirectHome = () => {
+
+    }
+    
     return (
         <div className="flex flex-row justify-between pt-2 pb-1 items-center pl-5 pr-5">
             <BsTwitch 

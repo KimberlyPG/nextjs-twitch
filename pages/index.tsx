@@ -2,6 +2,8 @@ import type { NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react';
 import Principal from "../components/Principal";
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import Layout from '../components/Layout';
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -11,8 +13,9 @@ const Home: NextPage = () => {
   }
   return (
     <div className='bg-black h-100 w-100 flex'>
-      <Sidebar />
-      <Principal />
+      <Layout>
+        <Principal />
+      </Layout>
     </div>
   );
 }
