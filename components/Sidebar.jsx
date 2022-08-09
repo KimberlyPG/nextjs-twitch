@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+
+import SidebarLive from './Sidebar-live';
+import SidebarOffine from './Sidebar-offline';
+
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-
-import StreamerLive from "./Streamer-live";
-
 import { addStreamerData, selectStreamer, cleanState } from "../store/slices/streamer/streamerSlice";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
@@ -79,20 +80,16 @@ const Sidebar = () => {
                     <h4 className="text-sm">Followed</h4>
                     <div className="p-5 border-r border-gray-900">
                             {streamerData.map((data) => (
-                                    validateLive(data.id) === true && (
-                                        <div>
-                                            <StreamerLive key={data.id} data={data}/>
-                                        </div>
+                                validateLive(data.id) === true && (
+                                    <div>
+                                        <SidebarLive key={data.id} data={data} />
+                                    </div>
                                     )
                                 ))
                             }
                             {streamerData.map((data) => (
                                 validateLive(data.id) === false && (
-                                    <div className="flex flex-row pb-3">
-                                        <img className="grayscale rounded-full h-10" src={data.profile_image_url} alt="" />
-                                        <h4 className="pl-2 truncate text-xs">{data.display_name}</h4>
-                                        <span className="text-right text-xs">Offline</span>
-                                    </div>
+                                    <SidebarOffine key={data.id} data={data} />
                                     )
                                 ))
                             }
