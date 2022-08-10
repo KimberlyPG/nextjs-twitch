@@ -64,7 +64,7 @@ const Sidebar = () => {
          
     const validateLive = (id) => {
         let res = false;
-        streamerLive.forEach((item) => {
+        streamerLive && streamerLive.forEach((item) => {
             if(item.user_id === id ) {
                 res = true
             }
@@ -81,19 +81,16 @@ const Sidebar = () => {
                     <div className="p-5 border-r border-gray-900">
                             {streamerData.map((data) => (
                                 validateLive(data.id) === true && (
-                                    <div>
-                                        <SidebarLive key={data.id} data={data} />
-                                    </div>
-                                    )
-                                ))
-                            }
+                                    <SidebarLive key={data.id} data={data} />
+                                )
+                            ))}
                             {streamerData.map((data) => (
                                 validateLive(data.id) === false && (
                                     <SidebarOffine key={data.id} data={data} />
-                                    )
-                                ))
-                            }
+                                )
+                            ))}
                     </div>
+                    <h4></h4>
                 </div>  
             }
         </div>

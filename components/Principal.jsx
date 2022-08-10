@@ -84,8 +84,7 @@ const Principal = () => {
                     <div className="flex flex-col pt-10">
                         {results?.map((streams) => (
                             <SearchList key={streams.id} streams={streams}/>
-                            )
-                        )}
+                        ))}
                     </div>
                 
                 <div className="pt-2">
