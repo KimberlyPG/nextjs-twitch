@@ -1,5 +1,6 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from 'next/router'
+import Link from "next/link";
 import { useState } from "react";
 import { BsTwitch, BsSearch, BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
 
@@ -66,6 +67,7 @@ const Topbar = () => {
                     onClick={navigateHome}
                 />
             </div>
+
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
                     <input 
@@ -80,11 +82,16 @@ const Topbar = () => {
                     </button>
                 </form>   
             </div>
+
             <div className="flex flex-row justify-end text-white items-center">
                 <h4 className="cursor-pointer pr-10 text-xs hover:text-purple-500" onClick={() => signOut({callbackUrl: "/login" })}>LOGOUT</h4>
 
-                <h4 className="text-xs pr-2 hover:text-purple-500">{session?.user.name}</h4>
-                <img className="rounded-full w-8 h-8 hover:opacity-80" src={session?.user.image} alt="" />
+                <Link href={{pathname: '/stream', query:{streamer: (session?.user.name) }}}>
+                    <div className="flex items-center hover:opacity-80 cursor-pointer">
+                        <h4 className="text-xs pr-2 hover:text-purple-500">{session?.user.name}</h4>
+                        <img className="rounded-full w-8 h-8" src={session?.user.image} alt="" />
+                    </div>
+                </Link>
             </div>
         </div>
     )
