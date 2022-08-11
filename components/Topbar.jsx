@@ -21,11 +21,12 @@ const Topbar = () => {
     const toggleButton = () => dispatch(createToggle(!toggleSidebar));
 
     const router = useRouter()
-    const navigateHome = () => router.push('/')
+    const navigateHome = () => router.push('/');
+    const navigateSearch = () => router.push('/search');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=5`,
+        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=8`,
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
@@ -37,7 +38,7 @@ const Topbar = () => {
                     dispatch(addSearchData(info)); 
                 })
             }); 
-            navigateHome();
+            navigateSearch();
     }
            
     const handleChange = (event) => {
@@ -46,7 +47,7 @@ const Topbar = () => {
     }
   
     return (
-        <div className="flex flex-row text-white justify-between pt-2 pb-1 items-center pl-5 pr-5">
+        <div className="flex flex-row text-white justify-between items-center pt-2 pb-1 pl-5 pr-5">
             <div className=" flex justify-start cursor-pointer text-xs space-x-5">
                 {toggleSidebar ? (
                     <BsArrowBarLeft 

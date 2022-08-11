@@ -5,9 +5,9 @@ const Login = ({ providers }) => {
     const { data: session, status } = useSession()
 
     return (
-        <div>
+        <div className='flex flex-col items-center bg-black min-h-screen w-full justify-center'>
             {Object.values(providers).map((provider) => (
-                <div key={provider.name}>
+                <div key={provider.name} className="items-center">
                     <button 
                         className='bg-[#9825bb] text-white p-5 rounded-full'
                         onClick={() => signIn(provider.id, {callbackUrl: "/" })}
