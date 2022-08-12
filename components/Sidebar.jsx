@@ -64,7 +64,7 @@ const Sidebar = () => {
          
     const validateLive = (id) => {
         let res = false;
-        streamerLive && streamerLive.forEach((item) => {
+        streamerLive !== {} && streamerLive.forEach((item) => {
             if(item.user_id === id ) {
                 res = true
             }
