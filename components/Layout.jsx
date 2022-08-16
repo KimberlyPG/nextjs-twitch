@@ -3,7 +3,7 @@ import Topbar from './Topbar';
 
 const Layout = ({ children }) => {
     return (
-        <div className='flex h-screen overflow-y-scroll scrollbar-hide'>
+        <div className='flex h-screen overflow-y-scroll scrollbar-hide bg-black'>
             <Sidebar />
             <div className='w-full'>
                 <Topbar/>

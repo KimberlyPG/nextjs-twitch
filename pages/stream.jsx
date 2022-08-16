@@ -8,7 +8,6 @@ const Stream = () => {
   
   console.log(router.query);
     return (
-        <div className="bg-black">
           <Layout>
             <ReactTwitchEmbedVideo 
               channel={streamer}
@@ -16,7 +15,6 @@ const Stream = () => {
               height="100%" width="100%" 
               />  
           </Layout>
-        </div>
     )
 }
 

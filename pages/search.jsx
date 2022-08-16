@@ -9,7 +9,6 @@ const Search = () => {
     const results = useAppSelector(selectSearch);
 
     return (
-        <div className="bg-black">
             <Layout>
                 <div className="pt-10">
                     {results?.map((streams) => (
@@ -17,7 +16,6 @@ const Search = () => {
                         ))}
                 </div>
             </Layout>
-        </div>
     )
 }
 

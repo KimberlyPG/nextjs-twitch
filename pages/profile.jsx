@@ -35,7 +35,7 @@ const Profile = () => {
     console.log("videos: ", video);
 
     return (
-        <div className='bg-black text-white'>
+        <div className='text-white'>
             <Layout>
                 <ReactTwitchEmbedVideo 
                 channel={name}
