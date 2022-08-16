@@ -3,11 +3,13 @@ import { useSession } from "next-auth/react";
 
 import SidebarLive from './Sidebar-live';
 import SidebarOffine from './Sidebar-offline';
+import SidebarRecommended from './Sidebar-recommended';
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addStreamerData, selectStreamer, cleanState } from "../store/slices/streamer/streamerSlice";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
+import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
 
 const Sidebar = () => {
     const [followed, setFollowed] = useState([]);
@@ -17,12 +19,13 @@ const Sidebar = () => {
     const streamerData = useAppSelector(selectStreamer);
     const streamerLive = useAppSelector(selectFollowedLive);
     const toggleSidebar = useAppSelector(selectToggle);
+    const recommendedList = useAppSelector(selectRecommended);
 
     const dispatch = useAppDispatch();
 
     const userId = session?.user.id;
     const currentToken = session?.user.token;
- 
+
     useEffect(() => {
         const getFollowed = async () => {
             if(currentToken) {
@@ -75,8 +78,10 @@ const Sidebar = () => {
     return (
         <div>
         {toggleSidebar && 
-            <div className="flex flex-col text-white pt-10 h-96 overflow-y-scroll scrollbar-hide w-96
-            sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
+            <div className="text-white">
+
+                <div className="flex flex-col pt-10 h-96 overflow-y-scroll scrollbar-hide w-96
+                sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
                     <h4 className="text-sm">Followed</h4>
                     <div className="p-5 border-r border-gray-900">
                             {streamerData.map((data) => (
@@ -90,9 +95,20 @@ const Sidebar = () => {
                                 )
                             ))}
                     </div>
-                    <h4></h4>
                 </div>  
-            }
+                <div className="flex flex-col pt-10 h-96 overflow-y-scroll scrollbar-hide w-96
+                sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
+                    <h1>Recommended</h1>
+                    <div className="p-5 border-r border-gray-900">
+                    {recommendedList && recommendedList.map((streamer) => (
+                       <SidebarRecommended streamer={streamer}/>
+                    ))
+                    }
+                    </div>
+                </div>
+
+            </div>
+        }
         </div>
     )
 }

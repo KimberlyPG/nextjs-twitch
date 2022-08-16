@@ -2,14 +2,13 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// import SearchList from "./Search-list";
 import MainFollowed from "./Main-followed";
 import MainStreams from "./Main-streams";
 import MainGamesTop from "./Main-gamesTop";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
-// import { selectSearch } from "../store/slices/searchSlice/searchSlice";
+import { addList, selectRecommended } from "../store/slices/recommended/recommendedSlice";
 
 const Main = () => {
     const { data: session, status } = useSession();
@@ -37,6 +36,7 @@ const Main = () => {
                     }
                     ).then(res => res.json());
     
+                    dispatch(addList(information.data));
                     setData(information.data);
                 }
                 }

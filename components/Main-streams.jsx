@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 const MainStreams = ({ streams }) => {
+
+    
     return (
         <div>
             <Link href={{pathname: '/stream', query:{streamer: (streams.user_name) }}}>
