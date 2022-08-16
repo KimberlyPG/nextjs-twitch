@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const MainGamesTop = ({ games }) => {
     return (
         <div className="cursor-pointer place-items-center pl-20">

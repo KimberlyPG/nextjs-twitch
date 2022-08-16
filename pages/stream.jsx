@@ -8,13 +8,12 @@ const Stream = () => {
   
   console.log(router.query);
     return (
-        <div className="bg-black ">
+        <div className="bg-black">
           <Layout>
             <ReactTwitchEmbedVideo 
               channel={streamer}
               allowfullscreen={true}
-              width="100%"
-              // height="670px"
+              height="100%" width="100%" 
               />  
           </Layout>
         </div>
