@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { RiRadioButtonLine } from "react-icons/ri";
 
 const SidebarRecommended = ({ streamer }) => {
     const { data: session, status } = useSession();
@@ -21,16 +22,22 @@ const SidebarRecommended = ({ streamer }) => {
                     setStreamerData(information.data[0]);
                 };
                 getStreamerInfo();
-    }, [])
+    }, [streamer])
 
     return (
-        <div className="">
+        <div className="flex flex-row text-white w-full mb-5">
             <img 
-                className="rounded full h-8" 
+                className="rounded-full h-8" 
                 src={streamerData.profile_image_url} alt="" 
             />
-            <h4 className="pb-5 w-72 hover:text-purple-400 cursor-pointer pl-2 truncate text-xs">{streamer.user_name}</h4>
-            <h4 className="pb-5 w-72 pl-2 truncate text-xs">{streamer.game_name}</h4>
+            <span>
+                <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-2 truncate text-xs font-semibold">{streamer.user_name}</h4>
+                <h4 className="w-28 pl-2 text-xs text-gray-300 truncate">{streamer.game_name}</h4>
+            </span>
+            <div>
+                <RiRadioButtonLine className="text-red-500 text-xs" />
+                <h4 className="pl-3 text-xs">{streamer.viewer_count}</h4>  
+            </div>
         </div>
     )
 }

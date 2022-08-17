@@ -27,7 +27,7 @@ const Main = () => {
     useEffect(() => {
             const getStreams = async () => {
                 if(currentToken) {
-                    const information = await fetch(`https://api.twitch.tv/helix/streams?first=4`,
+                    const information = await fetch(`https://api.twitch.tv/helix/streams?first=16`,
                     {
                         headers: {
                             "Authorization": `Bearer ${currentToken}`,
@@ -96,8 +96,8 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 
-                    <div className="grid grid-cols-4 grid-flow-row place-items-center">
-                        {data &&  data?.map((streams) => (
+                    <div className="grid grid-cols-4 place-items-center">
+                        {data &&  data?.slice(0, 4).map((streams) => (
                             <MainStreams key={streams.id} streams={streams}/>
                         ))}
                     </div>

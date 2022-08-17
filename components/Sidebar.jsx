@@ -80,9 +80,9 @@ const Sidebar = () => {
         {toggleSidebar && 
             <div className="text-white">
 
-                <div className="flex flex-col pt-10 h-96 overflow-y-scroll scrollbar-hide w-96
+                <h4 className="pt-10 text-sm">Followed</h4>
+                <div className="flex flex-col h-96 w-96 overflow-y-scroll scrollbar-hide 
                 sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
-                    <h4 className="text-sm">Followed</h4>
                     <div className="p-5 border-r border-gray-900">
                             {streamerData.map((data) => (
                                 validateLive(data.id) === true && (
@@ -95,10 +95,11 @@ const Sidebar = () => {
                                 )
                             ))}
                     </div>
-                </div>  
-                <div className="flex flex-col pt-10 h-96 overflow-y-scroll scrollbar-hide w-96
+                </div> 
+
+                <h1 className="pt-10 text-sm">Recommended</h1>
+                <div className="flex flex-col h-96 w-96 overflow-y-scroll scrollbar-hide
                 sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
-                    <h1>Recommended</h1>
                     <div className="p-5 border-r border-gray-900">
                     {recommendedList && recommendedList.map((streamer) => (
                        <SidebarRecommended streamer={streamer}/>
