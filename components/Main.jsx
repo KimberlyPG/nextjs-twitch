@@ -22,8 +22,6 @@ const Main = () => {
 
     const dispatch = useAppDispatch();
 
-    // const results = useAppSelector(selectSearch);
-
     useEffect(() => {
             const getStreams = async () => {
                 if(currentToken) {

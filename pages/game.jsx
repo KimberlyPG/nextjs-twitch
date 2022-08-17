@@ -9,13 +9,16 @@ const Game = () => {
     const currentToken = session?.user.token;
 
     const router = useRouter();
-    const gameId = router.query.game;
+    const gameId = router.query.id;
+    const gameName = router.query.name;
+    const gameUrl = router.query.image;
+    console.log("game", gameId, gameName, gameUrl);
 
     const [channel, setChannel] = useState([]);
  
     useEffect(() => {
         const getChannels = async () => {
-                const information = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=16`,
+                const information = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=12`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -30,20 +33,30 @@ const Game = () => {
         getChannels();
 
     }, [gameId]);
-    console.log("channel", channel);
-
 
     return (
         <Layout>
-            <div className="grid grid-cols-4 grid-flow-row place-items-center text-white">
-                {channel && channel.map((streamer) => (
-                    <div>
+            <div className="text-white">
+                <div className="p-10">
+                    <span className="flex">
                         <img
-                            className="w-80" 
-                            src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                        <span>{streamer.user_name}</span>
-                    </div>
-                ))}
+                            className="h-60" 
+                            src={gameUrl.slice(0, -21)+".jpg"} alt="" 
+                        />
+                        <h4 className="text-4xl">{gameName}</h4>                        
+                    </span>
+                </div>
+
+                <div className="grid grid-cols-4 grid-flow-row place-items-center p-3">
+                    {channel && channel.map((streamer) => (
+                        <div>
+                            <img
+                                className="w-80" 
+                                src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
+                            <span>{streamer.user_name}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </Layout>
     )

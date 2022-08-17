@@ -8,7 +8,6 @@ const SidebarLive = ({ data }) => {
     const liveData = useAppSelector(selectFollowedLive);
     
     const findIndex = () => liveData.findIndex((streamerid) => streamerid.user_id == data.id)
-    console.log(liveData);
 
     return (
         <Link href={{pathname: '/stream', query:{streamer: (data.display_name) }}}>
