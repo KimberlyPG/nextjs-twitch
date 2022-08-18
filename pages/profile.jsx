@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 
@@ -9,6 +10,7 @@ const Profile = () => {
     const router = useRouter();
     const name = router.query.name;
     const id = router.query.id;
+    const state = router.query.state;
 
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
@@ -18,7 +20,7 @@ const Profile = () => {
     useEffect(() => {
         const getVideos = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/videos?user_id=${id}&first=3`,
+                const information = await fetch(`https://api.twitch.tv/helix/videos?user_id=${id}&first=5`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -38,13 +40,13 @@ const Profile = () => {
         <div className='text-white'>
             <Layout>
                 <ReactTwitchEmbedVideo 
-                channel={name}
-                allowfullscreen={false}
-                width="100%"
-                height="400px"
+                    channel={name}
+                    allowfullscreen={state}
+                    width="100%"
+                    height="400px"
+                    onClick={"height=800px"}
                 />  
-          
-
+            
                 <div>
                     <h1>Recent streams</h1>
                     <div className='flex pr-10'>

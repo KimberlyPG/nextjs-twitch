@@ -87,7 +87,7 @@ const Topbar = () => {
             <div className="flex flex-row justify-end text-white items-center">
                 <h4 className="cursor-pointer pr-10 text-xs hover:text-purple-500" onClick={() => signOut({callbackUrl: "/login" })}>LOGOUT</h4>
 
-                <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id) }}}>
+                <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id), state:(false) }}}>
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500">{session?.user.name}</h4>
                         <img className="rounded-full w-8 h-8" src={session?.user.image} alt="" />

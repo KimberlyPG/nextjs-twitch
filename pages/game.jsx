@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import Layout from '../components/Layout';
@@ -20,7 +21,7 @@ const Game = () => {
  
     useEffect(() => {
         const getChannels = async () => {
-                const information = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=12`,
+                const information = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=15`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -52,17 +53,23 @@ const Game = () => {
 
                 <div className="grid grid-cols-5 grid-flow-row place-items-center pt-3">
                     {channel && channel.map((streamer) => (
-                        <div className="pb-7 cursor-pointer hover:opacity-80">
-                            <div className="relative">
-                                <h4 className="m-1 bg-red-500 w-10 h-4 text-xs rounded-md text-center absolute">LIVE</h4>
-                                <img
-                                    className="w-80" 
-                                    src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" 
-                                />
+                        <div className="pb-7">
+                                <div className="relative">
+                                    <h4 className="m-1 bg-red-500 w-10 h-4 text-xs rounded-md text-center absolute">LIVE</h4>
+                                    <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
+                                        <img
+                                            className="w-80 cursor-pointer hover:opacity-80" 
+                                            src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" 
+                                        />
+                                    </Link>
+                                </div>
+                                <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), state:(true)}}}>
+                                    <div className="cursor-pointer text-xs">
+                                        <h3 className="pt-2 font-bold w-80 truncate">{streamer.title}</h3>
+                                        <h4 className="text-gray-400">{streamer.user_name}</h4>
+                                    </div>
+                                </Link>
                             </div>
-                            <h3 className="text-xs w-80 truncate">{streamer.title}</h3>
-                            <h4 className="text-xs text-gray-400">{streamer.user_name}</h4>
-                        </div>
                     ))}
                 </div>
             </div>
