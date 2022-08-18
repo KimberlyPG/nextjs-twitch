@@ -33,27 +33,29 @@ const Game = () => {
         getChannels();
 
     }, [gameId]);
+    console.log("channels", channel);
 
     return (
         <Layout>
-            <div className="text-white">
+            <div className="text-white font-roboto">
                 <div className="p-10">
-                    <span className="flex">
+                    <span className="flex items-center">
                         <img
-                            className="h-60" 
+                            className="h-56 bg-purple-500 shadow-lg shadow-purple-500/50" 
                             src={gameUrl.slice(0, -21)+".jpg"} alt="" 
                         />
-                        <h4 className="text-4xl">{gameName}</h4>                        
+                        <h4 className="text-4xl pl-5">{gameName}</h4>                        
                     </span>
                 </div>
 
-                <div className="grid grid-cols-4 grid-flow-row place-items-center p-3">
+                <div className="grid grid-cols-4 grid-flow-row place-items-center pt-3">
                     {channel && channel.map((streamer) => (
-                        <div>
+                        <div className="pb-7 cursor-pointer hover:opacity-80">
                             <img
                                 className="w-80" 
                                 src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" />
-                            <span>{streamer.user_name}</span>
+                            <h4 className="text-xs w-80 truncate">{streamer.title}</h4>
+                            <h4 className="text-xs text-gray-400">{streamer.user_name}</h4>
                         </div>
                     ))}
                 </div>
