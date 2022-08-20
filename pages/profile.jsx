@@ -43,12 +43,18 @@ const Profile = () => {
                     channel={name}
                     allowfullscreen={state}
                     width="100%"
-                    height="400px"
-                    onClick={"height=800px"}
+                    height="450px"
                 />  
-            
+           
                 <div>
-                    <h1>Recent streams</h1>
+                    {state &&
+                        <div>
+                            <Link href={{pathname: '/stream', query:{streamer: (name) }}}>
+                                <a className='text-red-500 font-bold pl-3'>GO TO LIVE</a>
+                            </Link>
+                        </div>
+                    }
+                    <h1 className='pt-8'>Recent streams</h1>
                     <div className='flex pr-10'>
                         {video &&
                         video.map((item) => (

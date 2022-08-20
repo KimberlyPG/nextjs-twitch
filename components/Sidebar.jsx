@@ -79,8 +79,8 @@ const Sidebar = () => {
         <div>
         {toggleSidebar && 
             <div className="text-white">
-
-                <h4 className="pt-10 text-sm">Followed</h4>
+                
+                <h4 className="text-sm pt-10">Followed</h4>
                 <div className="flex flex-col h-96 w-96 overflow-y-scroll scrollbar-hide 
                 sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
                     <div className="p-5 border-r border-gray-900">

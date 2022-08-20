@@ -64,7 +64,7 @@ const Main = () => {
     useEffect(() => {
         const getGames = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/games/top?first=6`,
+                const information = await fetch(`https://api.twitch.tv/helix/games/top?first=7`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -85,7 +85,7 @@ const Main = () => {
 
                 <div className="pt-2">
                     <h1 className="pl-8 pb-5">Followed Live Channels</h1> 
-                    <div className="grid grid-cols-4 grid-flow-row place-items-center">
+                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 grid-flow-row place-items-center">
                         {followed?.map((streamer) => (                
                             <MainFollowed key={streamer.id} streamer={streamer}/>
                         ))}
@@ -94,8 +94,8 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 
-                    <div className="grid grid-cols-4 place-items-center">
-                        {data &&  data?.slice(0, 4).map((streams) => (
+                    <div className="grid grid-cols-5 place-items-center">
+                        {data &&  data?.slice(0, 5).map((streams) => (
                             <MainStreams key={streams.id} streams={streams}/>
                         ))}
                     </div>
@@ -103,7 +103,7 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Top Games</h1> 
-                    <div className="grid grid-cols-6 grid-flow-row place-items-center">
+                    <div className="grid grid-cols-7 grid-flow-row place-items-center">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <MainGamesTop games={games}/>
                          ))}
