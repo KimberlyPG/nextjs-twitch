@@ -53,7 +53,7 @@ const Topbar = () => {
                 {toggleSidebar ? (
                     <BsArrowBarLeft 
                         onClick={toggleButton}
-                        className="lg:text-purple-400 lg:text-sm hover:opacity-80"
+                        className="text-purple-400 text-sm hover:opacity-80"
                     />
                 ):(
                     <BsArrowBarRight 
