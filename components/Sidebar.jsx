@@ -29,7 +29,7 @@ const Sidebar = () => {
     useEffect(() => {
         const getFollowed = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}&first=100`,
+                const information = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}&first=50`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -78,27 +78,30 @@ const Sidebar = () => {
     return (
         <div>
         {toggleSidebar && 
-            <div className="text-white pt-10">
-                
-                <h4 className="text-sm mb-5 xs:hidden lg:grid">Followed</h4>
-                <div className="flex flex-col h-96 w-80 overflow-y-scroll scrollbar-hide 
-                md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
-                    <div className="p-4 border-r border-gray-900">
-                            {streamerData.map((data) => (
-                                validateLive(data.id) === true && (
-                                    <SidebarLive key={data.id} data={data} />
-                                )
-                            ))}
-                            {streamerData.map((data) => (
-                                validateLive(data.id) === false && (
-                                    <SidebarOffine key={data.id} data={data} />
-                                )
-                            ))}
-                    </div>
-                </div> 
-
+            <div className="text-white pt-10 h-screen">
+                {followed &&
+                     <>
+                        <h4 className="text-sm xs:hidden lg:grid">Followed</h4>
+                        <div className="flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide 
+                        md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
+                            <div className="p-4 border-r border-gray-900">
+                                    {streamerData.map((data) => (
+                                        validateLive(data.id) === true && (
+                                            <SidebarLive key={data.id} data={data} />
+                                        )
+                                    ))}
+                                    {streamerData.map((data) => (
+                                        validateLive(data.id) === false && (
+                                            <SidebarOffine key={data.id} data={data} />
+                                        )
+                                    ))}
+                            </div>
+                        </div> 
+                     </>
+                }
+               
                 <h1 className="pt-10 text-sm xs:hidden lg:grid">Recommended</h1>
-                <div className="flex flex-col h-96 w-80 overflow-y-scroll scrollbar-hide
+                <div className="flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide
                 md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
                     <div className="p-4 border-r border-gray-900">
                     {recommendedList && recommendedList.map((streamer) => (
@@ -107,7 +110,7 @@ const Sidebar = () => {
                     }
                     </div>
                 </div>
-
+            
             </div>
         }
         </div>
