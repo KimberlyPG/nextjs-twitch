@@ -103,7 +103,7 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pb-5">Top Games</h1> 
-                    <div className="grid 2xl:grid-cols-6 3xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4">
+                    <div className="grid 2xl:grid-cols-6 3xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <MainGamesTop games={games}/>
                          ))}
