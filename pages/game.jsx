@@ -40,25 +40,26 @@ const Game = () => {
 
     return (
         <Layout>
-            <div className="text-white font-roboto">
+            <div className="text-white font-roboto p-5">
                 <div className="p-10">
                     <span className="flex items-center">
                         <img
-                            className="h-56 bg-purple-500 shadow-lg shadow-purple-500/50" 
+                            className="lg:h-56 md:h-44 xs:h-36 bg-purple-500 shadow-lg shadow-purple-500/50" 
                             src={gameUrl.slice(0, -21)+".jpg"} alt="" 
-                        />
-                        <h2 className="text-4xl pl-5">{gameName}</h2>                        
+                            />
+                        <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{gameName}</h2>                        
                     </span>
                 </div>
 
-                <div className="grid grid-cols-5 grid-flow-row place-items-center pt-3">
+                <h3 className="text-sm fixed">Live channels we think you'll like</h3>
+                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3 mt-10 relative">
                     {channel && channel.map((streamer) => (
                         <div className="pb-7">
                                 <div className="relative">
                                     <h4 className="m-1 bg-red-500 w-10 h-4 text-xs rounded-md text-center absolute">LIVE</h4>
                                     <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                                         <img
-                                            className="w-80 cursor-pointer hover:opacity-80" 
+                                            className="w-full cursor-pointer hover:opacity-80" 
                                             src={streamer.thumbnail_url.slice(0, -21)+".jpg"} alt="" 
                                         />
                                     </Link>
@@ -69,7 +70,7 @@ const Game = () => {
                                         <h4 className="text-gray-400">{streamer.user_name}</h4>
                                     </div>
                                 </Link>
-                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

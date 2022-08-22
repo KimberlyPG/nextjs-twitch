@@ -10,5 +10,14 @@ module.exports = {
     clientId: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
     secret: process.env.JWT_SECRET
-  }
+  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/login',
+  //       permanent: false
+  //     },
+  //   ]
+  // },
 }

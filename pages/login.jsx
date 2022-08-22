@@ -1,8 +1,14 @@
 import { getProviders, signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router'
 
 const Login = ({ providers }) => {
-    const { data: session, status } = useSession()
+    const { data: session } = useSession();
+    const router = useRouter();
+
+    if(session){
+        router.push('/');
+    }  
 
     return (
         <div className='flex flex-col items-center bg-black min-h-screen w-full justify-center'>

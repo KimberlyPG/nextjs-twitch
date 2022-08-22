@@ -21,7 +21,7 @@ const Topbar = () => {
     const toggleSidebar = useAppSelector(selectToggle);
     const toggleButton = () => dispatch(createToggle(!toggleSidebar));
 
-    const router = useRouter()
+    const router = useRouter();
     const navigateHome = () => router.push('/');
     const navigateSearch = () => router.push('/search');
 
