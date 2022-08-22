@@ -55,13 +55,14 @@ const Profile = () => {
                         </div>
                     }
 
-                    <h1 className='pt-8'>Recent streams</h1>
-                    <div className='flex pr-10'>
+                <div className='p-5 font-roboto'>
+                <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
+                    <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3'>
                         {video &&
                         video.map((item) => (
                             <div className='cursor-pointer hover:opacity-80'>
                                 <img src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
-                                <h1 className='w-80 truncate'>{item.title}</h1>
+                                <h1 className='w-full text-sm truncate'>{item.title}</h1>
                                 {/* <iframe
                                     src={`https://player.twitch.tv/?${item.url}&parent=localhost:3000/profile`}
                                     height="<height>"
@@ -71,7 +72,8 @@ const Profile = () => {
                             </div>
                         ))
                         }
-                </div>
+                    </div>
+                </div>         
             </div>
           </Layout>
         </div>
