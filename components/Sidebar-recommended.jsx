@@ -31,8 +31,8 @@ const SidebarRecommended = ({ streamer }) => {
                 src={streamerData.profile_image_url} alt="" 
             />
             <span>
-                <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-2 truncate text-xs font-semibold">{streamer.user_name}</h4>
-                <h4 className="w-28 pl-2 text-xs text-gray-300 truncate">{streamer.game_name}</h4>
+                <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamer.user_name}</h4>
+                <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{streamer.game_name}</h4>
             </span>
             <div>
                 <RiRadioButtonLine className="text-red-500 text-xs" />

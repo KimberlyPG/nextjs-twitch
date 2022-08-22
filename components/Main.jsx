@@ -85,7 +85,7 @@ const Main = () => {
 
                 <div className="pt-2">
                     <h1 className="pl-8 pb-5">Followed Live Channels</h1> 
-                    <div className="flex flex-wrap mb-2 space-x-1">
+                    <div className="grid 2xl:grid-cols-4 3xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3"> 
                         {followed?.slice(0, 5).map((streamer) => (                
                             <MainFollowed key={streamer.id} streamer={streamer}/>
                         ))}
@@ -94,7 +94,7 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 
-                    <div className="flex flex-wrap mb-2 space-x-1">
+                    <div className="grid 2xl:grid-cols-4 3xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3">
                         {data &&  data?.slice(0, 5).map((streams) => (
                             <MainStreams key={streams.id} streams={streams}/>
                         ))}
@@ -103,7 +103,7 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pb-5">Top Games</h1> 
-                    <div className="grid 2xl:grid-cols-6 3xl:grid-cols-9 xl:grid-cols-6">
+                    <div className="grid 2xl:grid-cols-6 3xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <MainGamesTop games={games}/>
                          ))}

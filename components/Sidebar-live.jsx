@@ -14,10 +14,10 @@ const SidebarLive = ({ data }) => {
             <div className="flex flex-row pb-3 hover:opacity-80 cursor-pointer">
                 <img className="rounded-full h-8" src={data.profile_image_url} alt="" />
                 <span>
-                    <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-2 truncate text-xs">{data.display_name}</h4>
-                    <h4 className="w-28 pl-2 text-xs text-gray-300 truncate">{liveData[findIndex()].game_name}</h4>
+                    <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs">{data.display_name}</h4>
+                    <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{liveData[findIndex()].game_name}</h4>
                 </span>
-                <div className="flex flex-inline">
+                <div>
                     <RiRadioButtonLine className="text-red-500 text-xs" />
                     <h4 className="pl-3 text-xs">{liveData[findIndex()].viewer_count}</h4>  
                 </div>

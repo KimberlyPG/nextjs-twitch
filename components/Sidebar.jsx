@@ -82,8 +82,8 @@ const Sidebar = () => {
                 
                 <hr className="hidden"/>
                 <div className="flex flex-col h-96 w-80 overflow-y-scroll scrollbar-hide 
-                sm:max-w-[12rem] lg:max-w-[14rem] hidden md:inline-flex">
-                <h4 className="text-sm mb-5">Followed</h4>
+                md:max-w-[4rem] lg:max-w-[14rem] hidden md:inline-flex">
+                <h4 className="text-sm mb-5 sm:hidden">Followed</h4>
                     <div className="p-4 border-r border-gray-900">
                             {streamerData.map((data) => (
                                 validateLive(data.id) === true && (
@@ -98,10 +98,10 @@ const Sidebar = () => {
                     </div>
                 </div> 
 
-                <hr className="hidden"/>
-                <h1 className="pt-10 text-sm">Recommended</h1>
+                <hr />
+                {/* <h1 className="pt-10 text-sm ">Recommended</h1> */}
                 <div className="flex flex-col h-96 w-80 overflow-y-scroll scrollbar-hide
-                sm:max-w-[12rem] lg:max-w-[14rem] hidden md:inline-flex">
+                md:max-w-[4rem] lg:max-w-[14rem] hidden md:inline-flex">
                     <div className="p-4 border-r border-gray-900">
                     {recommendedList && recommendedList.map((streamer) => (
                        <SidebarRecommended streamer={streamer}/>
