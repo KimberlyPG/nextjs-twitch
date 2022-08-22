@@ -51,8 +51,8 @@ const Game = () => {
                     </span>
                 </div>
 
-                <h3 className="text-sm fixed">Live channels we think you'll like</h3>
-                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3 mt-10 relative">
+                <h3 className="text-sm my-5 font-semibold">Live channels we think you'll like</h3>
+                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3">
                     {channel && channel.map((streamer) => (
                         <div className="pb-7">
                                 <div className="relative">
