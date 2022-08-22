@@ -7,7 +7,7 @@ const MainFollowed = ({ streamer }) => {
             <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                 <div>
                     <img 
-                        className="w-80 hover:w-96 ease-in duration-200 hover:opacity-80" 
+                        className="w-80 hover:mt-2 ease-in duration-200 hover:opacity-80" 
                         src={streamer.thumbnail_url.slice(0, -21)+".jpg"} 
                     />
                     <h4 className="text-white text-sm hover:text-purple-400">{streamer.user_name}</h4>

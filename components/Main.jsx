@@ -64,7 +64,7 @@ const Main = () => {
     useEffect(() => {
         const getGames = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/games/top?first=7`,
+                const information = await fetch(`https://api.twitch.tv/helix/games/top?first=9`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
@@ -80,13 +80,13 @@ const Main = () => {
     }, []);
 
     return (
-        <div className="flex ">
+        <div className="flex mx-2">
             <div className="text-white">
 
                 <div className="pt-2">
                     <h1 className="pl-8 pb-5">Followed Live Channels</h1> 
-                    <div className="grid xl:grid-cols-5 lg:grid-cols-4 grid-flow-row place-items-center">
-                        {followed?.map((streamer) => (                
+                    <div className="flex flex-wrap mb-2 space-x-1">
+                        {followed?.slice(0, 5).map((streamer) => (                
                             <MainFollowed key={streamer.id} streamer={streamer}/>
                         ))}
                     </div>
@@ -94,7 +94,7 @@ const Main = () => {
 
                 <div className="pt-10">
                     <h1 className="pl-8 pb-5">Recommended Channels</h1> 
-                    <div className="grid grid-cols-5 place-items-center">
+                    <div className="flex flex-wrap mb-2 space-x-1">
                         {data &&  data?.slice(0, 5).map((streams) => (
                             <MainStreams key={streams.id} streams={streams}/>
                         ))}
@@ -102,8 +102,8 @@ const Main = () => {
                 </div>
 
                 <div className="pt-10">
-                    <h1 className="pl-8 pb-5">Top Games</h1> 
-                    <div className="grid grid-cols-7 grid-flow-row place-items-center">
+                    <h1 className="pb-5">Top Games</h1> 
+                    <div className="grid 2xl:grid-cols-6 3xl:grid-cols-9 xl:grid-cols-6">
                         {gamesTop &&  gamesTop?.map((games) => (
                             <MainGamesTop games={games}/>
                          ))}
