@@ -73,7 +73,7 @@ const Topbar = () => {
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
                     <input 
-                        className="bg-gray-300 rounded lg:w-80 text-black pl-3 xs:w-28"
+                        className="bg-gray-300 rounded lg:w-80 text-black pl-3 sm:w-60 xs:w-28"
                         type="search"
                         onChange={handleChange} 
                     />
