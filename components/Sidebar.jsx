@@ -42,7 +42,7 @@ const Sidebar = () => {
             }
             }
         getFollowed();
-    }, [userId])
+    }, [currentToken, userId])
 
     useEffect(() => {
         dispatch(cleanState([])); 
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 getFollowedInfo();
             })
         }
-    }, [followed])
+    }, [currentToken, followed])
         
     const validateLive = (id) => {
         let res = false;
@@ -105,7 +105,7 @@ const Sidebar = () => {
                 md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
                     <div className="p-4 border-r border-gray-900">
                     {recommendedList && recommendedList.map((streamer) => (
-                       <SidebarRecommended streamer={streamer}/>
+                       <SidebarRecommended key={streamer.user_id} streamer={streamer}/>
                     ))
                     }
                     </div>

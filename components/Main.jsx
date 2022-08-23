@@ -1,9 +1,7 @@
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import MainFollowed from "./Main-followed";
-import MainStreams from "./Main-streams";
+import StreamCard from "./Stream-card";
 import MainGamesTop from "./Main-gamesTop";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -39,7 +37,7 @@ const Main = () => {
                 }
                 }
             getStreams();
-    }, []);
+    }, [currentToken]);
 
     useEffect(() => {
         const getFollowed = async () => {
@@ -59,7 +57,7 @@ const Main = () => {
             }
             }
         getFollowed();
-    }, [])
+    }, [currentToken])
  
     useEffect(() => {
         const getGames = async () => {
@@ -77,7 +75,7 @@ const Main = () => {
             }
             }
         getGames();
-    }, []);
+    }, [currentToken]);
 
     return (
         <div className="flex p-5">
@@ -85,9 +83,11 @@ const Main = () => {
 
                 <div className="pt-2">
                     <h1 className="pb-5 font-semibold">Followed Live Channels</h1> 
-                    <div className="grid 2xl:grid-cols-4 3xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3"> 
+                    <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3"> 
                         {followed?.slice(0, 5).map((streamer) => (                
-                            <MainFollowed key={streamer.id} streamer={streamer}/>
+                        // <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
+                            <StreamCard key={streamer.id} streamer={streamer}/>
+                        // </Link>
                         ))}
                     </div>
                 </div>
@@ -95,8 +95,8 @@ const Main = () => {
                 <div className="pt-10">
                     <h1 className="pb-5 font-semibold">Recommended Channels</h1> 
                     <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3">
-                        {data &&  data?.slice(0, 5).map((streams) => (
-                            <MainStreams key={streams.id} streams={streams}/>
+                        {data &&  data?.slice(0, 5).map((streamer) => (
+                            <StreamCard key={streamer.id} streamer={streamer}/>
                         ))}
                     </div>
                 </div>
@@ -105,7 +105,7 @@ const Main = () => {
                     <h1 className="pb-5 font-semibold">Top Games</h1> 
                     <div className="grid 3xl:grid-cols-9 2xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
                         {gamesTop &&  gamesTop?.map((games) => (
-                            <MainGamesTop games={games}/>
+                            <MainGamesTop key={games.id} games={games}/>
                          ))}
                     </div>
                 </div>

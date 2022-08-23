@@ -22,7 +22,7 @@ const SidebarRecommended = ({ streamer }) => {
                     setStreamerData(information.data[0]);
                 };
                 getStreamerInfo();
-    }, [streamer])
+    }, [currentToken, streamer])
 
     return (
         <div className="flex flex-row text-white w-full mb-5">

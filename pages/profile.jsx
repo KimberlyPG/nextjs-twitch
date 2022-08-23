@@ -33,7 +33,7 @@ const Profile = () => {
             }
             }
         getVideos();
-    }, [id]);
+    }, [currentToken, id]);
     console.log("videos: ", video);
 
     return (
@@ -61,8 +61,8 @@ const Profile = () => {
                         {video &&
                         video.map((item) => (
                             <div className='cursor-pointer hover:opacity-80'>
-                                <img src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
-                                <h1 className='w-full text-sm truncate'>{item.title}</h1>
+                                <img key={item.id} src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
+                                <h1 key={item.id} className='w-full text-sm truncate'>{item.title}</h1>
                                 {/* <iframe
                                     src={`https://player.twitch.tv/?${item.url}&parent=localhost:3000/profile`}
                                     height="<height>"

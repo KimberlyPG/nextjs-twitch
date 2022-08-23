@@ -11,6 +11,9 @@ module.exports = {
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
     secret: process.env.JWT_SECRET
   },
+  images: {
+    domains: ['static-cdn.jtvnw.net'],
+  },
   // async redirects() {
   //   return [
   //     {

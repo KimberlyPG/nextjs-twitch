@@ -11,12 +11,12 @@ const Home: NextPage = () => {
   const currentUser = session?.user?.name;
   const router = useRouter();
 
+  useEffect(() => {
   if (!session) {
     console.log("Not Authenticated" );
-    useEffect(() => {
       router.push('/login')
-    }, [currentUser]);
-  }
+    }
+  }, [currentUser]);
   console.log(currentUser);
 
   return (
