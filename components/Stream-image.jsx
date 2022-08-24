@@ -7,6 +7,7 @@ const StreamImage = ({ thumbnail_url }) => {
             <Image 
                 className="hover:opacity-80" 
                 src={thumbnail_url.slice(0, -21)+".jpg"} 
+                alt="stream image"
                 layout="responsive"
                 width='100%'
                 height='55%'

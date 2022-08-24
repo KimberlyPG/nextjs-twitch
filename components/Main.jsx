@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import StreamCard from "./Stream-card";
 import MainGamesTop from "./Main-gamesTop";
 
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
-import { addList, selectRecommended } from "../store/slices/recommended/recommendedSlice";
+import { addList } from "../store/slices/recommended/recommendedSlice";
 
 const Main = () => {
     const { data: session, status } = useSession();
@@ -85,9 +85,7 @@ const Main = () => {
                     <h1 className="pb-5 font-semibold">Followed Live Channels</h1> 
                     <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3"> 
                         {followed?.slice(0, 5).map((streamer) => (                
-                        // <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                             <StreamCard key={streamer.id} streamer={streamer}/>
-                        // </Link>
                         ))}
                     </div>
                 </div>

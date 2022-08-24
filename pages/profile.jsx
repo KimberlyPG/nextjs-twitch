@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 
 import Layout from '../components/Layout';
+import VideoCard from '../components/video-card';
 
 const Profile = () => {
     const router = useRouter();
@@ -60,16 +61,7 @@ const Profile = () => {
                     <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3'>
                         {video &&
                         video.map((item) => (
-                            <div className='cursor-pointer hover:opacity-80'>
-                                <img key={item.id} src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
-                                <h1 key={item.id} className='w-full text-sm truncate'>{item.title}</h1>
-                                {/* <iframe
-                                    src={`https://player.twitch.tv/?${item.url}&parent=localhost:3000/profile`}
-                                    height="<height>"
-                                    width="<width>"
-                                    allowfullscreen>
-                                </iframe> */}
-                            </div>
+                          <VideoCard key={item.id} item={item} />  
                         ))
                         }
                     </div>
