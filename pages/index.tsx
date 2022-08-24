@@ -1,29 +1,18 @@
 import type { NextPage } from 'next'
 import { getSession, useSession } from 'next-auth/react';
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-
-import Main from "../components/Main";
-import Layout from '../components/Layout';
+import Principal from "../components/Principal";
+import Sidebar from "../components/Sidebar";
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
-  const currentUser = session?.user?.name;
-  const router = useRouter();
+  const { data: session, status } = useSession()
 
-  useEffect(() => {
   if (!session) {
     console.log("Not Authenticated" );
-      router.push('/login')
-    }
-  }, [currentUser]);
-  console.log(currentUser);
+  }
 
   return (
-    <div className='bg-black h-100 w-100 flex'>
-      <Layout>
-        <Main/>
-      </Layout>
+    <div className='bg-black h-100 w-100'>
+      <Principal />
     </div>
   );
 }

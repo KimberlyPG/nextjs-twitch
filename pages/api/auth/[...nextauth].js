@@ -46,6 +46,7 @@ export default NextAuth({
       if (account && user) {
         console.log("token", token);
         console.log("account", account);
+        console.log("TOKEN", token);
         return{
           ...token,
           accessToken: account.access_token,
