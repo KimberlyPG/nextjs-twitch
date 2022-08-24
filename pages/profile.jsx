@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 
 import Layout from '../components/Layout';
-import VideoCard from '../components/Video-card';
+import VideoCard from '../components/video-card';
 
 const Profile = () => {
     const router = useRouter();
