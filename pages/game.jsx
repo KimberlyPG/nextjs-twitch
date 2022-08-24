@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import Layout from '../components/Layout';
 import StreamImage from "../components/Stream-image";
-import GameCards from "../components/game-cards";
+import GameCards from "../components/Game-card";
 
 const Game = () => {
     const { data: session, status } = useSession();

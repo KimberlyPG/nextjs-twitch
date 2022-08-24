@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { RiRadioButtonLine } from "react-icons/ri";
 
+import UserImage from "./user-image";
+
 import { useAppSelector } from "../store/hooks";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 
@@ -12,6 +14,7 @@ const SidebarLive = ({ data }) => {
     return (
         <Link href={{pathname: '/stream', query:{streamer: (data.display_name) }}}>
             <div className="flex flex-row pb-3 hover:opacity-80 cursor-pointer">
+                {/* <UserImage imageUrl={data.profile_image_url} /> */}
                 <img className="rounded-full h-8" src={data.profile_image_url} alt="" />
                 <span>
                     <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs">{data.display_name}</h4>

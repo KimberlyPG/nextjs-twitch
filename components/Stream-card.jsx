@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiRadioButtonLine } from "react-icons/ri";
 
-import StreamImage from "./stream-image";
+import StreamImage from "./Stream-image";
 
 const StreamCard = ({ streamer }) => {
     const { id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
