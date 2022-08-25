@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { RiRadioButtonLine } from "react-icons/ri";
+
+import UserImage from "./user-image";
+
 import { useAppSelector } from "../store/hooks";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 
 const SidebarLive = ({ data }) => {
     const liveData = useAppSelector(selectFollowedLive);
+    
     const findIndex = () => liveData.findIndex((streamerid) => streamerid.user_id == data.id)
 
     return (
