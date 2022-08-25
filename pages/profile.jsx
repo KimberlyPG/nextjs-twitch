@@ -2,10 +2,14 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import ReactTwitchEmbedVideo from "react-twitch-embed-video";
+import dynamic from 'next/dynamic'
 
 import Layout from '../components/Layout';
 import VideoCard from '../components/Video-card';
+
+const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), {
+    ssr: false,
+  })
 
 const Profile = () => {
     const router = useRouter();
