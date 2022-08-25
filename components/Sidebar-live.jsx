@@ -17,7 +17,7 @@ const SidebarLive = ({ data }) => {
                 {/* <UserImage imageUrl={data.profile_image_url} /> */}
                 <img className="rounded-full h-8" src={data.profile_image_url} alt="" />
                 <span>
-                    <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs">{data.display_name}</h4>
+                    <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{data.display_name}</h4>
                     <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{liveData[findIndex()].game_name}</h4>
                 </span>
                 <div>
