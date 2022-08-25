@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiRadioButtonLine } from "react-icons/ri";
 
-import UserImage from "./user-image";
+import UserImage from "./User-image";
 
 import { useAppSelector } from "../store/hooks";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
