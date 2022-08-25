@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import Layout from '../components/Layout';
 import StreamImage from "../components/Stream-image";
-import GameCards from "../components/game-cards";
+import GameCard from "../components/Game-card";
 
 const Game = () => {
     const { data: session, status } = useSession();
@@ -52,7 +52,7 @@ const Game = () => {
                 <h3 className="text-sm my-5 font-semibold">Live channels we think you will like</h3>
                 <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3">
                     {channel && channel.map((streamer) => (
-                        <GameCards key={streamer.id} streamer={streamer} />
+                        <GameCard key={streamer.id} streamer={streamer} />
                     ))}
                 </div>
             </div>
