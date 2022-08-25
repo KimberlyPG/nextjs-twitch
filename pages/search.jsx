@@ -2,7 +2,6 @@ import SearchList from "../components/Search-list";
 import Layout from '../components/Layout';
 
 import { useAppSelector } from "../store/hooks";
-
 import { selectSearch } from "../store/slices/searchSlice/searchSlice";
 
 const Search = () => {
