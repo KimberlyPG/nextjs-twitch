@@ -3,7 +3,6 @@ import Image from "next/image";
 const VideoCard = ({ item }) => {
     return (
         <div className='cursor-pointer hover:opacity-80'>
-            {/* <img src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" /> */}
             <Image 
                 src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} 
                 alt="video image"
