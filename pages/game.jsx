@@ -1,11 +1,8 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 import Layout from '../components/Layout';
-import StreamImage from "../components/Stream-image";
 import GameCards from "../components/Game-card";
 
 const Game = () => {
@@ -45,7 +42,7 @@ const Game = () => {
                     <span className="flex items-center lg:h-56 md:h-44 xs:h-36">
                         <img
                             className="lg:h-56 md:h-44 xs:h-36 bg-purple-500 shadow-lg shadow-purple-500/50" 
-                            src={gameUrl.slice(0, -21)+".jpg"} alt="" 
+                            src={gameUrl?.slice(0, -21)+".jpg"} alt="" 
                         />
                         <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{gameName}</h2>                        
                     </span>
