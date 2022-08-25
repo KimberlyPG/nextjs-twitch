@@ -25,7 +25,7 @@ const SidebarRecommended = ({ streamer }) => {
     }, [currentToken, streamer])
 
     return (
-        <div className="flex flex-row text-white w-full mb-5">
+        <div className="flex flex-row text-white w-full mb-5 hover:opacity-80 cursor-pointer">
             <img 
                 className="rounded-full h-8" 
                 src={streamerData.profile_image_url} alt="" 
