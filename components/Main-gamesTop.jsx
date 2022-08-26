@@ -13,7 +13,7 @@ const MainGamesTop = ({ games }) => {
                     width='75%' 
                     alt="top game" 
                 />
-                <h4 className="w-full truncate text-white text-sm">{games.name}</h4>
+                <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{games.name}</h4>
             </div>
         </Link>
     )

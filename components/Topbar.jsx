@@ -87,7 +87,7 @@ const Topbar = () => {
 
             <div className="flex flex-row justify-end text-white items-center">
                 <RiLogoutCircleRLine 
-                    className="cursor-pointer mr-10 text-white sm:text-2xl xs:text-xl hover:text-purple-500 xs:text-xl"
+                    className="cursor-pointer mr-10 text-white sm:text-2xl sm:flex xs:hidden hover:text-purple-500"
                     onClick={() => signOut({callbackUrl: "/login" })}
                 />
 

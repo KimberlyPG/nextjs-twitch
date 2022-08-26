@@ -12,8 +12,8 @@ const StreamCard = ({ streamer }) => {
                 <div>
                     <StreamImage key={id} thumbnail_url={thumbnail_url}/>
                     <div>
-                        <h4 className="w-full truncate text-white text-sm">{title}</h4>
-                        <h3 className="text-white text-sm hover:text-purple-400">{user_name}</h3>
+                        <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{title}</h4>
+                        <h3 className="text-white sm:text-sm xs:text-xs hover:text-purple-400">{user_name}</h3>
                         <h4>{game_name}</h4>
                     </div>
                     <div className="flex flex-inline items-center">
