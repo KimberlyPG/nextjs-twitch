@@ -13,7 +13,7 @@ const SidebarLive = ({ data }) => {
 
     return (
         <Link href={{pathname: '/stream', query:{streamer: (data.display_name) }}}>
-            <div className="flex flex-row pb-3 hover:opacity-80 cursor-pointer">
+            <div className="flex flex-row w-full py-2 px-4 hover:bg-slate-900 hover:opacity-80 cursor-pointer">
                 {/* <UserImage imageUrl={data.profile_image_url} /> */}
                 <img className="rounded-full h-8" src={data.profile_image_url} alt="" />
                 <span>
