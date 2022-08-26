@@ -48,8 +48,8 @@ const Topbar = () => {
     }
   
     return (
-        <div className="flex flex-row text-white justify-between items-center pt-2 pb-1 pl-5 pr-5">
-            <div className=" flex justify-start cursor-pointer text-xs space-x-5">
+        <div className="flex flex-row text-white justify-between items-center py-2 px-5">
+            <div className="flex justify-start cursor-pointer text-xs space-x-5">
                 {toggleSidebar ? (
                     <BsArrowBarLeft 
                         onClick={toggleButton}
@@ -65,7 +65,7 @@ const Topbar = () => {
 
                 }
                 <BsTwitch 
-                    className="text-purple-800 text-2xl hover:opacity-80 sm:flex xs:hidden"
+                    className="text-purple-800 md:text-2xl xs:text-xl hover:opacity-80"
                     onClick={navigateHome}
                 />
             </div>
@@ -87,14 +87,14 @@ const Topbar = () => {
 
             <div className="flex flex-row justify-end text-white items-center">
                 <RiLogoutCircleRLine 
-                    className="cursor-pointer mr-10 text-white text-2xl hover:text-purple-500"
+                    className="cursor-pointer mr-10 text-white sm:text-2xl xs:text-xl hover:text-purple-500 xs:text-xl"
                     onClick={() => signOut({callbackUrl: "/login" })}
                 />
 
                 <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id), state:(false) }}}>
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500 xs:hidden lg:flex">{session?.user.name}</h4>
-                        <img className="rounded-full w-8 h-8" src={session?.user.image} alt="" />
+                        <img className="rounded-full md:w-8 md:h-8 xs:h-6 xs:w-6" src={session?.user.image} alt="" />
                     </div>
                 </Link>
             </div>
