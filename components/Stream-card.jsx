@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { RiRadioButtonLine } from "react-icons/ri";
 
 import StreamImage from "./Stream-image";
 
@@ -10,15 +9,11 @@ const StreamCard = ({ streamer }) => {
         <div className="cursor-pointer text-xs text-slate-400 mb-10 relative">
             <Link href={{pathname: '/stream', query:{streamer: (user_name) }}}>
                 <div>
-                    <StreamImage key={id} thumbnail_url={thumbnail_url}/>
+                        <StreamImage key={id} thumbnail_url={thumbnail_url} viewer_count={viewer_count}/>
                     <div>
                         <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{title}</h4>
                         <h3 className="text-white sm:text-sm xs:text-xs hover:text-purple-400">{user_name}</h3>
                         <h4>{game_name}</h4>
-                    </div>
-                    <div className="flex flex-inline items-center">
-                        <RiRadioButtonLine className="text-red-500"/>
-                        <h4 className="ml-2">{viewer_count}</h4>
                     </div>
                 </div>
             </Link>
