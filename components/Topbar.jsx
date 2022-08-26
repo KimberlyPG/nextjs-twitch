@@ -73,13 +73,13 @@ const Topbar = () => {
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
                     <input 
-                        className="bg-gray-300 rounded lg:w-80 text-black pl-3 sm:w-60 xs:w-28"
+                        className="bg-gray-300 rounded lg:w-80 text-black pl-3 sm:w-60 xs:w-24"
                         type="search"
                         onChange={handleChange} 
                     />
                     <button type="submit">
                         <BsSearch 
-                            className="text-l ml-2 align-middle cursor-pointer hover:opacity-80"
+                            className="sx:text-sm sm:text-md ml-2 align-middle cursor-pointer hover:opacity-80"
                         />
                     </button>
                 </form>   
