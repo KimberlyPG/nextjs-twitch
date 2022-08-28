@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import StreamImage from "./Stream-image";
 
-import { viewersformat } from "../lib/viewers-format";
+import { viewersformat } from "../utils/viewers-format";
 
 const StreamCard = ({ streamer }) => {
     const { id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;

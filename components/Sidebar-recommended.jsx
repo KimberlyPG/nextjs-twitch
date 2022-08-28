@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { RiRadioButtonLine } from "react-icons/ri";
 
-import { viewersformat } from "../lib/viewers-format";
+import SidebarStreamerCard from "./sidebar-streamer-card";
 
 const SidebarRecommended = ({ streamer }) => {
     const { data: session, status } = useSession();
@@ -27,20 +27,7 @@ const SidebarRecommended = ({ streamer }) => {
     }, [currentToken, streamer])
  
     return (
-        <div className="flex flex-row text-white w-full py-2 px-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
-            <img 
-                className="rounded-full h-8" 
-                src={streamerData.profile_image_url} alt="" 
-            />
-            <span>
-                <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamer.user_name}</h4>
-                <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{streamer.game_name}</h4>
-            </span>
-            <div>
-                <RiRadioButtonLine className="text-red-500 text-xs" />
-                <h4 className="pl-3 text-xs">{viewersformat(streamer.viewer_count)}</h4>  
-            </div>
-        </div>
+        <SidebarStreamerCard key={streamer.user_id} image={streamerData.profile_image_url} display_name={streamer.user_name} game_name={streamer.game_name} viewer_count={streamer.viewer_count} />  
     )
 }
 
