@@ -15,6 +15,7 @@ const Profile = () => {
     const router = useRouter();
     const name = router.query.name;
     const id = router.query.id;
+    const state = router.query.state;
 
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
