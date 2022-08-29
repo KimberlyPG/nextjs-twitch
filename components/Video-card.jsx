@@ -16,7 +16,7 @@ const VideoCard = ({ item }) => {
                 src={`https://player.twitch.tv/?${item.url}&parent=https://silly-manatee-cc57df.netlify.app`}
                 height="<height>"
                 width="<width>"
-                allowfullscreen>
+                allowFullScreen>
             </iframe>
         </div>
     )
