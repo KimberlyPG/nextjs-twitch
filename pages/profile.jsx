@@ -46,7 +46,7 @@ const Profile = () => {
             <Layout>
                 <ReactTwitchEmbedVideo 
                     channel={name}
-                    allowfullscreen={state}
+                    allowFullScreen={state}
                     width="100%"
                     height="450px"
                 />  
