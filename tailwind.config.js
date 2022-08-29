@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    gridAutoRows: {
+      '1fr': 'minmax(0, 0fr)',
+    },
     fontFamily: {
       'roboto': ['Roboto', 'sans-serif'],
     },

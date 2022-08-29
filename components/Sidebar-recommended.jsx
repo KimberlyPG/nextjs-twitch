@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { RiRadioButtonLine } from "react-icons/ri";
 
 import SidebarStreamerCard from "./sidebar-streamer-card";
 
@@ -27,7 +27,11 @@ const SidebarRecommended = ({ streamer }) => {
     }, [currentToken, streamer])
  
     return (
-        <SidebarStreamerCard key={streamer.user_id} image={streamerData.profile_image_url} display_name={streamer.user_name} game_name={streamer.game_name} viewer_count={streamer.viewer_count} />  
+        <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
+            <div>
+                <SidebarStreamerCard key={streamer.user_id} id={streamer.user_id} image={streamerData.profile_image_url} display_name={streamer.user_name} game_name={streamer.game_name} viewer_count={streamer.viewer_count} />  
+            </div>
+        </Link>
     )
 }
 
