@@ -12,12 +12,12 @@ const VideoCard = ({ item }) => {
                 width="450px"
             /> */}
             <h1 className='w-full text-sm truncate'>{item.title}</h1>
-            {/* <iframe
-                src={`https://player.twitch.tv/?${item.url}&parent=localhost:3000/profile`}
+            <iframe
+                src={`https://player.twitch.tv/?${item.url}&parent=https://silly-manatee-cc57df.netlify.app`}
                 height="<height>"
                 width="<width>"
                 allowfullscreen>
-            </iframe> */}
+            </iframe>
         </div>
     )
 }
