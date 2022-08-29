@@ -10,7 +10,8 @@ const SidebarStreamerCard = ({ image, display_name, game_name, viewer_count }) =
             <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                 <img 
                     className="rounded-full h-8" 
-                    src={image} alt="" 
+                    src={image} 
+                    alt="" 
                  />
                 <span>
                     <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{display_name}</h4>

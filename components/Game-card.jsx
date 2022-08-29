@@ -2,11 +2,12 @@ import Link from "next/link";
 import StreamImage from "./Stream-image";
 
 const GameCards = ({ streamer }) => {
+    console.log("game", streamer);
     return (
         <div className="pb-7 relative">
             <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                 <div className="cursor-pointer">
-                   <StreamImage key={streamer.id} thumbnail_url={streamer.thumbnail_url}/>
+                   <StreamImage key={streamer.id} thumbnail_url={streamer.thumbnail_url} viewer_count={streamer.viewer_count}/>
                 </div>
             </Link>
             <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), state:(true)}}}>
