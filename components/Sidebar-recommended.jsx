@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import SidebarStreamerCard from "./sidebar-streamer-card";
+import SidebarStreamerCard from "./Sidebar-streamer-card";
 
 const SidebarRecommended = ({ streamer }) => {
     const { data: session, status } = useSession();
