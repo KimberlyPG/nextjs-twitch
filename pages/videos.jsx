@@ -9,12 +9,22 @@ const Videos = () => {
     return (
         <div>
             <Layout>
-                <iframe
-                    src={`https://player.twitch.tv/?video=${id}&parent=silly-manatee-cc57df.netlify.app`}
-                    width="100%"
-                    height="100%"
-                    allowFullScreen>
-                </iframe>
+                <div className="flex flex-row w-full h-full">
+                    {/* <div className="left-0"> */}
+                        <iframe
+                            src={`https://player.twitch.tv/?video=${id}&parent=silly-manatee-cc57df.netlify.app`}
+                            width="80%"
+                            height="100%"
+                            allowFullScreen>
+                        </iframe>
+                    {/* </div> */}
+                    {/* <div className="right-0"> */}
+                        <iframe src="https://www.twitch.tv/embed/<channel>/chat?parent=<parent>"
+                            width="20%"
+                            height="100%">
+                        </iframe>
+                    {/* </div> */}
+                </div>
             </Layout>
         </div>
     )

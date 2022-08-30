@@ -102,7 +102,7 @@ const Sidebar = () => {
                       validateLive(data.id) === true && (
                         <SidebarStreamerCard
                           key={data.id}
-                          id={data.id}
+                          id={data.user_id}
                           image={data.profile_image_url}
                           display_name={data.display_name}
                           game_name={streamerLive[streamerLive.findIndex((streamerid) => streamerid.user_id == data.id)].game_name}
