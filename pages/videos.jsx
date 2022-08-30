@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-const videos = () => {
+const Videos = () => {
     const router = useRouter();
     const id = router.query.id;
 
@@ -15,3 +15,5 @@ const videos = () => {
         </div>
     )
 }
+
+export default Videos;
