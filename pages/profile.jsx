@@ -49,8 +49,8 @@ const Profile = () => {
                     allowfullscreen={state}
                     width="100%"
                     height="450px"
-                />  
-           
+                    layout='video'
+                /> 
                 <div>
                     {state === 'true' &&
                         <div className='pl-3'>

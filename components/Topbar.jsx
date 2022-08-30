@@ -8,7 +8,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { selectToggle, createToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
-import { addSearchData } from "../store/slices/searchSlice/searchSlice";
+import { addSearchData, cleanState } from "../store/slices/searchSlice/searchSlice";
 
 const Topbar = () => { 
     const { data: session, status } = useSession()
@@ -27,6 +27,7 @@ const Topbar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        dispatch(cleanState([]));
         axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=8`,
             {
                 headers: {

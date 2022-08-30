@@ -47,8 +47,7 @@ const Stream = () => {
               allowfullscreen={true}
               height="100%" 
               width="100%"
-              // layout='video'
-              time="string"
+              // time="string"
               />  
           </Layout>
     )
