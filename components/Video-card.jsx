@@ -13,7 +13,7 @@ const VideoCard = ({ item }) => {
             /> */}
             <h1 className='w-full text-sm truncate'>{item.title}</h1>
             <iframe
-                src={`https://player.twitch.tv/?${item.url}&parent=silly-manatee-cc57df.netlify.app`}
+                src={`https://player.twitch.tv/?video=${item.url}&parent=silly-manatee-cc57df.netlify.app`}
                 height="<height>"
                 width="<width>"
                 allowFullScreen>
