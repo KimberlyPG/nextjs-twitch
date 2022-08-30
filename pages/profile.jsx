@@ -59,9 +59,9 @@ const Profile = () => {
                         </div>
                     }
 
-                <div className='p-5 font-roboto'>
+                <div className='md:p-5 font-roboto'>
                 <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
-                    <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3'>
+                    <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
                         {video &&
                         video.map((item) => (
                           <VideoCard key={item.id} item={item} />  

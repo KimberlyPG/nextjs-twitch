@@ -3,12 +3,8 @@ import Image from "next/image";
 
 import { viewersformat } from "../utils/viewers-format";
 const VideoCard = ({ item }) => {
-    console.log("",item.thumbnail_url)
-    console.log("cut", item.thumbnail_url.slice(0, -22)+".jpg")
-    const w = 450;
-    const h = 5250;
     return (
-        <div className='cursor-pointer hover:opacity-80 mb-5 w-full'>
+        <div className='cursor-pointer hover:opacity-80 mb-5'>
             <Link href={{pathname: '/videos', query:{id: (item.id) }}}>
                 <div>
                     <div className="relative">
