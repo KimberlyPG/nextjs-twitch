@@ -5,7 +5,7 @@ import { viewersformat } from "../utils/viewers-format";
 
 const VideoCard = ({ item }) => {
     return (
-        <div className='cursor-pointer hover:opacity-80'>
+        <div className='cursor-pointer hover:opacity-80 mb-5'>
             <Link href={{pathname: '/videos', query:{id: (item.id) }}}>
                 <div>
                     <div className="relative">
