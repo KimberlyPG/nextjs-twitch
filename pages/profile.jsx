@@ -39,7 +39,6 @@ const Profile = () => {
             }
         getVideos();
     }, [currentToken, id]);
-    console.log("videos: ", video);
 
     return (
         <div className='text-white'>

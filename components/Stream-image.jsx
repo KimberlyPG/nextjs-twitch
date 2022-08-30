@@ -5,6 +5,7 @@ import { RiRadioButtonLine } from "react-icons/ri";
 import { viewersformat } from '../utils/viewers-format';
 
 const StreamImage = ({ thumbnail_url, viewer_count }) => {
+    console.log("stream card image", thumbnail_url);
 
     return (
         <div className='relative font-roboto'> 
