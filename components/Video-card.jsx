@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { viewersformat } from "../utils/viewers-format";
+import { time } from "../utils/time";
+
 const VideoCard = ({ item }) => {
     return (
         <div className='cursor-pointer hover:opacity-80 mb-5'>
@@ -16,7 +18,7 @@ const VideoCard = ({ item }) => {
                             height="250px"
                             width="450px"
                         /> */}
-                    <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute top-0">{item.duration}</p>
+                    <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute top-0">{time(item.duration)}</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersformat(item.view_count)} views</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0 right-0">{item.created_at}</p>
                     </div>

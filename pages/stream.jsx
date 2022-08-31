@@ -18,23 +18,23 @@ const Stream = () => {
 
   const currentToken = session?.user.token;
 
-  // const [song, setSong] = useState("");
+  const [song, setSong] = useState("");
 
-  //   const getSong = async () => {
-  //       if(currentToken) {
-  //           const information = await fetch(`https://api.twitch.tv/helix/soundtrack/current_track?broadcaster_id=${id}`,
-  //           {
-  //               headers: {
-  //                   "Authorization": `Bearer ${currentToken}`,
-  //                   "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-  //               }
-  //           }
-  //           ).then(res => res.json());
+    // const getSong = async () => {
+    //     if(currentToken) {
+    //         const information = await fetch(`https://api.twitch.tv/helix/soundtrack/current_track?broadcaster_id=${id}`,
+    //         {
+    //             headers: {
+    //                 "Authorization": `Bearer ${currentToken}`,
+    //                 "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+    //             }
+    //         }
+    //         ).then(res => res.json());
 
-  //           setSong(information);
-  //       }
-  //       console.log("current song:", song);
-  //     }
+    //         setSong(information);
+    //     }
+    //     console.log("current song:", song);
+    //   }
 
   console.log(router.query);
     return (
