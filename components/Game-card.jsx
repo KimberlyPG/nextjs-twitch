@@ -2,7 +2,7 @@ import Link from "next/link";
 import StreamImage from "./Stream-image";
 
 const GameCards = ({ streamer }) => {
-    console.log("game", streamer);
+
     return (
         <div className="pb-7 relative">
             <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
