@@ -25,7 +25,7 @@ const Profile = () => {
     useEffect(() => {
         const getVideos = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/videos?user_id=${id}&first=5`,
+                const information = await fetch(`https://api.twitch.tv/helix/videos?user_id=${id}&first=14`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
