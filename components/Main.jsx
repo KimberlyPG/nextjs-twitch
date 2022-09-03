@@ -11,14 +11,13 @@ import { addList } from "../store/slices/recommended/recommendedSlice";
 
 const Main = () => {
     const { data: session, status } = useSession();
+    const userId = session?.user.id;
+    const currentToken = session?.user.token;
 
     const [data, setData] = useState([]);
     const [gamesTop, setGamesTop] = useState([]);
     const [followed, setFollowed] = useState([]);
    
-    const userId = session?.user.id;
-    const currentToken = session?.user.token;
-
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -36,7 +35,7 @@ const Main = () => {
                     dispatch(addList(information.data));
                     setData(information.data);
                 }
-                }
+            }
             getStreams();
     }, [currentToken]);
 
@@ -53,10 +52,9 @@ const Main = () => {
                 ).then(res => res.json())
                 dispatch(cleanState({}));
                 dispatch(addFollowedData(information.data))
-                setFollowed(information.data)
-                
+                setFollowed(information.data)            
             }
-            }
+        }
         getFollowed();
     }, [currentToken])
  
@@ -71,10 +69,9 @@ const Main = () => {
                     }
                 }
                 ).then(res => res.json());
-
                 setGamesTop(information.data);
             }
-            }
+        }
         getGames();
     }, [currentToken]);
 

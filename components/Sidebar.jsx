@@ -16,20 +16,19 @@ import { selectRecommended } from "../store/slices/recommended/recommendedSlice"
 import { addData, selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
 
 const Sidebar = () => {
+  const { data: session, status } = useSession();
+  const userId = session?.user.id;
+  const currentToken = session?.user.token;
+  
   const [followed, setFollowed] = useState([]);
 
-  const { data: session, status } = useSession();
+  const dispatch = useAppDispatch();
 
   const streamerData = useAppSelector(selectStreamer);
   const streamerLive = useAppSelector(selectFollowedLive);
   const toggleSidebar = useAppSelector(selectToggle);
   const recommendedList = useAppSelector(selectRecommended);
   const recommendedUserData = useAppSelector(selectRecommendedUserData);
-
-  const dispatch = useAppDispatch();
-
-  const userId = session?.user.id;
-  const currentToken = session?.user.token;
 
   useEffect(() => {
     const getFollowed = async () => {
@@ -110,8 +109,7 @@ const Sidebar = () => {
               <div className="flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide 
                         md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
                 <div className="border-r border-gray-900">
-                  {streamerData.map(
-                    (data) =>
+                  {streamerData.map((data) =>
                       validateLive(data.id) === true && (
                         <SidebarStreamerCard
                           key={data.id}
@@ -123,8 +121,7 @@ const Sidebar = () => {
                         />
                       )
                   )}
-                  {streamerData.map(
-                    (data) =>
+                  {streamerData.map((data) =>
                       validateLive(data.id) === false && (
                         <SidebarStreamerCard
                           key={data.id}
@@ -139,9 +136,7 @@ const Sidebar = () => {
             </>
           )}
 
-          <h1 className="pt-10 pl-4 text-sm font-semibold xs:hidden lg:grid">
-            Recommended
-          </h1>
+          <h1 className="pt-10 pl-4 text-sm font-semibold xs:hidden lg:grid">Recommended</h1>
           <BsCameraVideo className="text-gray-500 lg:hidden w-full mt-4" />
           <div className="flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide
                 md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
