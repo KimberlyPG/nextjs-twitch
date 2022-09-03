@@ -22,6 +22,7 @@ const Sidebar = () => {
 
   const streamerData = useAppSelector(selectStreamer);
   const streamerLive = useAppSelector(selectFollowedLive);
+  console.log("live", streamerLive)
   const toggleSidebar = useAppSelector(selectToggle);
   const recommendedList = useAppSelector(selectRecommended);
 
@@ -73,13 +74,14 @@ const Sidebar = () => {
 
   const validateLive = (id) => {
     let res = false;
-    streamerLive &&
-      streamerLive?.forEach((item) => {
+    if(streamerLive.length > 0 ){
+      streamerLive.forEach((item) => {
         if (item.user_id === id) {
           res = true;
         }
       });
     return res;
+    }
   };
 
   return (

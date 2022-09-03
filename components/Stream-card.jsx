@@ -11,8 +11,6 @@ const StreamCard = ({ streamer, type }) => {
 
     const streamerData = useSelector(selectStreamer);
     const recommendedData = useSelector(selectRecommendedUserData);
-    console.log("streamerData", streamerData)
-    console.log("recommendedData", recommendedData)
 
     const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id)
     const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id)

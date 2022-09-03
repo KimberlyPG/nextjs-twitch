@@ -1,6 +1,6 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {}
+const initialState = []
 
 export const followedLiveSlice = createSlice({
   name: 'followed',
