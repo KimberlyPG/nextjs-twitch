@@ -22,7 +22,6 @@ const Sidebar = () => {
 
   const streamerData = useAppSelector(selectStreamer);
   const streamerLive = useAppSelector(selectFollowedLive);
-  console.log("live", streamerLive)
   const toggleSidebar = useAppSelector(selectToggle);
   const recommendedList = useAppSelector(selectRecommended);
 

@@ -20,10 +20,10 @@ const StreamCard = ({ streamer, type }) => {
             <Link href={{pathname: '/stream', query:{streamer: (user_name), id: (user_id)}}}>
                 <div>
                     <StreamImage key={id} thumbnail_url={thumbnail_url} viewer_count={viewer_count}/>
-                    <div className="flex flex-row w-full truncate">
+                    <div className="flex">  
                         {type === 'followed' ? 
                             <img 
-                                className="rounded-full h-10 m-2"
+                                className="rounded-full h-10 m-2 flex flex-col"
                                 src={streamerData[findStreamer]?.profile_image_url} 
                                 alt="" 
                             />
@@ -34,13 +34,12 @@ const StreamCard = ({ streamer, type }) => {
                                 alt="" 
                             />                          
                         }
-
-                        <div>
-                            <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{title}</h4>
+                        <span className="w-full truncate">
+                            <h4 className="truncate text-white sm:text-sm xs:text-xs">{title}</h4>
                             <h3 className="text-white sm:text-sm xs:text-xs hover:text-purple-400">{user_name}</h3>
                             <h4>{game_name}</h4>
-                        </div>
-                    </div>                        
+                        </span>
+                    </div>                         
                 </div>
             </Link>
         </div>
