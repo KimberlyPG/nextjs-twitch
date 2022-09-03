@@ -92,7 +92,7 @@ const Topbar = () => {
                     onClick={() => signOut({callbackUrl: "/login" })}
                 />
 
-                <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id), state:(false) }}}>
+                <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id), image: (session?.user.image), state:(false) }}}>
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500 xs:hidden lg:flex">{session?.user.name}</h4>
                         <img className="rounded-full md:w-8 md:h-8 xs:h-6 xs:w-6" src={session?.user.image} alt="" />

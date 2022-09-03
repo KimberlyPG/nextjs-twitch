@@ -1,12 +1,16 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "../store/hooks";
 
 import SidebarStreamerCard from "./Sidebar-streamer-card";
+import { addData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
 
 const SidebarRecommended = ({ streamer }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
+
+    const dispatch = useAppDispatch();
 
     const [streamerData, setStreamerData] = useState([]);
 
@@ -22,6 +26,7 @@ const SidebarRecommended = ({ streamer }) => {
                     }
                     ).then(res => res.json())
                     setStreamerData(information.data[0]);
+                    dispatch(addData(information.data[0]));
                 };
                 getStreamerInfo();
     }, [currentToken, streamer])

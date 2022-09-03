@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import Layout from '../components/Layout';
 import VideoCard from '../components/Video-card';
@@ -15,12 +16,14 @@ const Profile = () => {
     const router = useRouter();
     const name = router.query.name;
     const id = router.query.id;
+    const image = router.query.image;
     const state = router.query.state;
 
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
     const [video, setVideo] = useState([]);
+    const [userData, setUserData] = useState({});
 
     useEffect(() => {
         const getVideos = async () => {
@@ -39,6 +42,22 @@ const Profile = () => {
             }
         getVideos();
     }, [currentToken, id]);
+
+    // useEffect(() => {
+    //     const getUserData = async() => {
+    //                 const information = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${id}`,
+    //                 {
+    //                     headers: {
+    //                         "Authorization": `Bearer ${currentToken}`,
+    //                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+    //                     }
+    //                 }
+    //                 ).then(res => res.json())
+    //                 setUserData(information.data[0]);
+    //             };
+    //             getUserData();
+    // }, []);
+    // console.log("user", userData);
 
     return (
         <div className='text-white'>
@@ -59,17 +78,30 @@ const Profile = () => {
                         </div>
                     }
 
-                <div className='md:p-5 font-roboto'>
-                <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
-                    <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
-                        {video &&
-                        video.map((item) => (
-                          <VideoCard key={item.id} item={item} />  
-                        ))
-                        }
-                    </div>
-                </div>         
-            </div>
+                <div className='flex flex-row items-center m-5'>
+                    {/* <Image 
+                        className="rounded-full cursor-pointer" 
+                        src={image}
+                        layout="fixed"
+                        width="70rem"
+                        height="70rem"
+                        alt="user image" 
+                    />  */}
+                    <h3 className='pl-5'>{name}</h3>
+                </div>
+
+                {video.length > 0 &&
+                    <div className='md:p-5 font-roboto'>              
+                    <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
+                        <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
+                            {video.map((item) => (
+                            <VideoCard key={item.id} item={item} />  
+                            ))
+                            }
+                        </div>
+                    </div>         
+                }
+                </div>
           </Layout>
         </div>
     )
