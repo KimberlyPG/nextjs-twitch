@@ -98,6 +98,8 @@ const Sidebar = () => {
     }
   };
 
+  console.log("streamer data", streamerData)
+
   return (
     <div>
       {toggleSidebar && (
@@ -113,7 +115,7 @@ const Sidebar = () => {
                       validateLive(data.id) === true && (
                         <SidebarStreamerCard
                           key={data.id}
-                          id={data.user_id}
+                          id={data.id}
                           image={data.profile_image_url}
                           display_name={data.display_name}
                           game_name={streamerLive[streamerLive.findIndex((streamerid) => streamerid.user_id == data.id)].game_name}
@@ -144,7 +146,7 @@ const Sidebar = () => {
               {recommendedList &&
                 recommendedList.map((streamer) => (
                   <SidebarStreamerCard
-                    key={streamer.user_id} 
+                    key={streamer.id} 
                     id={streamer.user_id} 
                     image={recommendedUserData[recommendedUserData.findIndex((streamerid) => streamerid.id == streamer.user_id)]?.profile_image_url} 
                     display_name={streamer.user_name} 

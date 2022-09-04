@@ -74,6 +74,8 @@ const Main = () => {
         }
         getGames();
     }, [currentToken]);
+    console.log("followed", followed)
+    console.log("recommended", data)
 
     return (
         <div className="flex md:p-5">
