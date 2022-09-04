@@ -26,14 +26,12 @@ const GameCards = ({ streamer }) => {
         getStreamerInfo();
 
     }, [currentToken, streamer.user_id]);
-    console.log("user data", userData);
 
     return (
         <div className="pb-7 relative">
             <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                 <div className="cursor-pointer">
                    <StreamImage 
-                        key={streamer.id} 
                         thumbnail_url={streamer.thumbnail_url} 
                         viewer_count={streamer.viewer_count}
                     />
@@ -42,7 +40,6 @@ const GameCards = ({ streamer }) => {
             <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), state:(true)}}}>
                 <div className="cursor-pointer">
                     <StreamDescription 
-                        key={streamer.id} 
                         user_id={streamer.id} 
                         title={streamer.title} 
                         user_name={streamer.user_name} 

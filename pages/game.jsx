@@ -33,7 +33,6 @@ const Game = () => {
         getChannels();
 
     }, [currentToken, gameId]);
-    console.log("channels", channel);
 
     return (
         <Layout>

@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       router.push('/login')
     }
   }, [currentUser]);
-  console.log(currentUser);
+  console.log("current user:", currentUser);
 
   return (
     <div className='bg-black h-100 w-100 flex'>

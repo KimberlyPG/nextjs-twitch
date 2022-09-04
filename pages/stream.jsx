@@ -10,13 +10,14 @@ const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), 
 })
 
 const Stream = () => {
+  const { data: session, status } = useSession();
+  const currentToken = session?.user.token;
+  
   const router = useRouter();
   const streamer = router.query.streamer;
   const id = router.query.id;
+  console.log(router.query);
 
-  const { data: session, status } = useSession();
-
-  const currentToken = session?.user.token;
 
   const [song, setSong] = useState("");
 
@@ -36,7 +37,6 @@ const Stream = () => {
     //     console.log("current song:", song);
     //   }
 
-  console.log(router.query);
     return (
           <Layout>
             {/* <div>

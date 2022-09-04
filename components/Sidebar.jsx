@@ -97,9 +97,7 @@ const Sidebar = () => {
     return res;
     }
   };
-
-  console.log("streamer data", streamerData)
-
+  
   return (
     <div>
       {toggleSidebar && (
