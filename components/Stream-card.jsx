@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useSelector } from "react-redux";
 
 import StreamImage from "./Stream-image";
 import  StreamDescription from "./Stream-description";
@@ -11,8 +10,19 @@ const StreamCard = ({ streamer, type }) => {
         <div className="cursor-pointer text-xs text-slate-400 mb-10 relative">
             <Link href={{pathname: '/stream', query:{streamer: (user_name), id: (user_id)}}}>
                 <div>
-                    <StreamImage key={user_id} thumbnail_url={thumbnail_url} viewer_count={viewer_count}/>
-                    <StreamDescription key={user_id} user_id={user_id} title={title} user_name={user_name} game_name={game_name} type={type} />
+                    <StreamImage 
+                        key={user_id} 
+                        thumbnail_url={thumbnail_url} 
+                        viewer_count={viewer_count}
+                    />
+                    <StreamDescription 
+                        key={user_id} 
+                        user_id={user_id} 
+                        title={title} 
+                        user_name={user_name} 
+                        game_name={game_name} 
+                        type={type} 
+                    />
                 </div>
             </Link>
         </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import StreamImage from "./Stream-image";
+import  StreamDescription from "./Stream-description";
 
 const GameCards = ({ streamer }) => {
     const { data: session, status } = useSession();
@@ -31,20 +32,23 @@ const GameCards = ({ streamer }) => {
         <div className="pb-7 relative">
             <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name) }}}>
                 <div className="cursor-pointer">
-                   <StreamImage key={streamer.id} thumbnail_url={streamer.thumbnail_url} viewer_count={streamer.viewer_count}/>
+                   <StreamImage 
+                        key={streamer.id} 
+                        thumbnail_url={streamer.thumbnail_url} 
+                        viewer_count={streamer.viewer_count}
+                    />
                 </div>
             </Link>
             <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), state:(true)}}}>
-                <div className="cursor-pointer text-xs flex">
-                    <img 
-                        className="rounded-full h-10 m-2 flex flex-col"
-                        src={userData.profile_image_url} 
-                        alt={` ${streamer.user_name} image`} 
+                <div className="cursor-pointer">
+                    <StreamDescription 
+                        key={streamer.id} 
+                        user_id={streamer.id} 
+                        title={streamer.title} 
+                        user_name={streamer.user_name} 
+                        profile_image_url={userData.profile_image_url} 
+                        type='other' 
                     />
-                    <div className="w-full truncate">
-                        <h3 key={streamer.id} className="pt-2 font-bold w-full truncate">{streamer.title}</h3>
-                        <h4 key={streamer.id} className="text-gray-400">{streamer.user_name}</h4>
-                    </div>
                 </div>
             </Link>
         </div>
