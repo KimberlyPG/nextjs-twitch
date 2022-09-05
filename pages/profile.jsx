@@ -79,14 +79,14 @@ const Profile = () => {
                     }
 
                 <div className='flex flex-row items-center m-5'>
-                    {/* <Image 
+                    <Image 
                         className="rounded-full cursor-pointer" 
                         src={image}
                         layout="fixed"
                         width="70rem"
                         height="70rem"
                         alt="user image" 
-                    />  */}
+                    /> 
                     <h3 className='pl-5'>{name}</h3>
                 </div>
 
