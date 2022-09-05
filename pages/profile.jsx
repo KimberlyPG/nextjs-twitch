@@ -72,7 +72,7 @@ const Profile = () => {
                 <div>
                     {state === 'true' &&
                         <div className='pl-3'>
-                            <Link href={{pathname: '/stream', query:{streamer: (name) }}}>
+                            <Link href={{pathname: '/stream', query:{streamer: (name), id:(id) }}}>
                                 <a className='text-white bg-red-600 rounded-sm font-bold font-roboto p-1 hover:opacity-50'>GO TO LIVE</a>
                             </Link>
                         </div>

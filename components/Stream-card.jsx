@@ -4,7 +4,7 @@ import StreamImage from "./Stream-image";
 import  StreamDescription from "./Stream-description";
 
 const StreamCard = ({ streamer, type }) => {
-    const { id, user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
+    const { user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
 
     return (
         <div className="cursor-pointer text-xs text-slate-400 mb-10 relative">
