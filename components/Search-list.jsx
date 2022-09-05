@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SearchList = ({ streams }) => {
+    
+    const state = streams.is_live;
+
     return ( 
-        <Link href={{pathname: '/profile', query:{name: (streams.display_name), id:(streams.id), image:(streams.thumbnail_url), state:(true)}}}>
+        <Link href={{pathname: '/profile', query:{name: (streams.display_name), id:(streams.id), image:(streams.thumbnail_url), state:(state)}}}>
             <div className="flex flex-row text-white mb-5 ml-20 cursor-pointer">
                     <Image 
                         className="rounded-full cursor-pointer" 
