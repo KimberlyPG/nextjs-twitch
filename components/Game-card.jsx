@@ -37,7 +37,7 @@ const GameCards = ({ streamer }) => {
                     />
                 </div>
             </Link>
-            <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), state:(true)}}}>
+            <Link href={{pathname: '/profile', query:{name: (streamer.user_name), id:(streamer.user_id), image:(userData.profile_image_url), state:(true)}}}>
                 <div className="cursor-pointer">
                     <StreamDescription 
                         user_id={streamer.id} 
