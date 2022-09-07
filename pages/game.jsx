@@ -36,7 +36,7 @@ const Game = () => {
 
     return (
         <Layout>
-            <div className="text-white font-roboto p-5">
+            <div className="text-white font-roboto sm:p-5">
                 <header className="p-10">
                     <span className="flex items-center lg:h-56 md:h-44 xs:h-36">
                         <img
@@ -48,7 +48,7 @@ const Game = () => {
                 </header>
 
                 <h3 className="text-sm my-5 font-semibold">Live channels we think you will like</h3>
-                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 space-x-3">
+                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1 space-x-3">
                     {channel && channel.map((streamer) => (
                         <GameCards key={streamer.id} streamer={streamer} />
                     ))}
