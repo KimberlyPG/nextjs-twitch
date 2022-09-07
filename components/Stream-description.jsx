@@ -14,22 +14,23 @@ const StreamDescription = ({ user_id, title, user_name, game_name, profile_image
 
     return (
         <div className="flex">  
-            {type === 'followed' ?
+            {type === 'followed' &&
                 <UserImage 
-                    extraStyle={"h-10 flex flex-col my-2 mr-2"} 
+                    extraStyle={"h-10 my-2 mr-2"} 
                     imageUrl={streamerData[findStreamer]?.profile_image_url} 
                     user={user_name} 
                 />
-                :
+            }
+            {type === 'recommended' &&   
                 <UserImage 
-                    extraStyle={"h-10 flex flex-col my-2 mr-2"}
+                    extraStyle={"h-10 my-2 mr-2"}
                     imageUrl={recommendedData[findRecommended]?.profile_image_url} 
                     user={user_name}
                 /> 
             }  
             {type === 'other' &&
                 <UserImage 
-                    extraStyle={"h-10 flex flex-col my-2 mr-2"}
+                    extraStyle={"h-10 my-2 mr-2"}
                     imageUrl={profile_image_url}
                     user={user_name}
                 />                       
