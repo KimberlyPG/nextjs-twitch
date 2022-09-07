@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import viewersformat from "../utils/viewers-format";
+import { viewersformat } from "../utils/viewers-format";
 
 const SearchList = ({ streams }) => {
     const { data: session, status } = useSession();
@@ -38,7 +38,7 @@ const SearchList = ({ streams }) => {
         <div>
         {state === true ? (
              <Link href={{pathname: '/stream', query:{streamer: (streams.display_name), id:(streams.id) }}}>
-                <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer">
+                <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
                     <div className="relative sm:w-64 xs:w-36">
                         <img 
                             className="full"
@@ -47,11 +47,11 @@ const SearchList = ({ streams }) => {
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>
-                    <div className="xs:ml-2 sm:ml-10">                 
+                    <div className="w-1/2 xs:ml-2 sm:ml-10">                 
                         <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h4>
-                        <h4 className="text-xs text-purple-500 hover:text-white cursor-pointer xs:hidden lg:flex">{streams.game_name}</h4>
-                        <p>{data?.viewer_count} viewers</p>
-                        <h4 className="text-xs text-purple-500 hover:text-white cursor-pointer xs:hidden lg:flex">{streams.title}</h4>
+                        <h3 className="xs:text-xs sm:text-sm text-gray-300">{streams.game_name}</h3>
+                        <p className="xs:text-xs sm:text-sm text-gray-300">{viewersformat(data?.viewer_count)} viewers</p>
+                        <h3 className="xs:text-xs sm:text-sm truncate text-gray-300">{streams.title}</h3>
                     </div> 
                 </div>  
             </Link>
@@ -60,7 +60,7 @@ const SearchList = ({ streams }) => {
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer">
                     <div className="flex sm:w-64 xs:w-36 justify-center">
                         <Image 
-                            className="rounded-full cursor-pointer m-0" 
+                            className="rounded-full cursor-pointer" 
                             src={streams.thumbnail_url}
                             layout="fixed"
                             width="90%"
@@ -68,17 +68,14 @@ const SearchList = ({ streams }) => {
                             alt="streamer image" 
                         /> 
                     </div>
-                    <div className="flex xs:flex-col md:flex-row">
-                        <h4 className="xs:ml-2 sm:ml-10 md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h4>
-                        {streams.game_name &&
-                            <div className="xs:ml-0 sm:ml-10">
-                                <h4 className="text-sm xs:hidden lg:flex">Lo último de {streams.display_name}</h4>
-                                <h4 className="text-xs text-purple-500 hover:text-white cursor-pointer xs:hidden lg:flex">{streams.game_name}</h4>
-                                <h4 className="text-xs text-purple-500 hover:text-white cursor-pointer xs:hidden lg:flex">{streams.title}</h4>
-                            </div>
-                        }
+                        <div className="w-1/2 xs:ml-2 sm:ml-10">
+                            <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400">{streams.display_name}</h4>
+                            <h4 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">Lo último de {streams.display_name}</h4>
+                            <h4 className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.game_name}</h4>
+                            <h4 className="xs:text-xs sm:text-sm w-full truncate text-purple-500 hover:text-white xs:hidden sm:flex">{streams.title}</h4>
+                        </div>
                     </div>        
-                </div>  
+
             </Link>
             )
         } 
