@@ -41,7 +41,7 @@ const SearchList = ({ streams }) => {
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
                     <div className="relative sm:w-64 xs:w-36">
                         <img 
-                            className="full"
+                            className="w-full"
                             src={data?.thumbnail_url?.slice(0, -21)+".jpg"} 
                             alt="" 
                         />
