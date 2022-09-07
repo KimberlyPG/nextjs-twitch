@@ -1,15 +1,11 @@
-import Image from "next/image";
+const UserImage = ({ imageUrl, user, extraStyle }) => {
 
-const UserImage = ({ imageUrl }) => {
     return (
         <div>
-            <Image 
-                className="rounded-full"
-                src={imageUrl}
-                alt="User image"
-                // layout="fill"
-                // height="100px"
-                // width="100px"
+            <img 
+                className={`rounded-full ${extraStyle}`}
+                src={imageUrl} 
+                alt={`${user} profile image`} 
             />
         </div>
     )

@@ -1,6 +1,8 @@
 import { RiRadioButtonLine } from "react-icons/ri";
 import Link from "next/link";
 
+import UserImage from "./User-image";
+
 import { viewersformat } from "../utils/viewers-format";
 
 const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count }) => {
@@ -10,11 +12,7 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
         {game_name ? (
             <Link href={{pathname: '/stream', query:{streamer: (display_name), id: (id)}}}>
                 <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
-                    <img 
-                        className="rounded-full h-8" 
-                        src={image} 
-                        alt="" 
-                    />
+                    <UserImage imageUrl={image} user={display_name} extraStyle={"h-8"} />
                     <span>
                         <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{display_name}</h4>
                         <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{game_name}</h4>
@@ -28,11 +26,7 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
             ):(
             <Link href={{pathname: '/profile', query:{name: (display_name), id:(id), image:(image), state:(false)}}}>
                 <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
-                    <img 
-                        className="grayscale rounded-full h-8" 
-                        src={image} 
-                        alt="" 
-                    />
+                    <UserImage imageUrl={image} user={display_name} extraStyle={"h-8 grayscale"} />
                     <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{display_name}</h4>
                     <h3 className="right-0 text-xs">offline</h3>
                 </div>

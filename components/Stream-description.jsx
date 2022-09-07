@@ -1,3 +1,5 @@
+import UserImage from "./User-image";
+
 import { useSelector } from "react-redux";
 import { selectStreamer } from "../store/slices/streamer/streamerSlice";
 import { selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
@@ -13,23 +15,23 @@ const StreamDescription = ({ user_id, title, user_name, game_name, profile_image
     return (
         <div className="flex">  
             {type === 'followed' ?
-                <img 
-                    className="rounded-full h-10 flex flex-col my-2 mr-2"
-                    src={streamerData[findStreamer]?.profile_image_url} 
-                    alt="" 
+                <UserImage 
+                    extraStyle={"h-10 flex flex-col my-2 mr-2"} 
+                    imageUrl={streamerData[findStreamer]?.profile_image_url} 
+                    user={user_name} 
                 />
                 :
-                <img 
-                    className="rounded-full h-10 my-2 mr-2"
-                    src={recommendedData[findRecommended]?.profile_image_url} 
-                    alt="" 
+                <UserImage 
+                    extraStyle={"h-10 flex flex-col my-2 mr-2"}
+                    imageUrl={recommendedData[findRecommended]?.profile_image_url} 
+                    user={user_name}
                 /> 
             }  
             {type === 'other' &&
-                <img 
-                    className="rounded-full h-10 my-2 mr-2"
-                    src={profile_image_url}
-                    alt="" 
+                <UserImage 
+                    extraStyle={"h-10 flex flex-col my-2 mr-2"}
+                    imageUrl={profile_image_url}
+                    user={user_name}
                 />                       
             }
             <span className="w-full truncate m-2">
