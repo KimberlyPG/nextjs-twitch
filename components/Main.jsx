@@ -31,6 +31,7 @@ const Main = () => {
                         }
                     }
                     ).then(res => res.json());
+                    // information.data.filter((item) => filtered(item.user_id) !== true)
                     dispatch(addList(information.data));
                     setData(information.data);
                 }
@@ -84,7 +85,7 @@ const Main = () => {
           });
         return res;
         }
-      };
+    };
 
     return (
         <div className="flex md:p-5">

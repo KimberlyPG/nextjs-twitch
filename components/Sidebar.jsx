@@ -142,7 +142,7 @@ const Sidebar = () => {
                 md:max-w-[4rem] lg:max-w-[14rem] xs:max-w-[4rem]">
             <div className="border-r border-gray-900">
               {recommendedList &&
-                recommendedList.map((streamer) => (
+                recommendedList.filter((item) => validateLive(item.user_id) !== true).map((streamer) => (
                   <SidebarStreamerCard
                     key={streamer.id} 
                     id={streamer.user_id} 
