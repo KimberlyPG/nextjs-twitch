@@ -14,10 +14,10 @@ const Topbar = () => {
     const { data: session, status } = useSession()
     const currentToken = session?.user.token;
     
+    const dispatch = useAppDispatch()
+    
     const [name, setName] = useState("");
     
-    const dispatch = useAppDispatch()
-
     const toggleSidebar = useAppSelector(selectToggle);
     const toggleButton = () => dispatch(createToggle(!toggleSidebar));
 
@@ -40,7 +40,7 @@ const Topbar = () => {
                     dispatch(addSearchData(info)); 
                 })
             }); 
-            navigateSearch();
+        navigateSearch();
     }
            
     const handleChange = (event) => {

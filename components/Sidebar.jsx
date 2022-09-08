@@ -41,7 +41,6 @@ const Sidebar = () => {
             },
           }
         ).then((res) => res.json());
-
         setFollowed(response.data);
       }
     };
@@ -97,7 +96,7 @@ const Sidebar = () => {
     return res;
     }
   };
-  
+
   return (
     <div>
       {toggleSidebar && (

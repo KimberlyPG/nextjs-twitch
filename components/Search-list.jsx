@@ -1,8 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { viewersformat } from "../utils/viewers-format";
 
@@ -11,7 +10,6 @@ const SearchList = ({ streams }) => {
     const currentToken = session?.user.token;
 
     const state = streams.is_live;
-
     const [data, setData] = useState({});
  
     useEffect(() => {
@@ -41,7 +39,7 @@ const SearchList = ({ streams }) => {
                         <img 
                             className="w-full"
                             src={data?.thumbnail_url?.slice(0, -21)+".jpg"} 
-                            alt="" 
+                            alt={`Agustin ${streams.display_name}`} 
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>

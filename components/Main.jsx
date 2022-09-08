@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { Carousel } from '@trendyol-js/react-carousel';
 
 import StreamCard from "./Stream-card";
 import MainGamesTop from "./Main-gamesTop";
@@ -31,7 +30,6 @@ const Main = () => {
                         }
                     }
                     ).then(res => res.json());
-                    // information.data.filter((item) => filtered(item.user_id) !== true)
                     dispatch(addList(information.data));
                     setData(information.data);
                 }
@@ -90,8 +88,7 @@ const Main = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">
-
-            
+           
             {followed.length > 0 &&
                 <div className="pt-2">
                     <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Followed Live Channels</h1> 

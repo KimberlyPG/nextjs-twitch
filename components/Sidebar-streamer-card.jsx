@@ -32,7 +32,7 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
                 </div>
             </Link>
             ) 
-            }
+        }
         </>
     )
 }

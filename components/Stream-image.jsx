@@ -1,5 +1,4 @@
 import Image from 'next/image'
-
 import { RiRadioButtonLine } from "react-icons/ri";
 
 import { viewersformat } from '../utils/viewers-format';
