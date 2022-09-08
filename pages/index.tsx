@@ -38,5 +38,4 @@ export async function getServerSideProps(context: {}) {
   };
 }
 
-export default Home
-
+export default Home;

@@ -23,8 +23,8 @@ const Login = ({ providers }) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
 export default Login;
 

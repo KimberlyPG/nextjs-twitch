@@ -88,7 +88,7 @@ const Profile = () => {
                 </div>
           </Layout>
         </div>
-    )
-}
+    );
+};
 
 export default Profile;

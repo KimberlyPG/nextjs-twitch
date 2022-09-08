@@ -54,7 +54,7 @@ const Game = () => {
                 </div>
             </div>
         </Layout>
-    )
-}
+    );
+};
 
 export default Game;

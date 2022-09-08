@@ -12,15 +12,15 @@ const Stream = () => {
   const streamer = router.query.streamer;
 
     return (
-          <Layout>
-            <ReactTwitchEmbedVideo 
-              channel={streamer}
-              allowfullscreen={true}
-              height="100%" 
-              width="100%"
-            />  
-          </Layout>
-    )
-}
+      <Layout>
+        <ReactTwitchEmbedVideo 
+          channel={streamer}
+          allowfullscreen={true}
+          height="100%" 
+          width="100%"
+        />  
+      </Layout>
+    );
+};
 
 export default Stream;
