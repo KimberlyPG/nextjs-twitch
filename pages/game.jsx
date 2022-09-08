@@ -29,9 +29,7 @@ const Game = () => {
 
                 setChannel(information.data);
             }
-
         getChannels();
-
     }, [currentToken, gameId]);
 
     return (
@@ -41,7 +39,8 @@ const Game = () => {
                     <span className="flex items-center lg:h-56 md:h-44 xs:h-36">
                         <img
                             className="lg:h-56 md:h-44 xs:h-36 bg-purple-500 shadow-lg shadow-purple-500/50" 
-                            src={gameUrl?.slice(0, -21)+".jpg"} alt="" 
+                            src={gameUrl?.slice(0, -21)+".jpg"} 
+                            alt={`${gameName} image`} 
                         />
                         <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{gameName}</h2>                        
                     </span>

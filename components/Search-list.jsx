@@ -31,7 +31,7 @@ const SearchList = ({ streams }) => {
     }, [state])
    
     return ( 
-        <div>
+        <>
         {state === true ? (
              <Link href={{pathname: '/stream', query:{streamer: (streams.display_name), id:(streams.id) }}}>
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
@@ -74,7 +74,7 @@ const SearchList = ({ streams }) => {
             </Link>
             )
         } 
-        </div>        
+        </>        
     )
 }
 

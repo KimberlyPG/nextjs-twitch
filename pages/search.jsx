@@ -10,7 +10,7 @@ const Search = () => {
 
     return (
             <Layout>
-                <div className="pt-10">
+                <div className="pt-10 font-roboto">
                     {results?.map((streams) => (
                             <SearchList key={streams.id} streams={streams}/>
                         ))}

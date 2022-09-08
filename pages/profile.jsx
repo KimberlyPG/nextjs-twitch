@@ -43,24 +43,8 @@ const Profile = () => {
         getVideos();
     }, [currentToken, id]);
 
-    // useEffect(() => {
-    //     const getUserData = async() => {
-    //                 const information = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${id}`,
-    //                 {
-    //                     headers: {
-    //                         "Authorization": `Bearer ${currentToken}`,
-    //                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-    //                     }
-    //                 }
-    //                 ).then(res => res.json())
-    //                 setUserData(information.data[0]);
-    //             };
-    //             getUserData();
-    // }, []);
-    // console.log("user", userData);
-
     return (
-        <div className='text-white'>
+        <div className='text-white font-roboto'>
             <Layout>
                 <ReactTwitchEmbedVideo 
                     channel={name}
@@ -73,7 +57,7 @@ const Profile = () => {
                     {state === 'true' &&
                         <div className='pl-3'>
                             <Link href={{pathname: '/stream', query:{streamer: (name), id:(id) }}}>
-                                <a className='text-white bg-red-600 rounded-sm font-bold font-roboto p-1 hover:opacity-50'>GO TO LIVE</a>
+                                <a className='bg-red-600 rounded-sm font-bold font-roboto p-1 hover:opacity-50'>GO TO LIVE</a>
                             </Link>
                         </div>
                     }
@@ -91,7 +75,7 @@ const Profile = () => {
                 </div>
 
                 {video.length > 0 &&
-                    <div className='md:p-5 font-roboto'>              
+                    <div className='md:p-5'>              
                     <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
                         <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
                             {video.map((item) => (
