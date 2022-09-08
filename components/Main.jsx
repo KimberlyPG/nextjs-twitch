@@ -19,7 +19,7 @@ const Main = () => {
     const [gamesTop, setGamesTop] = useState([]);
    
     const dispatch = useAppDispatch();
-
+ 
     useEffect(() => {
             const getStreams = async () => {
                 if(currentToken) {
@@ -31,7 +31,6 @@ const Main = () => {
                         }
                     }
                     ).then(res => res.json());
-    
                     dispatch(addList(information.data));
                     setData(information.data);
                 }
@@ -75,6 +74,18 @@ const Main = () => {
         getGames();
     }, [currentToken]);
 
+    const filtered = (id) => {
+        let res = false;
+        if(followed.length > 0 ){
+          followed.forEach((item) => {
+            if (item.user_id === id) {
+              res = true;
+            }
+          });
+        return res;
+        }
+      };
+
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">
@@ -94,7 +105,7 @@ const Main = () => {
                 <div className="sm:pt-2 xs:pt-2">
                     <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Recommended Channels</h1> 
                     <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3">
-                        {data &&  data?.slice(0, 5).map((streamer) => (
+                        {data &&  data?.filter((item) => filtered(item.user_id) !== true).slice(0, 5).map((streamer) => (
                             <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
                             ))}
                     </div>

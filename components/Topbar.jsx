@@ -60,17 +60,14 @@ const Topbar = () => {
                     <BsArrowBarRight 
                         onClick={toggleButton} 
                         className="text-purple-400 text-sm hover:opacity-80"
-                    />
-                    
+                    />               
                 )
-
                 }
                 <BsTwitch 
                     className="text-purple-800 md:text-2xl xs:text-xl hover:opacity-80"
                     onClick={navigateHome}
                 />
             </div>
-
             <div className="flex justify-center text-white">
                 <form onSubmit={handleSubmit}>
                     <input 
@@ -85,13 +82,11 @@ const Topbar = () => {
                     </button>
                 </form>   
             </div>
-
             <div className="flex flex-row justify-end text-white items-center">
                 <RiLogoutCircleRLine 
                     className="cursor-pointer mr-10 text-white sm:text-2xl sm:flex xs:hidden hover:text-purple-500"
                     onClick={() => signOut({callbackUrl: "/login" })}
                 />
-
                 <Link href={{pathname: '/profile', query:{name: (session?.user.name), id: (session?.user.id), image: (session?.user.image), state:(false) }}}>
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500 xs:hidden lg:flex">{session?.user.name}</h4>

@@ -14,7 +14,6 @@ const SearchList = ({ streams }) => {
 
     const [data, setData] = useState({});
  
-    // console.log("streams", streams);
     useEffect(() => {
         if(state === true) {
             const getStream = async () => {
@@ -32,8 +31,7 @@ const SearchList = ({ streams }) => {
             getStream();
         }
     }, [state])
-    console.log("data", data);
-    
+   
     return ( 
         <div>
         {state === true ? (
@@ -68,14 +66,13 @@ const SearchList = ({ streams }) => {
                             alt="streamer image" 
                         /> 
                     </div>
-                        <div className="w-1/2 xs:ml-2 sm:ml-10">
-                            <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400">{streams.display_name}</h4>
-                            <h4 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">Lo último de {streams.display_name}</h4>
-                            <h4 className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.game_name}</h4>
-                            <h4 className="xs:text-xs sm:text-sm w-full truncate text-purple-500 hover:text-white xs:hidden sm:flex">{streams.title}</h4>
-                        </div>
-                    </div>        
-
+                    <div className="w-1/2 xs:ml-2 sm:ml-10">
+                        <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400">{streams.display_name}</h4>
+                        <h4 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">Lo último de {streams.display_name}</h4>
+                        <h4 className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.game_name}</h4>
+                        <h4 className="xs:text-xs sm:text-sm w-full truncate text-purple-500 hover:text-white xs:hidden sm:flex">{streams.title}</h4>
+                    </div>
+                </div>        
             </Link>
             )
         } 
