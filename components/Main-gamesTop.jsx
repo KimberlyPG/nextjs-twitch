@@ -11,7 +11,7 @@ const MainGamesTop = ({ games }) => {
                     layout="responsive"
                     height='100%'
                     width='75%' 
-                    alt="top game" 
+                    alt={`${games.name} image`}
                 />
                 <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{games.name}</h4>
             </div>

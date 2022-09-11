@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 import Layout from '../components/Layout';
 import VideoCard from '../components/Video-card';
