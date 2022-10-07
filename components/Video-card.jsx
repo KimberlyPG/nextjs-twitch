@@ -12,13 +12,6 @@ const VideoCard = ({ item }) => {
                 <div>
                     <div className="relative">
                         <img src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
-                        {/* <Image 
-                            src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} 
-                            alt="video image"
-                            layout="intrinsic"
-                            height="250px"
-                            width="450px"
-                        /> */}
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute top-0">{time(item.duration)}</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersformat(item.view_count)} views</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0 right-0">{days(item.created_at, item.duration)}</p>
