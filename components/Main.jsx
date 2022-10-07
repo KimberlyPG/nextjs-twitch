@@ -12,6 +12,8 @@ const Main = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const currentToken = session?.user.token;
+    console.log(currentToken)
+
 
     const [data, setData] = useState([]);
     const [followed, setFollowed] = useState([]);
