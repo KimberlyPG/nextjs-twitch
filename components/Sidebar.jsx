@@ -34,7 +34,7 @@ const Sidebar = () => {
 	useEffect(() => {
 		const getFollowed = async () => {
 			if (currentToken) {
-				twitch.get(`/users/follows?from_id=${userId}&first=50`,
+				await twitch.get(`/users/follows?from_id=${userId}&first=50`,
 				{
 					headers: {
 					"Authorization": `Bearer ${currentToken}`,
@@ -52,7 +52,7 @@ const Sidebar = () => {
 		followed &&	followed.map((streamer) => {
 			const streamerId = streamer.to_id;
 			const getFollowedInfo = async () => {
-				twitch.get(`/users?id=${streamerId}`,
+				await twitch.get(`/users?id=${streamerId}`,
 				{
 					headers: {
 						Authorization: `Bearer ${currentToken}`,
@@ -67,8 +67,8 @@ const Sidebar = () => {
 
 	useEffect(() => {
 		recommendedList.map((streamer) => {
-			const getStreamerInfo = async() => {
-				twitch.get(`/users?id=${streamer.user_id}`,
+			const getStreamerInfo = async () => {
+				await twitch.get(`/users?id=${streamer.user_id}`,
 				{
 					headers: {
 						"Authorization": `Bearer ${currentToken}`,
