@@ -12,8 +12,8 @@ const Search = () => {
         <Layout>
             <div className="pt-10 font-roboto">
                 {results?.map((streams) => (
-                        <SearchList key={streams.id} streams={streams}/>
-                    ))}
+                    <SearchList key={streams.id} streams={streams}/>
+                ))}
             </div>
         </Layout>
     );
