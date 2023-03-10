@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 
+import twitch from "../pages/api/twitch";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   addStreamerData,
@@ -14,16 +15,16 @@ import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSli
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
 import { addData, selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
+import { validateLive } from "../utils/validateLive";
 
 const Sidebar = () => {
 	const { data: session, status } = useSession();
+	const dispatch = useAppDispatch();
+	const [followed, setFollowed] = useState([]);
+
 	const userId = session?.user.id;
 	const currentToken = session?.user.token;
 	
-	const [followed, setFollowed] = useState([]);
-
-	const dispatch = useAppDispatch();
-
 	const streamerData = useAppSelector(selectStreamer);
 	const streamerLive = useAppSelector(selectFollowedLive);
 	const toggleSidebar = useAppSelector(selectToggle);
@@ -32,70 +33,53 @@ const Sidebar = () => {
 
 	useEffect(() => {
 		const getFollowed = async () => {
-		if (currentToken) {
-			const response = await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userId}&first=50`,
-			{
-				headers: {
-				Authorization: `Bearer ${currentToken}`,
-				"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-				},
+			if (currentToken) {
+				twitch.get(`/users/follows?from_id=${userId}&first=50`,
+				{
+					headers: {
+					"Authorization": `Bearer ${currentToken}`,
+					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+					},
+				})
+				.then((res) => setFollowed(res.data.data));
 			}
-			).then((res) => res.json());
-			setFollowed(response.data);
-		}
 		};
 		getFollowed();
 	}, [currentToken, userId]);
 
 	useEffect(() => {
 		dispatch(cleanState([]));
-		if (followed) {
-		followed.map((streamer) => {
+		followed &&	followed.map((streamer) => {
 			const streamerId = streamer.to_id;
 			const getFollowedInfo = async () => {
-			const response = await fetch(`https://api.twitch.tv/helix/users?id=${streamerId}`,
+				twitch.get(`/users?id=${streamerId}`,
 				{
-				headers: {
-					Authorization: `Bearer ${currentToken}`,
-					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-				},
-				}
-			).then((res) => res.json());
-			dispatch(addStreamerData(response.data[0]));
+					headers: {
+						Authorization: `Bearer ${currentToken}`,
+						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+					},
+				})
+			.then((res) =>dispatch(addStreamerData(res.data.data[0])));
 			};
 			getFollowedInfo();
 		});
-		}
 	}, [currentToken, followed, dispatch]);
 
 	useEffect(() => {
 		recommendedList.map((streamer) => {
-		const getStreamerInfo = async() => {
-			const information = await fetch(`https://api.twitch.tv/helix/users?id=${streamer.user_id}`,
-			{
-				headers: {
-					"Authorization": `Bearer ${currentToken}`,
-					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-				}
-			}
-			).then(res => res.json())
-			dispatch(addData(information.data[0]));
-		};
-		getStreamerInfo();
-	});
-	}, [currentToken, recommendedList, dispatch]);
-
-	const validateLive = (id) => {
-		let res = false;
-		if(streamerLive.length > 0 ){
-		streamerLive.forEach((item) => {
-			if (item.user_id === id) {
-			res = true;
-			}
+			const getStreamerInfo = async() => {
+				twitch.get(`/users?id=${streamer.user_id}`,
+				{
+					headers: {
+						"Authorization": `Bearer ${currentToken}`,
+						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+					}
+				})
+				.then(res => dispatch(addData(res.data.data[0])))
+			};
+			getStreamerInfo();
 		});
-		return res;
-		}
-	};
+	}, [currentToken, recommendedList, dispatch]);
 
 	return (
 		<>
@@ -103,7 +87,7 @@ const Sidebar = () => {
 			<div className="text-white pt-10 h-screen">
 			{followed && (
 				<SidebarContainer title="followed">
-					{streamerData.map((data) => validateLive(data.id) === true && (
+					{streamerData.map((data) => validateLive(data.id, streamerLive) === true && (
 						<SidebarStreamerCard
 							key={data.id}
 							id={data.id}
@@ -114,7 +98,7 @@ const Sidebar = () => {
 						/>
 						)
 					)}
-					{streamerData.map((data) => validateLive(data.id) === false && (
+					{streamerData.map((data) => validateLive(data.id, streamerLive) === false && (
 						<SidebarStreamerCard
 							key={data.id}
 							id={data.id}
