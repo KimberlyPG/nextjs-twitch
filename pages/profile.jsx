@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import Layout from '../components/Layout';
-import VideoCard from '../components/Video-card';
+import VideoCard from '../components/VideoCard';
 
 const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), {
     ssr: false,

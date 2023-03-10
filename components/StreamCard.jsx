@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import StreamImage from "./Stream-image";
-import  StreamDescription from "./Stream-description";
+import StreamImage from "./StreamImage";
+import  StreamDescription from "./StreamDescription";
 
 const StreamCard = ({ streamer, type }) => {
     const { user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;

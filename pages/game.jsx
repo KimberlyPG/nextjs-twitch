@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 import Layout from '../components/Layout';
-import GameCards from "../components/Game-card";
+import GameCards from "../components/GameCard";
 
 const Game = () => {
     const { data: session, status } = useSession();

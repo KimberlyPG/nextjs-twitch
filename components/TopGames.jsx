@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const MainGamesTop = ({ games }) => {
+const TopGames = ({ games }) => {
     return (
         <Link href={{pathname: '/game', query:{id: (games.id), image: (games.box_art_url), name:(games.name) }}}>
             <div className="cursor-pointer mb-5 mx-1">
@@ -19,4 +19,4 @@ const MainGamesTop = ({ games }) => {
     )
 }
 
-export default MainGamesTop;
+export default TopGames;
