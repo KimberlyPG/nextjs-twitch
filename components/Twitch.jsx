@@ -9,6 +9,7 @@ import twitch from "../pages/api/twitch"
 import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
+import { recommendationFilter } from "../utils/recommendationFilter";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
@@ -77,18 +78,6 @@ const Twitch = () => {
         getGames();
     }, [currentToken]);
 
-    const filtered = (id) => {
-        let res = false;
-        if(followed.length > 0 ){
-          followed.forEach((item) => {
-            if (item.user_id === id) {
-              res = true;
-            }
-          });
-        return res;
-        }
-    };
-
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
@@ -100,7 +89,8 @@ const Twitch = () => {
                     </StreamCardContainer> 
                 }
                 <StreamCardContainer description="Recommended Channels">
-                    {data &&  data?.filter((item) => filtered(item.user_id) !== true).slice(0, 5).map((streamer) => (
+                    {data &&  data?.filter((item) => 
+                        recommendationFilter(item.user_id, followed) !== true).slice(0, 5).map((streamer) => (
                         <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
                     ))}
                 </StreamCardContainer>
