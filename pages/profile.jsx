@@ -79,7 +79,7 @@ const Profile = () => {
                     <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
                         <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
                             {video.map((item) => (
-                            <VideoCard key={item.id} item={item} />  
+                                <VideoCard key={item.id} item={item} />  
                             ))
                             }
                         </div>

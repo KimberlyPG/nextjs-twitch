@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Layout from '../components/Layout';
 import GameCards from "../components/GameCard";
 
+import twitch from "./api/twitch";
+
 const Game = () => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
@@ -18,16 +20,14 @@ const Game = () => {
  
     useEffect(() => {
         const getChannels = async () => {
-                const information = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=15`,
+            await twitch.get(`https://api.twitch.tv/helix/streams?game_id=${gameId}&first=15`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                     }
-                }
-                ).then(res => res.json());
-
-                setChannel(information.data);
+                })
+                .then(res => setChannel(res.data.data));
             }
         getChannels();
     }, [currentToken, gameId]);
