@@ -3,7 +3,13 @@ import Image from "next/image";
 
 const TopGames = ({ games }) => {
     return (
-        <Link href={{pathname: '/game', query:{id: (games.id), image: (games.box_art_url), name:(games.name) }}}>
+        <Link 
+            href={{
+                pathname: `/game/${games.id}`, 
+                query: {id: (games.id), image: (games.box_art_url), name:(games.name)},
+            }} 
+            as={`/game/${games.id}`}
+        >
             <div className="cursor-pointer mb-5 mx-1">
                 <Image 
                     className="hover:w-56 ease-in duration-200 hover:opacity-80" 
