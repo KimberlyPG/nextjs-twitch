@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { BsSuitHeart, BsCameraVideo } from "react-icons/bs";
 
-import SidebarStreamerCard from "./Sidebar-streamer-card";
+import SidebarStreamerCard from "./SidebarStreamerCard";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {

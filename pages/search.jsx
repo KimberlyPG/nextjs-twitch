@@ -1,4 +1,4 @@
-import SearchList from "../components/Search-list";
+import SearchList from "../components/SearchList";
 import Layout from '../components/Layout';
 
 import { useAppSelector } from "../store/hooks";

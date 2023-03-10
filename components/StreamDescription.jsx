@@ -1,4 +1,4 @@
-import UserImage from "./User-image";
+import UserImage from "./UserImage";
 
 import { useSelector } from "react-redux";
 import { selectStreamer } from "../store/slices/streamer/streamerSlice";

@@ -1,7 +1,7 @@
 import { RiRadioButtonLine } from "react-icons/ri";
 import Link from "next/link";
 
-import UserImage from "./User-image";
+import UserImage from "./UserImage";
 
 import { viewersformat } from "../utils/viewers-format";
 
