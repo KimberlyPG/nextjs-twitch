@@ -26,8 +26,8 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
             ):(
             <Link 
                 href={{
-                    pathname: '/profile', 
-                    query:{name: (display_name), id:(id), image:(image), state:(false)}
+                    pathname: `/profile/${display_name}`, 
+                    query:{id:(id), image:(image), state:(false)}
                 }}
                 as={`/profile/${display_name}`}
             >

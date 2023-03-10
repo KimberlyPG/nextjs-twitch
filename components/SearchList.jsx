@@ -52,7 +52,17 @@ const SearchList = ({ streams }) => {
                 </div>  
             </Link>
             ):(  
-            <Link href={{pathname: '/profile', query:{name: (streams.display_name), id:(streams.id), image:(streams.thumbnail_url), state:(state)}}}>
+            <Link 
+                href={{
+                    pathname: `/profile/${streams.display_name}`, 
+                    query: {
+                        id:(streams.id), 
+                        image:(streams.thumbnail_url), 
+                        state:(state)
+                    }
+                }}
+                as={`/profile/${streams.display_name}`}
+            >
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer">
                     <div className="flex sm:w-64 xs:w-36 justify-center">
                         <Image 

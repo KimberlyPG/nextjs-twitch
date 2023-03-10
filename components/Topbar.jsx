@@ -47,8 +47,8 @@ const Topbar = () => {
                 />
                 <Link 
                     href={{
-                        pathname: '/profile', 
-                        query:{name: (session?.user.name), id: (session?.user.id), image: (session?.user.image), state:(false)}, 
+                        pathname: `/profile/${session?.user.name}`, 
+                        query:{id: (session?.user.id), image: (session?.user.image), state:(false)}, 
                     }} 
                     as={`/profile/${session?.user.name}`}
                 >
