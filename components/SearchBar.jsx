@@ -15,7 +15,7 @@ const SearchBar = () => {
     
     const currentToken = session?.user.token;
 
-    const navigateSearch = () => router.push('/search');
+    const navigateSearch = () => router.push(`/search/${name}`);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -1,9 +1,9 @@
-import SearchList from "../components/SearchList";
-import Layout from '../components/Layout';
+import SearchList from "../../components/SearchList";
+import Layout from '../../components/Layout';
 
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 
-import { selectSearch } from "../store/slices/searchSlice/searchSlice";
+import { selectSearch } from "../../store/slices/searchSlice/searchSlice";
 
 const Search = () => {
     const results = useAppSelector(selectSearch);
