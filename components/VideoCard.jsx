@@ -6,7 +6,6 @@ import { time } from "../utils/time";
 import { days } from "../utils/days";
 
 const VideoCard = ({ item }) => {
-    console.log("item", item)
     return (
         <div className='cursor-pointer hover:opacity-80 mb-5'>
             <Link href={`/videos/${item.id}`}>
