@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { viewersformat } from "../utils/viewers-format";
+import { viewersFormat } from "../utils/viewersFormat";
 
 const SearchList = ({ streams }) => {
     const { data: session, status } = useSession();
@@ -46,7 +46,7 @@ const SearchList = ({ streams }) => {
                     <div className="w-1/2 xs:ml-2 sm:ml-10">                 
                         <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h4>
                         <h3 className="xs:text-xs sm:text-sm text-gray-300">{streams.game_name}</h3>
-                        <p className="xs:text-xs sm:text-sm text-gray-300">{viewersformat(data?.viewer_count)} viewers</p>
+                        <p className="xs:text-xs sm:text-sm text-gray-300">{viewersFormat(data?.viewer_count)} viewers</p>
                         <h3 className="xs:text-xs sm:text-sm truncate text-gray-300">{streams.title}</h3>
                     </div> 
                 </div>  

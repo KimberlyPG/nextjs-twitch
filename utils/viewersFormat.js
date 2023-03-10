@@ -1,4 +1,4 @@
-export function viewersformat(num) {
+export function viewersFormat(num) {
     if (num > 900) {
         return (num / 1000).toFixed(1).replace(/\.0$/, '') + ' k';
     }

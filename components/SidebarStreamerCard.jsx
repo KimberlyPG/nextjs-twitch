@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import UserImage from "./UserImage";
 
-import { viewersformat } from "../utils/viewers-format";
+import { viewersFormat } from "../utils/viewersFormat";
 
 const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count }) => {
 
@@ -19,7 +19,7 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
                     </span>
                     <div className="flex right-0">
                         <RiRadioButtonLine className="text-red-500 text-xs" />
-                        <h4 className="text-xs pl-1">{viewersformat(viewer_count)}</h4>  
+                        <h4 className="text-xs pl-1">{viewersFormat(viewer_count)}</h4>  
                     </div>
                 </div>
             </Link>

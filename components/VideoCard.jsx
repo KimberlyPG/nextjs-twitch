@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { viewersformat } from "../utils/viewers-format";
+import { viewersFormat } from "../utils/viewersFormat";
 import { time } from "../utils/time";
 import { days } from "../utils/days";
 
@@ -13,7 +13,7 @@ const VideoCard = ({ item }) => {
                     <div className="relative">
                         <img src={item.thumbnail_url.slice(0, -22)+"450x250.jpg"} alt="" />
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute top-0">{time(item.duration)}</p>
-                    <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersformat(item.view_count)} views</p>
+                    <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersFormat(item.view_count)} views</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0 right-0">{days(item.created_at, item.duration)}</p>
                     </div>
                     <h1 className='xs:w-64 md:w-full truncate sm:text-sm xs:text-xs'>{item.title}</h1>
