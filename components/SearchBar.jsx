@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from 'next/router'
 import { BsSearch } from "react-icons/bs";
 
-import axios from "axios";
+import twitch from "../pages/api/twitch";
 import { useAppDispatch } from "../store/hooks";
 import { addSearchData, cleanState } from "../store/slices/searchSlice/searchSlice";
 
@@ -17,17 +17,17 @@ const SearchBar = () => {
 
     const navigateSearch = () => router.push('/search');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         dispatch(cleanState([]));
-        axios.get(`https://api.twitch.tv/helix/search/channels?query=${name}&first=8`,
+        await twitch.get(`/search/channels?query=${name}&first=8`,
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
                     "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                 }
-            }
-            ).then((data) => {
+            })
+            .then((data) => {
                 data.data.data.map((info) => {
                     dispatch(addSearchData(info)); 
                 })
