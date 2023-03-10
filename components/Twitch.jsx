@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import StreamCard from "./Stream-card";
+import StreamCard from "./StreamCard";
 import TopGames from "./TopGames";
 
 import { useAppDispatch } from "../store/hooks";
