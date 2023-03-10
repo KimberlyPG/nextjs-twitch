@@ -24,7 +24,13 @@ const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count 
                 </div>
             </Link>
             ):(
-            <Link href={{pathname: '/profile', query:{name: (display_name), id:(id), image:(image), state:(false)}}}>
+            <Link 
+                href={{
+                    pathname: '/profile', 
+                    query:{name: (display_name), id:(id), image:(image), state:(false)}
+                }}
+                as={`/profile/${display_name}`}
+            >
                 <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage imageUrl={image} user={display_name} extraStyle={"h-8 grayscale"} />
                     <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{display_name}</h4>
