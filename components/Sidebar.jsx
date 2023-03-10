@@ -84,7 +84,7 @@ const Sidebar = () => {
 	return (
 		<>
 		{toggleSidebar && (
-			<div className="text-white pt-10 h-screen">
+			<div className="text-white pt-10 h-screen space-y-5">
 			{followed && (
 				<SidebarContainer title="followed">
 					{streamerData.map((data) => validateLive(data.id, streamerLive) === true && (
