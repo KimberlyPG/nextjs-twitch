@@ -7,13 +7,12 @@ import TopGames from "./TopGames";
 import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
+import twitch from "../pages/api/twitch"
 
 const Twitch = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const currentToken = session?.user.token;
-    console.log(currentToken)
-
 
     const [data, setData] = useState([]);
     const [followed, setFollowed] = useState([]);
@@ -24,52 +23,53 @@ const Twitch = () => {
     useEffect(() => {
             const getStreams = async () => {
                 if(currentToken) {
-                    const information = await fetch(`https://api.twitch.tv/helix/streams?first=12`,
+                    await twitch.get(`/streams?first=12`,
                     {
                         headers: {
                             "Authorization": `Bearer ${currentToken}`,
                             "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                         }
-                    }
-                    ).then(res => res.json());
-                    dispatch(addList(information.data));
-                    setData(information.data);
+                    })
+                    .then((data) => {
+                        dispatch(addList(data.data.data));
+                        setData(data.data.data);
+                    })
                 }
             }
             getStreams();
-    }, [currentToken]);
+    }, [currentToken, dispatch]);
 
     useEffect(() => {
         const getFollowed = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=${userId}`,
+                await twitch.get(`/streams/followed?user_id=${userId}`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                     }
-                }
-                ).then(res => res.json())
-                dispatch(cleanState({}));
-                dispatch(addFollowedData(information.data))
-                setFollowed(information.data)            
+                })
+                .then((data) => {
+                    dispatch(cleanState({}));
+                    dispatch(addFollowedData(data.data.data))
+                    setFollowed(data.data.data)            
+                })
             }
         }
         getFollowed();
-    }, [currentToken])
+    }, [currentToken, dispatch, userId])
  
     useEffect(() => {
         const getGames = async () => {
             if(currentToken) {
-                const information = await fetch(`https://api.twitch.tv/helix/games/top?first=9`,
+                await twitch.get(`/games/top?first=9`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                     }
-                }
-                ).then(res => res.json());
-                setTopGames(information.data);
+                })
+                .then((data) => setTopGames(data.data.data));
             }
         }
         getGames();
