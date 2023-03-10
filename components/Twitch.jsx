@@ -5,13 +5,15 @@ import StreamCard from "./StreamCard";
 import StreamCardContainer from "../components/StreamCardContainer";
 import TopGames from "./TopGames";
 
+import twitch from "../pages/api/twitch"
 import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
-import twitch from "../pages/api/twitch"
 
 const Twitch = () => {
     const { data: session, status } = useSession();
+    const dispatch = useAppDispatch();
+    
     const userId = session?.user.id;
     const currentToken = session?.user.token;
 
@@ -19,7 +21,6 @@ const Twitch = () => {
     const [followed, setFollowed] = useState([]);
     const [topGames, setTopGames] = useState([]);
    
-    const dispatch = useAppDispatch();
  
     useEffect(() => {
         const getStreams = async () => {
