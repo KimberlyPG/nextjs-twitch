@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 
 export default NextAuth({
-  // Configure one or more authentication providers
+  // provider configuration
   providers: [
     {
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,

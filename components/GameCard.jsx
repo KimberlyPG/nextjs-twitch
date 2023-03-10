@@ -2,8 +2,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-import StreamImage from "./Stream-image";
-import  StreamDescription from "./Stream-description";
+import StreamImage from "./StreamImage";
+import  StreamDescription from "./StreamDescription";
 
 const GameCards = ({ streamer }) => {
     const { data: session, status } = useSession();
