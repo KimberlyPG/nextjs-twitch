@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+import twitch from "../pages/api/twitch";
 import StreamImage from "./StreamImage";
 import  StreamDescription from "./StreamDescription";
 
@@ -13,15 +14,14 @@ const GameCards = ({ streamer }) => {
 
     useEffect(() => {
         const getStreamerInfo = async() => {
-            const response = await fetch(`https://api.twitch.tv/helix/users?id=${streamer.user_id}`,
+            await twitch.get(`/users?id=${streamer.user_id}`,
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
                     "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
                 }
-            }
-            ).then(res => res.json())
-            setUserData(response.data[0]);
+            })
+            .then(res => setUserData(res.data.data[0]))
         };
         getStreamerInfo();
 
