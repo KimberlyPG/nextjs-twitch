@@ -33,7 +33,7 @@ const SearchList = ({ streams }) => {
     return ( 
         <>
         {state === true ? (
-             <Link href={{pathname: '/stream', query:{streamer: (streams.display_name), id:(streams.id) }}}>
+             <Link href={`/stream/${display_name}`}>
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
                     <div className="relative sm:w-64 xs:w-36">
                         <img 

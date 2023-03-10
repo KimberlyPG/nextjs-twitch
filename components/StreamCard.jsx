@@ -8,7 +8,7 @@ const StreamCard = ({ streamer, type }) => {
 
     return (
         <div className="cursor-pointer text-xs text-slate-400 mb-10 relative">
-            <Link href={{pathname: '/stream', query:{streamer: (user_name), id: (user_id)}}}>
+            <Link href={`/stream/${user_name}`}>
                 <div>
                     <StreamImage 
                         thumbnail_url={thumbnail_url} 

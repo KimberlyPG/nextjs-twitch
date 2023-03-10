@@ -29,7 +29,7 @@ const GameCards = ({ streamer }) => {
 
     return (
         <div className="pb-7 relative">
-            <Link href={{pathname: '/stream', query:{streamer: (streamer.user_name), id:(streamer.user_id) }}}>
+            <Link href={`/stream/${streamer.user_name}`}>
                 <div className="cursor-pointer">
                    <StreamImage 
                         thumbnail_url={streamer.thumbnail_url} 
