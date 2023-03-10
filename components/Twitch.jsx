@@ -2,13 +2,13 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import StreamCard from "./Stream-card";
-import MainGamesTop from "./Main-gamesTop";
+import TopGames from "./TopGames";
 
 import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
 
-const Main = () => {
+const Twitch = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const currentToken = session?.user.token;
@@ -17,7 +17,7 @@ const Main = () => {
 
     const [data, setData] = useState([]);
     const [followed, setFollowed] = useState([]);
-    const [gamesTop, setGamesTop] = useState([]);
+    const [topGames, setTopGames] = useState([]);
    
     const dispatch = useAppDispatch();
  
@@ -69,7 +69,7 @@ const Main = () => {
                     }
                 }
                 ).then(res => res.json());
-                setGamesTop(information.data);
+                setTopGames(information.data);
             }
         }
         getGames();
@@ -114,8 +114,8 @@ const Main = () => {
                 <div className="sm:pt-2 xs:pt-2">
                     <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Top Games</h1> 
                     <div className="grid 3xl:grid-cols-9 2xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
-                        {gamesTop &&  gamesTop?.map((games) => (
-                            <MainGamesTop key={games.id} games={games}/>
+                        {topGames &&  topGames?.map((games) => (
+                            <TopGames key={games.id} games={games}/>
                          ))}
                     </div>
                 </div>
@@ -124,4 +124,4 @@ const Main = () => {
     )
 } 
 
-export default Main;
+export default Twitch;

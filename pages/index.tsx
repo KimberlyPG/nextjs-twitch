@@ -3,7 +3,7 @@ import { getSession, useSession } from 'next-auth/react';
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Main from "../components/Main";
+import Twitch from "../components/Twitch";
 import Layout from '../components/Layout';
 
 const Home: NextPage = () => {
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   return (
     <div className='bg-black h-100 w-100 flex'>
       <Layout>
-        <Main/>
+        <Twitch />
       </Layout>
     </div>
   );
