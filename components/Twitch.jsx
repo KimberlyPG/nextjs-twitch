@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import StreamCard from "./StreamCard";
+import StreamCardContainer from "../components/StreamCardContainer";
 import TopGames from "./TopGames";
 
 import { useAppDispatch } from "../store/hooks";
@@ -21,22 +22,22 @@ const Twitch = () => {
     const dispatch = useAppDispatch();
  
     useEffect(() => {
-            const getStreams = async () => {
-                if(currentToken) {
-                    await twitch.get(`/streams?first=12`,
-                    {
-                        headers: {
-                            "Authorization": `Bearer ${currentToken}`,
-                            "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
-                        }
-                    })
-                    .then((data) => {
-                        dispatch(addList(data.data.data));
-                        setData(data.data.data);
-                    })
-                }
+        const getStreams = async () => {
+            if(currentToken) {
+                await twitch.get(`/streams?first=12`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${currentToken}`,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                    }
+                })
+                .then((data) => {
+                    dispatch(addList(data.data.data));
+                    setData(data.data.data);
+                })
             }
-            getStreams();
+        }
+        getStreams();
     }, [currentToken, dispatch]);
 
     useEffect(() => {
@@ -89,28 +90,19 @@ const Twitch = () => {
 
     return (
         <div className="flex md:p-5">
-            <div className="text-white font-roboto">
-           
-            {followed.length > 0 &&
-                <div className="pt-2">
-                    <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Followed Live Channels</h1> 
-                    <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3"> 
+            <div className="text-white font-roboto">        
+                {followed.length > 0 &&
+                    <StreamCardContainer description="Followed Live Channels">
                         {followed?.slice(0, 5).map((streamer) => (                
                             <StreamCard key={streamer.id} streamer={streamer} type='followed'/>
                         ))}
-                    </div>
-                </div>
+                    </StreamCardContainer> 
                 }
-
-                <div className="sm:pt-2 xs:pt-2">
-                    <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Recommended Channels</h1> 
-                    <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3">
-                        {data &&  data?.filter((item) => filtered(item.user_id) !== true).slice(0, 5).map((streamer) => (
-                            <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
-                            ))}
-                    </div>
-                </div>
-
+                <StreamCardContainer description="Recommended Channels">
+                    {data &&  data?.filter((item) => filtered(item.user_id) !== true).slice(0, 5).map((streamer) => (
+                        <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
+                    ))}
+                </StreamCardContainer>
                 <div className="sm:pt-2 xs:pt-2">
                     <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Top Games</h1> 
                     <div className="grid 3xl:grid-cols-9 2xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
