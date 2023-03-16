@@ -1,7 +1,12 @@
-import React from 'react'
+import React, {FC} from 'react'
 import TopGamesItem from './TopGamesItem'
+import { TopGameData } from '../types/types'
 
-function TopGames({ topGames }) {
+type TopGamesProps = {
+  topGames: TopGameData[];
+}
+
+const TopGames: FC<TopGamesProps> = ({ topGames }) => {
   return (
     <div className="sm:pt-2 xs:pt-2">
         <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Top Games</h1> 
@@ -14,4 +19,4 @@ function TopGames({ topGames }) {
   )
 }
 
-export default TopGames
+export default TopGames;
