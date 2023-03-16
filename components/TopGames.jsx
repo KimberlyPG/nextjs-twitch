@@ -1,28 +1,17 @@
-import Link from "next/link";
-import Image from "next/image";
+import React from 'react'
+import TopGamesItem from './TopGamesItem'
 
-const TopGames = ({ games }) => {
-    return (
-        <Link 
-            href={{
-                pathname: `/game/${games.id}`, 
-                query: {id: (games.id), image: (games.box_art_url), name:(games.name)},
-            }} 
-            as={`/game/${games.id}`}
-        >
-            <div className="cursor-pointer mb-5 mx-1">
-                <Image 
-                    className="hover:w-56 ease-in duration-200 hover:opacity-80" 
-                    src={games.box_art_url.slice(0, -21)+".jpg"}
-                    layout="responsive"
-                    height='100%'
-                    width='75%' 
-                    alt={`${games.name} image`}
-                />
-                <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{games.name}</h4>
-            </div>
-        </Link>
-    )
+function TopGames({ topGames }) {
+  return (
+    <div className="sm:pt-2 xs:pt-2">
+        <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Top Games</h1> 
+        <div className="grid 3xl:grid-cols-9 2xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
+            {topGames &&  topGames.map((games) => (
+                <TopGamesItem key={games.id} games={games}/>
+            ))}
+        </div>
+    </div>
+  )
 }
 
-export default TopGames;
+export default TopGames
