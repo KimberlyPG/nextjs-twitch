@@ -1,7 +1,13 @@
+import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { TopGameData } from "../types/types";
 
-const TopGames = ({ games }) => {
+type TopGamesItem = {
+    games: TopGameData;
+}
+
+const TopGamesItem: FC<TopGamesItem> = ({ games }) => {
     return (
         <Link 
             href={{
@@ -25,4 +31,4 @@ const TopGames = ({ games }) => {
     )
 }
 
-export default TopGames;
+export default TopGamesItem;

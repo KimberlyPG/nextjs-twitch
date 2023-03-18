@@ -2,27 +2,29 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import StreamCard from "./StreamCard";
-import StreamCardContainer from "../components/StreamCardContainer";
+import StreamCardContainer from "./StreamCardContainer";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
 import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
-import { recommendationFilter } from "../utils/recommendationFilter";
+import { useStreamsFilter } from "../hooks/useStreamsFilter";
+import { LiveStreamsData, TopGamesData } from "../types/types";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
     const dispatch = useAppDispatch();
     
-    const userId = session?.user.id;
-    const currentToken = session?.user.token;
+    const userId = session?.user?.id;
+    const currentToken = session?.user?.token;
+    
+    const [streams, setStreams] = useState<LiveStreamsData[]>([]);
+    const [followedStreams, setFollowedStreams] = useState<LiveStreamsData[]>([]);
+    const [topGames, setTopGames] = useState<TopGamesData[]>([]);
 
-    const [data, setData] = useState([]);
-    const [followed, setFollowed] = useState([]);
-    const [topGames, setTopGames] = useState([]);
-   
- 
+    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followedStreams, streams)!;
+
     useEffect(() => {
         const getStreams = async () => {
             if(currentToken) {
@@ -30,12 +32,12 @@ const Twitch = () => {
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 })
                 .then((data) => {
                     dispatch(addList(data.data.data));
-                    setData(data.data.data);
+                    setStreams(data.data.data);
                 })
             }
         }
@@ -49,13 +51,13 @@ const Twitch = () => {
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 })
                 .then((data) => {
                     dispatch(cleanState({}));
                     dispatch(addFollowedData(data.data.data))
-                    setFollowed(data.data.data)            
+                    setFollowedStreams(data.data.data)            
                 })
             }
         }
@@ -69,7 +71,7 @@ const Twitch = () => {
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 })
                 .then((data) => setTopGames(data.data.data));
@@ -81,27 +83,19 @@ const Twitch = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followed.length > 0 &&
+                {followedStreams.length > 0 &&
                     <StreamCardContainer description="Followed Live Channels">
-                        {followed.slice(0, 5).map((streamer) => (                
+                        {followedStreams.slice(0, 5).map((streamer) => (                
                             <StreamCard key={streamer.id} streamer={streamer} type='followed'/>
                         ))}
                     </StreamCardContainer> 
                 }
                 <StreamCardContainer description="Recommended Channels">
-                    {data &&  data.filter((item) => 
-                        recommendationFilter(item.user_id, followed) !== true).slice(0, 5).map((streamer) => (
+                    {streamsFiltered &&  streamsFiltered.slice(0, 5).map((streamer) => (
                         <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
                     ))}
                 </StreamCardContainer>
-                <div className="sm:pt-2 xs:pt-2">
-                    <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">Top Games</h1> 
-                    <div className="grid 3xl:grid-cols-9 2xl:grid-cols-9 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-4">
-                        {topGames &&  topGames.map((games) => (
-                            <TopGames key={games.id} games={games}/>
-                         ))}
-                    </div>
-                </div>
+                <TopGames topGames={topGames}/>
             </div>
         </div>
     )
