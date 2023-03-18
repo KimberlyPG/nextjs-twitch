@@ -23,7 +23,7 @@ export type TopGamesData = {
     igdb_id:     string;
 }
 
-export interface TopGame {
+export interface TopGameData {
     id:          string;
     name:        string;
     box_art_url: string;

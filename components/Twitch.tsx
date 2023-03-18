@@ -11,7 +11,6 @@ import { addFollowedData, cleanState } from "../store/slices/followedLive/follow
 import { addList } from "../store/slices/recommended/recommendedSlice";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
 import { LiveStreamsData, TopGamesData } from "../types/types";
-import { InitialStreamDataValues } from "../initialValues/intialDataValues";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
