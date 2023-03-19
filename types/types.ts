@@ -16,16 +16,22 @@ export type LiveStreamsData = {
     is_mature:     boolean;
 }
 
-export type TopGamesData = {
+export interface TopGameData {
     id:          string;
     name:        string;
     box_art_url: string;
     igdb_id:     string;
 }
 
-export interface TopGameData {
-    id:          string;
-    name:        string;
-    box_art_url: string;
-    igdb_id:     string;
+export interface UserData {
+    id:                string;
+    login:             string;
+    display_name:      string;
+    type:              string;
+    broadcaster_type:  string;
+    description:       string;
+    profile_image_url: string;
+    offline_image_url: string;
+    view_count:        number;
+    created_at:        string;
 }

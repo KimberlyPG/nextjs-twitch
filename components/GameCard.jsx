@@ -53,7 +53,7 @@ const GameCards = ({ streamer }) => {
                         user_id={streamer.id} 
                         title={streamer.title} 
                         user_name={streamer.user_name} 
-                        profile_image_url={userData.profile_image_url} 
+                        profile_image={userData.profile_image_url} 
                         type='other' 
                     />
                 </div>
