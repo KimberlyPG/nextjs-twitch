@@ -25,7 +25,7 @@ const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
                         user_id={user_id} 
                         title={title} 
                         user_name={user_name} 
-                        profile_image={null}
+                        profile_image={undefined}
                         game_name={game_name} 
                         type={type} 
                     />
