@@ -11,7 +11,7 @@ type StreamDescriptionProps = {
     title: string;
     user_name: string;
     game_name: string;
-    profile_image: string | null;
+    profile_image: string;
     type: string;
 }
 
@@ -19,7 +19,6 @@ const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_na
     const streamerData = useSelector(selectStreamer);
     const recommendedData = useSelector(selectRecommendedUserData);
 
-    console.log(streamerData)
     const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id)
     const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id)
 
