@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { RiRadioButtonLine } from "react-icons/ri";
 import Link from "next/link";
 
@@ -5,8 +6,15 @@ import UserImage from "./UserImage";
 
 import { viewersFormat } from "../utils/viewersFormat";
 
-const SidebarStreamerCard = ({ id, image, display_name, game_name, viewer_count }) => {
+type SidebarStreamerCardProps = {
+    id: string;
+    image: string;
+    display_name: string;
+    game_name: string;
+    viewer_count: number;
+}
 
+const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, image, display_name, game_name, viewer_count }) => {
     return (
         <>
         {game_name ? (
