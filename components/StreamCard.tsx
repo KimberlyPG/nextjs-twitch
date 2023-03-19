@@ -1,9 +1,16 @@
+import { FC } from "react";
 import Link from "next/link";
 
 import StreamImage from "./StreamImage";
 import  StreamDescription from "./StreamDescription";
+import { LiveStreamsData } from "../types/types";
 
-const StreamCard = ({ streamer, type }) => {
+type StreamCardProps = {
+    streamer: LiveStreamsData;
+    type: string;
+}
+
+const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
     const { user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
 
     return (
