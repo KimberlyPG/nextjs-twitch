@@ -18,8 +18,8 @@ const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
             <Link href={`/stream/${user_name}`}>
                 <div>
                     <StreamImage 
-                        thumbnail_url={thumbnail_url} 
-                        viewer_count={viewer_count}
+                        thumbnailUrl={thumbnail_url} 
+                        viewerCount={viewer_count}
                     />
                     <StreamDescription 
                         user_id={user_id} 

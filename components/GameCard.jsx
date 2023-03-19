@@ -32,8 +32,8 @@ const GameCards = ({ streamer }) => {
             <Link href={`/stream/${streamer.user_name}`}>
                 <div className="cursor-pointer">
                    <StreamImage 
-                        thumbnail_url={streamer.thumbnail_url} 
-                        viewer_count={streamer.viewer_count}
+                        thumbnailUrl={streamer.thumbnail_url} 
+                        viewerCount={streamer.viewer_count}
                     />
                 </div>
             </Link>
