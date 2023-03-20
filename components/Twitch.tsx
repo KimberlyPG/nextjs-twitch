@@ -1,71 +1,31 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import StreamCard from "./StreamCard";
 import StreamCardContainer from "./StreamCardContainer";
+import StreamCard from "./StreamCard";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
-import { addList } from "../store/slices/recommended/recommendedSlice";
+import { LiveStreamsData, TopGameData, UserData } from "../types/types";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
-import { LiveStreamsData, TopGameData } from "../types/types";
+import { useAppSelector } from "../store/hooks";
+import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
 import { selectStreamer } from "../store/slices/streamer/streamerSlice";
+
+import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
-    const dispatch = useAppDispatch();
-    
-    const userId = session?.user?.id;
+
     const currentToken = session?.user?.token;
     
-    const [streams, setStreams] = useState<LiveStreamsData[]>([]);
-    const [followedStreams, setFollowedStreams] = useState<LiveStreamsData[]>([]);
     const [topGames, setTopGames] = useState<TopGameData[]>([]);
 
-    const followsStreamers = useAppSelector(selectStreamer)
-    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followsStreamers, streams)!;
+    const recommendedStreams: LiveStreamsData[] = useAppSelector(selectRecommended);
+    const followedStreamersLive: LiveStreamsData[] = useAppSelector(selectFollowedLive);
+    const followsStreamers: UserData[] = useAppSelector(selectStreamer)
+    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followsStreamers, recommendedStreams)!;
 
-    useEffect(() => {
-        const getStreams = async () => {
-            if(currentToken) {
-                await twitch.get(`/streams?first=12`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                    }
-                })
-                .then((data) => {
-                    dispatch(addList(data.data.data));
-                    setStreams(data.data.data);
-                })
-            }
-        }
-        getStreams();
-    }, [currentToken, dispatch]);
-
-    useEffect(() => {
-        const getFollowed = async () => {
-            if(currentToken) {
-                await twitch.get(`/streams/followed?user_id=${userId}`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                    }
-                })
-                .then((data) => {
-                    dispatch(cleanState({}));
-                    dispatch(addFollowedData(data.data.data))
-                    setFollowedStreams(data.data.data)            
-                })
-            }
-        }
-        getFollowed();
-    }, [currentToken, dispatch, userId])
- 
     useEffect(() => {
         const getGames = async () => {
             if(currentToken) {
@@ -85,9 +45,9 @@ const Twitch = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedStreams.length > 0 &&
+                {followedStreamersLive.length > 0 &&
                     <StreamCardContainer description="Followed Live Channels">
-                        {followedStreams.slice(0, 5).map((streamer) => (                
+                        {followedStreamersLive.slice(0, 5).map((streamer) => (                
                             <StreamCard key={streamer.id} streamer={streamer} type='followed'/>
                         ))}
                     </StreamCardContainer> 

@@ -9,13 +9,13 @@ export const followedLiveSlice = createSlice({
     addFollowedData: (state, action) => {
       return state = action.payload;
     },
-    cleanState: (state, action) => {
-      return state = action.payload;
-    }
+    // cleanState: (state, action) => {
+    //   return state = action.payload;
+    // }
   },
 });
 
-export const { addFollowedData, cleanState } = followedLiveSlice.actions;
+export const { addFollowedData } = followedLiveSlice.actions;
 
 export const selectFollowedLive = (state) => state.followed;
 
