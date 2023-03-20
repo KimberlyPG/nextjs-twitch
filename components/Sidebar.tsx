@@ -119,24 +119,22 @@ const Sidebar = () => {
 
 	//recommendations user data
 	useEffect(() => {
-		if(recommendationsList.length>0) {
-			recommendationsList.map((streamer: LiveStreamsData) => {
-				const getStreamerInfo = async () => {
-					await twitch.get(`/users?id=${streamer.user_id}`,
-					{
-						headers: {
-							"Authorization": `Bearer ${currentToken}`,
-							"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-						}
-					})
-					.then(res => {
-						setRecommendedData(current => [...current, res.data.data[0]]);
-						dispatch(addData(res.data.data[0]));
-					})
-				};
-				getStreamerInfo();
-			});
-		}
+		recommendationsList && recommendationsList.map((streamer: LiveStreamsData) => {
+			const getStreamerInfo = async () => {
+				await twitch.get(`/users?id=${streamer.user_id}`,
+				{
+					headers: {
+						"Authorization": `Bearer ${currentToken}`,
+						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+					}
+				})
+				.then(res => {
+					setRecommendedData(current => [...current, res.data.data[0]]);
+					dispatch(addData(res.data.data[0]));
+				})
+			};
+			getStreamerInfo();
+		});
 	}, [currentToken, recommendationsList, dispatch]);
 
 	return (
