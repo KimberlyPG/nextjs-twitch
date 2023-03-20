@@ -10,26 +10,30 @@ const SearchBar = () => {
         event.preventDefault();
         router.push(`/search/${name}`);
     }
-           
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         setName(event.target.value);
     }
-    
+
+    const handleClick = () => {
+        router.push(`/search/${name}`);
+    }
+
     return (
-        <div className="flex justify-center text-white">
+        <div className="flex flex-row justify-center items-center text-white">
             <form onSubmit={handleSubmit}>
                 <input 
-                    className="bg-gray-300 rounded lg:w-80 text-black pl-3 sm:w-60 xs:w-24"
+                    className="bg-gray-300 rounded lg:w-80 text-black pl-3 sm:w-60 xs:w-24 xs:text-xs sm:text-sm"
                     type="search"
+                    placeholder="Search streamers..."
                     onChange={handleChange} 
                 />
-                <button type="submit">
-                    <BsSearch 
-                        className="sx:text-sm sm:text-md ml-2 align-middle cursor-pointer hover:opacity-80"
-                    />
-                </button>
             </form>   
+            <BsSearch 
+                onClick={() => handleClick()}
+                className="sx:text-sm sm:text-md ml-2 align-middle cursor-pointer hover:opacity-80"
+            />
         </div>
     )
 }
