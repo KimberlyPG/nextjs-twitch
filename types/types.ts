@@ -80,3 +80,15 @@ export interface Video {
     duration:       string;
     muted_segments: null;
 }
+
+export interface Provider {
+    twitch: Twitch;
+}
+
+export interface Twitch {
+    id:          string;
+    name:        string;
+    type:        string;
+    signinUrl:   string;
+    callbackUrl: string;
+}
