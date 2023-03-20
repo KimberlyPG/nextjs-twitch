@@ -8,7 +8,6 @@ import  StreamDescription from "./StreamDescription";
 
 import { LiveStreamsData, UserData } from "../types/types";
 import { initialUserDataValues } from "../initialValues/intialDataValues";
-import { addUserData } from "../store/slices/userData/userDataSlice";
 import { useAppDispatch } from "../store/hooks";
 
 type GameCardProps = {
@@ -17,8 +16,6 @@ type GameCardProps = {
 const GameCards: FC<GameCardProps> = ({ streamer }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
-
-    const dispatch = useAppDispatch(); 
 
     const [userData, setUserData] = useState<UserData>(initialUserDataValues);
 

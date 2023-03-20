@@ -19,34 +19,37 @@ const Game: NextPage = () => {
 
     const [game, setGame] = useState<GameData>(InitialGameDataValues);
     const [channel, setChannel] = useState<LiveStreamsData[]>([]);
-    console.log(game)
 
     useEffect(() => {
+        if(gameId && currentToken) {
         const getGameData = async() => {
-            await twitch.get(`/games?id=${gameId}`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                }
-            })
-            .then(res => setGame(res.data.data[0]));
-        }
-        getGameData();
-    }, [gameId, currentToken])
- 
-    useEffect(() => {
-        const getChannels = async () => {
-            await twitch.get(`/streams?game_id=${gameId}&first=15`,
+                await twitch.get(`/games?id=${gameId}`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
                         "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 })
-                .then(res => setChannel(res.data.data));
+                .then(res => setGame(res.data.data[0]));
             }
-        getChannels();
+            getGameData();
+        }
+    }, [gameId, currentToken])
+ 
+    useEffect(() => {
+        if(gameId && currentToken) {
+        const getChannels = async () => {
+                await twitch.get(`/streams?game_id=${gameId}&first=15`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${currentToken}`,
+                            "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+                        }
+                    })
+                    .then(res => setChannel(res.data.data));
+                }
+            getChannels();
+            }
     }, [currentToken, gameId]);
 
     return (
@@ -64,7 +67,7 @@ const Game: NextPage = () => {
                 </header>
 
                 <h3 className="text-sm my-5 font-semibold">Live channels we think you will like</h3>
-                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1 space-x-3">
+                <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1">
                     {channel && channel.map((streamer) => (
                         <GameCards key={streamer.id} streamer={streamer} />
                     ))}
