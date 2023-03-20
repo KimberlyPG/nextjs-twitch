@@ -47,10 +47,9 @@ const Topbar = () => {
                 />
                 <Link 
                     href={{
-                        pathname: `/profile/${session?.user.name}`, 
-                        query:{id: (session?.user.id), image: (session?.user.image), state:(false)}, 
+                        pathname: `/profile/${session?.user.id}`, 
+                        query:{state:(false)}, 
                     }} 
-                    as={`/profile/${session?.user.name}`}
                 >
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500 xs:hidden lg:flex">{session?.user.name}</h4>

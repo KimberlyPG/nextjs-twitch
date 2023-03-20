@@ -5,6 +5,7 @@ import sidebarTogleSlice from './slices/sidebarToggleSlice/sidebarToggleSlice';
 import searchSlice from './slices/searchSlice/searchSlice';
 import recommendedSlice from './slices/recommended/recommendedSlice';
 import recommendedUserData from './slices/recommendedUserData/recommendedUserDataSlice'
+import userDataSlice from './slices/userData/userDataSlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     toggle: sidebarTogleSlice,
     search: searchSlice,
     recommended: recommendedSlice,
-    recommendedUser: recommendedUserData
+    recommendedUser: recommendedUserData,
+    userData: userDataSlice
   },
 });
 

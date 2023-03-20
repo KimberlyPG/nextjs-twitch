@@ -8,6 +8,8 @@ import  StreamDescription from "./StreamDescription";
 
 import { LiveStreamsData, UserData } from "../types/types";
 import { initialUserDataValues } from "../initialValues/intialDataValues";
+import { addUserData } from "../store/slices/userData/userDataSlice";
+import { useAppDispatch } from "../store/hooks";
 
 type GameCardProps = {
     streamer: LiveStreamsData;
@@ -15,6 +17,8 @@ type GameCardProps = {
 const GameCards: FC<GameCardProps> = ({ streamer }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
+
+    const dispatch = useAppDispatch(); 
 
     const [userData, setUserData] = useState<UserData>(initialUserDataValues);
 
@@ -43,17 +47,7 @@ const GameCards: FC<GameCardProps> = ({ streamer }) => {
                     />
                 </div>
             </Link>
-            <Link 
-                href={{
-                    pathname: `/profile/${streamer.user_name}`, 
-                    query: {
-                        id:(streamer.user_id), 
-                        image:(userData.profile_image_url), 
-                        state:(true)
-                        }
-                    }}
-                    as={`/profile/${streamer.user_name}`}
-                >
+            <Link href={{pathname: `/profile/${streamer.user_id}`, query: {state:(true)}}}>
                 <div className="cursor-pointer">
                     <StreamDescription 
                         user_id={streamer.id} 
