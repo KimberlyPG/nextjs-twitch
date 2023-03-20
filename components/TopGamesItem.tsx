@@ -14,10 +14,11 @@ const TopGamesItem: FC<TopGamesItem> = ({ games }) => {
                 <Image 
                     className="hover:w-56 ease-in duration-200 hover:opacity-80" 
                     src={games.box_art_url.slice(0, -21)+".jpg"}
-                    layout="responsive"
-                    height='100%'
-                    width='75%' 
                     alt={`${games.name} image`}
+                    layout="responsive"
+                    objectFit="contain"
+                    height='100%'
+                    width='75%'
                 />
                 <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{games.name}</h4>
             </div>
