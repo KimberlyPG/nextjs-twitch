@@ -13,7 +13,6 @@ type SearchListProps = {
 }
 
 const SearchList: FC<SearchListProps> = ({ streams }) => {
-    console.log("streams", streams)
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
@@ -35,8 +34,7 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
             getStream();
         }
     }, [state, currentToken, streams.id])
-    console.log("data", data)
-   
+ 
     return ( 
         <>
         {state ? (
