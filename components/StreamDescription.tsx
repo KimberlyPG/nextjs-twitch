@@ -47,9 +47,9 @@ const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_na
                 />                       
             }
             <span className="w-full truncate m-2">
-                <h4 className="truncate text-white sm:text-sm xs:text-xs">{title}</h4>
+                <p className="truncate text-white sm:text-sm xs:text-xs">{title}</p>
                 <h3 className="text-gray-400 sm:text-sm xs:text-xs">{user_name}</h3>
-                <h4 className="text-gray-400 sm:text-sm xs:text-xs hover:text-purple-400">{game_name}</h4>
+                <p className="text-gray-400 sm:text-sm xs:text-xs hover:text-purple-400">{game_name}</p>
             </span>
         </div>   
     );

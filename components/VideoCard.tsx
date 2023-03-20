@@ -23,7 +23,7 @@ const VideoCard: FC<VideoCardProps> = ({ item }) => {
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersFormat(item.view_count)} views</p>
                     <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0 right-0">{days(item.created_at, item.duration)}</p>
                     </div>
-                    <h1 className='xs:w-64 md:w-full truncate sm:text-sm xs:text-xs'>{item.title}</h1>
+                    <p className='xs:w-64 md:w-full truncate sm:text-sm xs:text-xs'>{item.title}</p>
                 </div>
             </Link>
         </div>
