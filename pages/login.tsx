@@ -1,8 +1,13 @@
-import { getProviders, signIn } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
+import { getProviders, signIn, useSession } from 'next-auth/react';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router'
+import { Provider } from '../types/types';
 
-const Login = ({ providers }) => {
+type LoginProp = {
+    providers: Provider;
+}
+
+const Login: NextPage<LoginProp> = ({ providers }) => {
     const { data: session } = useSession();
     const router = useRouter();
 
