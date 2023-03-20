@@ -10,7 +10,7 @@ import { useAppDispatch } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
-import { LiveStreamsData, TopGamesData } from "../types/types";
+import { LiveStreamsData, TopGameData } from "../types/types";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
@@ -21,9 +21,9 @@ const Twitch = () => {
     
     const [streams, setStreams] = useState<LiveStreamsData[]>([]);
     const [followedStreams, setFollowedStreams] = useState<LiveStreamsData[]>([]);
-    const [topGames, setTopGames] = useState<TopGamesData[]>([]);
+    const [topGames, setTopGames] = useState<TopGameData[]>([]);
 
-    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followedStreams, streams)!;
+    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followedStreams, streams, "twitch")!;
 
     useEffect(() => {
         const getStreams = async () => {
