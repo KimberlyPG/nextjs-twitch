@@ -28,24 +28,25 @@ const Profile: NextPage = () => {
     const [video, setVideo] = useState<Video[]>([]);
 
     useEffect(() => {
-        const getStreamerInfo = async() => {
-            await twitch.get(`/users?id=${id}`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                }
-            })
-            .then(res => setUserData(res.data.data[0]))
-        };
-        getStreamerInfo();
+        if(currentToken && id) {
+            const getStreamerInfo = async() => {
+                await twitch.get(`/users?id=${id}`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${currentToken}`,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+                    }
+                })
+                .then(res => setUserData(res.data.data[0]))
+            };
+            getStreamerInfo();
+        }
     }, [currentToken, id]);
 
     useEffect(() => {
-        if(id) {
+        if(currentToken && id) {
             const getVideos = async () => {
-                if(currentToken) {
-                    await twitch.get(`/videos?user_id=${id}&first=5`,
+                await twitch.get(`/videos?user_id=${id}&first=5`,
                     {
                         headers: {
                             "Authorization": `Bearer ${currentToken}`,
@@ -54,7 +55,6 @@ const Profile: NextPage = () => {
                     }
                     ).then(res => setVideo(res?.data?.data));
                 }
-            }
             getVideos();
         }
     }, [currentToken, id]);
