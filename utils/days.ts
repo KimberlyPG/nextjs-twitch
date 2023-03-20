@@ -1,6 +1,6 @@
 const today = new Date();
 
-export function days(videoDate, videoDuration){
+export const days = (videoDate: string, videoDuration: string) => {
     const date1 = today.getTime();
     const date2 = videoDate.slice(0, -10)
 
