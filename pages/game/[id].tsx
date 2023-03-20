@@ -62,11 +62,11 @@ const Game: NextPage = () => {
                             src={game?.box_art_url?.slice(0, -21)+".jpg"} 
                             alt={`${game?.name} image`} 
                         />
-                        <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{game?.name}</h2>                        
+                        <h1 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{game?.name}</h1>                        
                     </span>
                 </header>
 
-                <h3 className="text-sm my-5 font-semibold">Live channels we think you will like</h3>
+                <h2 className="text-sm my-5 font-semibold">Live channels we think you will like</h2>
                 <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1">
                     {channel && channel.map((streamer) => (
                         <GameCards key={streamer.id} streamer={streamer} />

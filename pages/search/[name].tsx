@@ -19,17 +19,19 @@ const Search: NextPage = () => {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        const searchUsers = async() => {
-            await twitch.get(`/search/channels?query=${userName}&first=8`,
-            {
-                headers: {
-                    "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                }
-            })
-            .then((data) => setResults(data.data.data)) 
+        if(userName && currentToken) {
+            const searchUsers = async() => {
+                await twitch.get(`/search/channels?query=${userName}&first=8`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${currentToken}`,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+                    }
+                })
+                .then((data) => setResults(data.data.data)) 
+            }
+            searchUsers();
         }
-        searchUsers();
     }, [userName, currentToken])
 
     return (
