@@ -7,7 +7,8 @@ import Layout from '../../components/Layout';
 import GameCards from "../../components/GameCard";
 
 import twitch from "../api/twitch";
-import { LiveStreamsData } from "../../types/types";
+import { GameData, LiveStreamsData } from "../../types/types";
+import { InitialGameDataValues } from "../../initialValues/intialDataValues";
 
 const Game: NextPage = () => {
     const { data: session, status } = useSession();
@@ -15,10 +16,24 @@ const Game: NextPage = () => {
 
     const router = useRouter();
     const gameId = router.query.id;
-    const gameName = router.query.name;
-    const gameUrl = router.query.image;
-    
+
+    const [game, setGame] = useState<GameData>(InitialGameDataValues);
     const [channel, setChannel] = useState<LiveStreamsData[]>([]);
+    console.log(game)
+
+    useEffect(() => {
+        const getGameData = async() => {
+            await twitch.get(`/games?id=${gameId}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${currentToken}`,
+                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+                }
+            })
+            .then(res => setGame(res.data.data[0]));
+        }
+        getGameData();
+    }, [gameId, currentToken])
  
     useEffect(() => {
         const getChannels = async () => {
@@ -41,10 +56,10 @@ const Game: NextPage = () => {
                     <span className="flex items-center lg:h-56 md:h-44 xs:h-36">
                         <img
                             className="lg:h-56 md:h-44 xs:h-36 bg-purple-500 shadow-lg shadow-purple-500/50" 
-                            src={gameUrl?.slice(0, -21)+".jpg"} 
-                            alt={`${gameName} image`} 
+                            src={game?.box_art_url?.slice(0, -21)+".jpg"} 
+                            alt={`${game?.name} image`} 
                         />
-                        <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{gameName}</h2>                        
+                        <h2 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{game?.name}</h2>                        
                     </span>
                 </header>
 

@@ -23,6 +23,13 @@ export type TopGameData = {
     igdb_id:     string;
 }
 
+export type GameData = {
+    id:          string;
+    name:        string;
+    box_art_url: string;
+    igdb_id:     string;
+}
+
 export type UserData = {
     id:                string;
     login:             string;

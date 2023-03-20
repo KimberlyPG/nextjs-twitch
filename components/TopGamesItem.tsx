@@ -9,13 +9,7 @@ type TopGamesItem = {
 
 const TopGamesItem: FC<TopGamesItem> = ({ games }) => {
     return (
-        <Link 
-            href={{
-                pathname: `/game/${games.id}`, 
-                query: {id: (games.id), image: (games.box_art_url), name:(games.name)},
-            }} 
-            as={`/game/${games.id}`}
-        >
+        <Link href={`/game/${games.id}`}>
             <div className="cursor-pointer mb-5 mx-1">
                 <Image 
                     className="hover:w-56 ease-in duration-200 hover:opacity-80" 

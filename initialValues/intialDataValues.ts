@@ -33,3 +33,10 @@ export const initialUserDataValues = {
     view_count: 0,
     created_at: "",
 }
+
+export const InitialGameDataValues = {
+    id: "",
+    name: "",
+    box_art_url: "",
+    igdb_id: "",
+}
