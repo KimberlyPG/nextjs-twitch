@@ -19,8 +19,8 @@ const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), 
 const Profile: NextPage = () => {
     const router = useRouter();
     const name = router.query.name as string;
-    const id = router.query.id;
-    const image = router.query.image;
+    const id = router.query.id as string;
+    const image = router.query.image as string;
     const state = router.query.state;
 
     const { data: session, status } = useSession();
@@ -49,7 +49,7 @@ const Profile: NextPage = () => {
             <Layout>
                 <ReactTwitchEmbedVideo 
                     channel={name}
-                    allowfullscreen={state}
+                    allowfullscreen={Boolean(state)}
                     width="100%"
                     height="450px"
                     layout='video'
