@@ -33,7 +33,7 @@ const Sidebar = () => {
 	const toggleSidebar = useAppSelector(selectToggle);
 	const streamerLive = useAppSelector(selectFollowedLive);
 	const recommendedList = useAppSelector(selectRecommended);
-
+	console.log(streamerLive)
 	const {followLive, followOffline}  = useIsFollowLive(followedData, streamerLive);
 	const recommendations = useStreamsFilter(followedData, recommendedList, "sidebar");
 	const findStreamer = (data, id) => data?.findIndex((streamerid) => streamerid.id == id);

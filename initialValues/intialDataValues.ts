@@ -15,3 +15,8 @@ export const InitialStreamDataValues ={
     tags:          [],
     is_mature:     false,
 }
+
+export const initialIsFollowLiveValues = {
+    followLive: [],
+    followOffline: [],
+}
