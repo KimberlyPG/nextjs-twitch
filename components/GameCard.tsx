@@ -1,16 +1,22 @@
 import { useSession } from "next-auth/react";
+import { useState, useEffect, FC } from "react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 import twitch from "../pages/api/twitch";
 import StreamImage from "./StreamImage";
 import  StreamDescription from "./StreamDescription";
 
-const GameCards = ({ streamer }) => {
+import { LiveStreamsData, UserData } from "../types/types";
+import { initialUserDataValues } from "../initialValues/intialDataValues";
+
+type GameCardProps = {
+    streamer: LiveStreamsData;
+}
+const GameCards: FC<GameCardProps> = ({ streamer }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
-    const [userData, setUserData] = useState([]);
+    const [userData, setUserData] = useState<UserData>(initialUserDataValues);
 
     useEffect(() => {
         const getStreamerInfo = async() => {
@@ -18,7 +24,7 @@ const GameCards = ({ streamer }) => {
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                 }
             })
             .then(res => setUserData(res.data.data[0]))
@@ -53,6 +59,7 @@ const GameCards = ({ streamer }) => {
                         user_id={streamer.id} 
                         title={streamer.title} 
                         user_name={streamer.user_name} 
+                        game_name={null}
                         profile_image={userData.profile_image_url} 
                         type='other' 
                     />

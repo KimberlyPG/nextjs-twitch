@@ -20,3 +20,16 @@ export const initialIsFollowLiveValues = {
     followLive: [],
     followOffline: [],
 }
+
+export const initialUserDataValues = {
+    id: "",
+    login: "",
+    display_name: "",
+    type: "",
+    broadcaster_type: "",
+    description: "",
+    profile_image_url: "",
+    offline_image_url: "",
+    view_count: 0,
+    created_at: "",
+}

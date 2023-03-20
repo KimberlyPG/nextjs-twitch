@@ -10,7 +10,7 @@ type StreamDescriptionProps = {
     user_id: string;
     title: string;
     user_name: string;
-    game_name: string;
+    game_name: string | null;
     profile_image: string | undefined;
     type: string;
 }
