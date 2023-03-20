@@ -18,6 +18,7 @@ const StreamImage: FC<StreamImageProps> = ({ thumbnailUrl, viewerCount }) => {
                 src={thumbnailUrl.slice(0, -21)+".jpg"} 
                 alt="stream image"
                 layout="responsive"
+                objectFit="contain"
                 width='100%'
                 height='55%'
             />
