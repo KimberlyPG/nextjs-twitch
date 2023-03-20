@@ -1,21 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 import { LiveStreamsData } from '../../../types/types';
-import { InitialStreamDataValues } from '../../../initialValues/intialDataValues';
 
-const initialState: LiveStreamsData[] = [
-  InitialStreamDataValues
-]
+const initialState: LiveStreamsData[] = []
 
 export const recommendedSlice = createSlice({
-  name: 'recommended',
-  initialState,
-  reducers: {
-    addList: (state, action) => {
-      return state = action.payload;
+    name: 'recommended',
+    initialState,
+    reducers: {
+		addList: (state, action: PayloadAction<LiveStreamsData[]>) => {
+			return state = action.payload;
+		},
     },
-  },
 });
 
 export const { addList } = recommendedSlice.actions;

@@ -1,21 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 import { LiveStreamsData } from '../../../types/types';
-import { InitialStreamDataValues } from '../../../initialValues/intialDataValues';
 
-const initialState: LiveStreamsData[] = [
-  InitialStreamDataValues
-]
+const initialState: LiveStreamsData[] = []
 
 export const followedLiveSlice = createSlice({
-  name: 'followed',
-  initialState,
-  reducers: {
-    addFollowedData: (state, action) => {
-      return state = action.payload;
-    },
-  },
+	name: 'followed',
+	initialState,
+	reducers: {
+		addFollowedData: (state, action: PayloadAction<LiveStreamsData[]>) => {
+		return state = action.payload;
+		},
+	},
 });
 
 export const { addFollowedData } = followedLiveSlice.actions;
