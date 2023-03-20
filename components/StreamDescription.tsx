@@ -5,6 +5,7 @@ import UserImage from "./UserImage";
 import { useSelector } from "react-redux";
 import { selectStreamer } from "../store/slices/streamer/streamerSlice";
 import { selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
+import { UserData } from "../types/types";
 
 type StreamDescriptionProps = {
     user_id: string;
@@ -16,11 +17,11 @@ type StreamDescriptionProps = {
 }
 
 const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_name, game_name, profile_image, type }) => {
-    const streamerData = useSelector(selectStreamer);
-    const recommendedData = useSelector(selectRecommendedUserData);
+    const streamerData: UserData[] = useSelector(selectStreamer);
+    const recommendedData: UserData[] = useSelector(selectRecommendedUserData);
 
-    const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id)
-    const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id)
+    const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id);
+    const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id);
 
     return (
         <div className="flex">  
