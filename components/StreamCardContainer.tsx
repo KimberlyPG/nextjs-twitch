@@ -1,6 +1,11 @@
-import React from 'react'
+import { FC, ReactNode } from "react";
 
-const StreamCardContainer = ({ children, description }) => {
+type StreamCardContainerProps = {
+    children: ReactNode;
+    description: string;
+}
+
+const StreamCardContainer: FC<StreamCardContainerProps> = ({ children, description }) => {
   return (
     <div className="sm:pt-2 xs:pt-2">
         <h1 className="md:pb-5 xs:pb-3 xs:pl-2 font-semibold xs:text-xs md:text-lg">{description}</h1> 

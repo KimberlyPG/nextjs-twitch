@@ -1,16 +1,27 @@
+import { FC } from "react";
+
 import UserImage from "./UserImage";
 
 import { useSelector } from "react-redux";
 import { selectStreamer } from "../store/slices/streamer/streamerSlice";
 import { selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
+import { UserData } from "../types/types";
 
-const StreamDescription = ({ user_id, title, user_name, game_name, profile_image_url, type }) => {
+type StreamDescriptionProps = {
+    user_id: string;
+    title: string;
+    user_name: string;
+    game_name: string | null;
+    profile_image: string | undefined;
+    type: string;
+}
 
-    const streamerData = useSelector(selectStreamer);
-    const recommendedData = useSelector(selectRecommendedUserData);
+const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_name, game_name, profile_image, type }) => {
+    const streamerData: UserData[] = useSelector(selectStreamer);
+    const recommendedData: UserData[] = useSelector(selectRecommendedUserData);
 
-    const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id)
-    const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id)
+    const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id);
+    const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id);
 
     return (
         <div className="flex">  
@@ -31,7 +42,7 @@ const StreamDescription = ({ user_id, title, user_name, game_name, profile_image
             {type === 'other' &&
                 <UserImage 
                     extraStyle={"h-10 my-2 mr-2"}
-                    imageUrl={profile_image_url}
+                    imageUrl={profile_image}
                     user={user_name}
                 />                       
             }

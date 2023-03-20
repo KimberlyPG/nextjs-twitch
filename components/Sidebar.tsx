@@ -5,31 +5,38 @@ import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 
 import twitch from "../pages/api/twitch";
+import { UserData, Follow, LiveStreamsData } from "../types/types";
+import { useIsFollowLive } from "../hooks/useIsFollowLive";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   addStreamerData,
-  selectStreamer,
   cleanState,
 } from "../store/slices/streamer/streamerSlice";
 import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
-import { addData, selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
-import { validateLive } from "../utils/validateLive";
+import { addData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
+import { useStreamsFilter } from "../hooks/useStreamsFilter";
+import { findStreamer } from "../utils/findStreamer";
+
 
 const Sidebar = () => {
 	const { data: session, status } = useSession();
 	const dispatch = useAppDispatch();
-	const [followed, setFollowed] = useState([]);
 
 	const userId = session?.user.id;
 	const currentToken = session?.user.token;
-	
-	const streamerData = useAppSelector(selectStreamer);
-	const streamerLive = useAppSelector(selectFollowedLive);
+
+	const [followed, setFollowed] = useState<Follow[]>([]);
+	const [followedData, setFollowedData] = useState<UserData[]>([]);
+	const [recommendedData, setRecommendedData] = useState<UserData[]>([]);
+
 	const toggleSidebar = useAppSelector(selectToggle);
+	const streamerLive = useAppSelector(selectFollowedLive);
 	const recommendedList = useAppSelector(selectRecommended);
-	const recommendedUserData = useAppSelector(selectRecommendedUserData);
+
+	const {followLive, followOffline}  = useIsFollowLive(followedData, streamerLive);
+	const recommendations = useStreamsFilter(followedData, recommendedList);
 
 	useEffect(() => {
 		const getFollowed = async () => {
@@ -38,7 +45,7 @@ const Sidebar = () => {
 				{
 					headers: {
 					"Authorization": `Bearer ${currentToken}`,
-					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
 					},
 				})
 				.then((res) => setFollowed(res.data.data));
@@ -56,26 +63,32 @@ const Sidebar = () => {
 				{
 					headers: {
 						Authorization: `Bearer ${currentToken}`,
-						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
 					},
 				})
-			.then((res) =>dispatch(addStreamerData(res.data.data[0])));
-			};
+				.then((res) => {
+					setFollowedData(current => [...current, res.data.data[0]]);
+					dispatch(addStreamerData(res.data.data[0]));
+				}) 
+			}
 			getFollowedInfo();
 		});
-	}, [currentToken, followed, dispatch]);
+	}, [followed, currentToken, dispatch]);
 
 	useEffect(() => {
-		recommendedList.map((streamer) => {
+		recommendedList.map((streamer: LiveStreamsData) => {
 			const getStreamerInfo = async () => {
 				await twitch.get(`/users?id=${streamer.user_id}`,
 				{
 					headers: {
 						"Authorization": `Bearer ${currentToken}`,
-						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+						"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
 					}
 				})
-				.then(res => dispatch(addData(res.data.data[0])))
+				.then(res => {
+					setRecommendedData(current => [...current, res.data.data[0]]);
+					dispatch(addData(res.data.data[0]));
+				})
 			};
 			getStreamerInfo();
 		});
@@ -87,23 +100,23 @@ const Sidebar = () => {
 			<div className="text-white pt-10 h-screen space-y-5">
 			{followed && (
 				<SidebarContainer title="followed">
-					{streamerData.map((data) => validateLive(data.id, streamerLive) === true && (
+					{followLive && followLive?.map((streamer) =>  (
 						<SidebarStreamerCard
-							key={data.id}
-							id={data.id}
-							image={data.profile_image_url}
-							display_name={data.display_name}
-							game_name={streamerLive[streamerLive.findIndex((streamerid) => streamerid.user_id == data.id)].game_name}
-							viewer_count={streamerLive[streamerLive.findIndex((streamerid) => streamerid.user_id == data.id)].viewer_count}
+							key={streamer.id}
+							id={streamer.id}
+							image={followedData[findStreamer(followedData, streamer.user_id)]?.profile_image_url}
+							display_name={streamer.user_name}
+							game_name={streamer.game_name}
+							viewer_count={streamer.viewer_count}
 						/>
 						)
 					)}
-					{streamerData.map((data) => validateLive(data.id, streamerLive) === false && (
+					{followOffline && followOffline?.map((streamer) => (
 						<SidebarStreamerCard
-							key={data.id}
-							id={data.id}
-							image={data.profile_image_url}
-							display_name={data.display_name}
+							key={streamer.id}
+							id={streamer.id}
+							image={streamer.profile_image_url}
+							display_name={streamer.display_name}
 							game_name={null}
 							viewer_count={null}
 						/>
@@ -112,12 +125,11 @@ const Sidebar = () => {
 				</SidebarContainer>
 			)}
 				<SidebarContainer title="recomended">
-					{recommendedList &&
-						recommendedList.filter((item) => validateLive(item.user_id) !== true).map((streamer) => (
+					{recommendations && recommendations.map((streamer) => (
 						<SidebarStreamerCard
 							key={streamer.id} 
 							id={streamer.user_id} 
-							image={recommendedUserData[recommendedUserData.findIndex((streamerid) => streamerid.id == streamer.user_id)]?.profile_image_url} 
+							image={recommendedData[findStreamer(recommendedData, streamer.user_id)]?.profile_image_url} 
 							display_name={streamer.user_name} 
 							game_name={streamer.game_name} 
 							viewer_count={streamer.viewer_count}
@@ -128,6 +140,6 @@ const Sidebar = () => {
 		)}
 		</>
 	);
-};
+}
 
 export default Sidebar;

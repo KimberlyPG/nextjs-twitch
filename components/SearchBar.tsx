@@ -1,41 +1,42 @@
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { FormEvent, ChangeEvent, useState } from "react";
 import { useRouter } from 'next/router'
 import { BsSearch } from "react-icons/bs";
 
 import twitch from "../pages/api/twitch";
 import { useAppDispatch } from "../store/hooks";
 import { addSearchData, cleanState } from "../store/slices/searchSlice/searchSlice";
+import { SearchChannels } from "../types/types";
 
 const SearchBar = () => {
     const { data: session, status } = useSession();
     const dispatch = useAppDispatch(); 
     const router = useRouter();
-    const [name, setName] = useState("");
+    const [name, setName] = useState<string>("");
     
     const currentToken = session?.user.token;
 
     const navigateSearch = () => router.push(`/search/${name}`);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(cleanState([]));
         await twitch.get(`/search/channels?query=${name}&first=8`,
             {
                 headers: {
                     "Authorization": `Bearer ${currentToken}`,
-                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                    "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                 }
             })
             .then((data) => {
-                data.data.data.map((info) => {
-                    dispatch(addSearchData(info)); 
+                data.data.data.map((results: SearchChannels[]) => {
+                    dispatch(addSearchData(results)); 
                 })
             }); 
         navigateSearch();
     }
            
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         setName(event.target.value);
     }

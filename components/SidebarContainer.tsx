@@ -1,7 +1,12 @@
-import React from 'react'
+import { FC, ReactNode } from 'react';
 import { BsSuitHeart, BsCameraVideo } from "react-icons/bs";
 
-const SidebarContainer = ({ title, children }) => {
+type SidebarContainerProps = {
+	title: string;
+   	children: ReactNode;
+}
+
+const SidebarContainer: FC<SidebarContainerProps> = ({ title, children }) => {
   return (
     <>
         <h4 className="text-sm font-semibold pl-4 xs:hidden lg:grid">{title}</h4>

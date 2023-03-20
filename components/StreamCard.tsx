@@ -1,9 +1,16 @@
+import { FC } from "react";
 import Link from "next/link";
 
 import StreamImage from "./StreamImage";
 import  StreamDescription from "./StreamDescription";
+import { LiveStreamsData } from "../types/types";
 
-const StreamCard = ({ streamer, type }) => {
+type StreamCardProps = {
+    streamer: LiveStreamsData;
+    type: string;
+}
+
+const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
     const { user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
 
     return (
@@ -11,13 +18,14 @@ const StreamCard = ({ streamer, type }) => {
             <Link href={`/stream/${user_name}`}>
                 <div>
                     <StreamImage 
-                        thumbnail_url={thumbnail_url} 
-                        viewer_count={viewer_count}
+                        thumbnailUrl={thumbnail_url} 
+                        viewerCount={viewer_count}
                     />
                     <StreamDescription 
                         user_id={user_id} 
                         title={title} 
                         user_name={user_name} 
+                        profile_image={undefined}
                         game_name={game_name} 
                         type={type} 
                     />

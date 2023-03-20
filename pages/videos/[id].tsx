@@ -1,8 +1,9 @@
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import Layout from '../../components/Layout';
 
-const Videos = () => {
+const Videos: NextPage = () => {
     const router = useRouter();
     const id = router.query.id;
 

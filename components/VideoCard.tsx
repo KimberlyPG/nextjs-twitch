@@ -1,11 +1,15 @@
+import { FC } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { viewersFormat } from "../utils/viewersFormat";
 import { time } from "../utils/time";
 import { days } from "../utils/days";
+import { Video } from "../types/types";
 
-const VideoCard = ({ item }) => {
+type VideoCardProps = {
+    item: Video;
+}
+const VideoCard: FC<VideoCardProps> = ({ item }) => {
     return (
         <div className='cursor-pointer hover:opacity-80 mb-5'>
             <Link href={`/videos/${item.id}`}>
@@ -23,7 +27,7 @@ const VideoCard = ({ item }) => {
                 </div>
             </Link>
         </div>
-    )
+    );
 }
 
 export default VideoCard;

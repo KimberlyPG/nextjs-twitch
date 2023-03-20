@@ -1,45 +1,50 @@
 import { useSession } from "next-auth/react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
+import twitch from "../pages/api/twitch";
+import { SearchChannels, LiveStreamsData} from "../types/types";
+import { InitialStreamDataValues } from "../initialValues/intialDataValues";
 import { viewersFormat } from "../utils/viewersFormat";
 
-const SearchList = ({ streams }) => {
+type SearchListProps = {
+    streams: SearchChannels;
+}
+
+const SearchList: FC<SearchListProps> = ({ streams }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
     const state = streams.is_live;
-    const [data, setData] = useState({});
+    const [data, setData] = useState<LiveStreamsData>(InitialStreamDataValues);
  
     useEffect(() => {
-        if(state === true) {
+        if(state) {
             const getStream = async () => {
-                const response = await fetch(`https://api.twitch.tv/helix/streams?&user_id=${streams.id}`,
+                await twitch.get(`/streams?&user_id=${streams.id}`,
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 }
-                ).then(res => res.json());
-                setData(response.data[0]);
-                console.log("send")
+                ).then(data => setData(data.data.data[0]))
             }
             getStream();
         }
-    }, [state])
-   
+    }, [state, currentToken, streams.id])
+ 
     return ( 
         <>
-        {state === true ? (
-             <Link href={`/stream/${display_name}`}>
+        {state ? (
+             <Link href={`/stream/${streams.display_name}`}>
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
                     <div className="relative sm:w-64 xs:w-36">
                         <img 
                             className="w-full"
                             src={data?.thumbnail_url?.slice(0, -21)+".jpg"} 
-                            alt={`Agustin ${streams.display_name}`} 
+                            alt={`${streams.display_name} image`} 
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>

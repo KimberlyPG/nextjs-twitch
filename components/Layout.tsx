@@ -1,7 +1,13 @@
+import { FC, ReactNode } from "react";
+
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 
-const Layout = ({ children }) => {
+type LayoutProps = {
+    children: ReactNode;
+}
+
+const Layout: FC<LayoutProps> = ({ children }) => {
     return (
         <div className='flex h-screen w-screen overflow-y-scroll scrollbar-hide bg-black'>
             <Sidebar />
@@ -10,7 +16,7 @@ const Layout = ({ children }) => {
                 <div className='h-full overflow-y-scroll scrollbar-hide'>{children}</div>
             </div>
         </div>
-        )
+    );
 }
 
 export default Layout;
