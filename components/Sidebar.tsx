@@ -5,6 +5,8 @@ import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 
 import twitch from "../pages/api/twitch";
+import { UserData, Follow, LiveStreamsData } from "../types/types";
+import { useIsFollowLive } from "../hooks/useIsFollowLive";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   addStreamerData,
@@ -15,9 +17,8 @@ import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSl
 import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
 import { addData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
+import { findStreamer } from "../utils/findStreamer";
 
-import { UserData, Follow } from "../types/types";
-import { useIsFollowLive } from "../hooks/useIsFollowLive";
 
 const Sidebar = () => {
 	const { data: session, status } = useSession();
@@ -33,10 +34,9 @@ const Sidebar = () => {
 	const toggleSidebar = useAppSelector(selectToggle);
 	const streamerLive = useAppSelector(selectFollowedLive);
 	const recommendedList = useAppSelector(selectRecommended);
-	console.log(streamerLive)
+
 	const {followLive, followOffline}  = useIsFollowLive(followedData, streamerLive);
-	const recommendations = useStreamsFilter(followedData, recommendedList, "sidebar");
-	const findStreamer = (data, id) => data?.findIndex((streamerid) => streamerid.id == id);
+	const recommendations = useStreamsFilter(followedData, recommendedList);
 
 	useEffect(() => {
 		const getFollowed = async () => {
@@ -76,7 +76,7 @@ const Sidebar = () => {
 	}, [followed, currentToken, dispatch]);
 
 	useEffect(() => {
-		recommendedList.map((streamer) => {
+		recommendedList.map((streamer: LiveStreamsData) => {
 			const getStreamerInfo = async () => {
 				await twitch.get(`/users?id=${streamer.user_id}`,
 				{

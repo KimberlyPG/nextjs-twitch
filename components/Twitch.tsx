@@ -6,11 +6,12 @@ import StreamCardContainer from "./StreamCardContainer";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addFollowedData, cleanState } from "../store/slices/followedLive/followedLiveSlice";
 import { addList } from "../store/slices/recommended/recommendedSlice";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
 import { LiveStreamsData, TopGameData } from "../types/types";
+import { selectStreamer } from "../store/slices/streamer/streamerSlice";
 
 const Twitch = () => {
     const { data: session, status } = useSession();
@@ -23,7 +24,8 @@ const Twitch = () => {
     const [followedStreams, setFollowedStreams] = useState<LiveStreamsData[]>([]);
     const [topGames, setTopGames] = useState<TopGameData[]>([]);
 
-    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followedStreams, streams, "twitch")!;
+    const followsStreamers = useAppSelector(selectStreamer)
+    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followsStreamers, streams)!;
 
     useEffect(() => {
         const getStreams = async () => {

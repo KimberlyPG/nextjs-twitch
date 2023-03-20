@@ -10,8 +10,8 @@ type SidebarStreamerCardProps = {
     id: string;
     image: string;
     display_name: string;
-    game_name: string;
-    viewer_count: number;
+    game_name: string | null;
+    viewer_count: number | null;
 }
 
 const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, image, display_name, game_name, viewer_count }) => {
