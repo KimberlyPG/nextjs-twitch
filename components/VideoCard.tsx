@@ -27,7 +27,7 @@ const VideoCard: FC<VideoCardProps> = ({ item }) => {
                 </div>
             </Link>
         </div>
-    )
+    );
 }
 
 export default VideoCard;
