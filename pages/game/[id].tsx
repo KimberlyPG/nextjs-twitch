@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -6,8 +7,9 @@ import Layout from '../../components/Layout';
 import GameCards from "../../components/GameCard";
 
 import twitch from "../api/twitch";
+import { LiveStreamsData } from "../../types/types";
 
-const Game = () => {
+const Game: NextPage = () => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
@@ -16,7 +18,7 @@ const Game = () => {
     const gameName = router.query.name;
     const gameUrl = router.query.image;
     
-    const [channel, setChannel] = useState([]);
+    const [channel, setChannel] = useState<LiveStreamsData[]>([]);
  
     useEffect(() => {
         const getChannels = async () => {
@@ -24,7 +26,7 @@ const Game = () => {
                 {
                     headers: {
                         "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID,
+                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
                     }
                 })
                 .then(res => setChannel(res.data.data));
