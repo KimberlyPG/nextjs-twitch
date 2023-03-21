@@ -58,7 +58,7 @@ export type SearchChannels = {
     started_at:           string;
 }
 
-export interface Follow {
+export type Follow = {
     from_id:     string;
     from_login:  string;
     from_name:   string;
@@ -68,7 +68,7 @@ export interface Follow {
     followed_at: string;
 }
 
-export interface Video {
+export type Video = {
     id:             string;
     stream_id:      string;
     user_id:        string;
@@ -88,11 +88,11 @@ export interface Video {
     muted_segments: null;
 }
 
-export interface Provider {
+export type Provider = {
     twitch: Twitch;
 }
 
-export interface Twitch {
+export type Twitch = {
     id:          string;
     name:        string;
     type:        string;

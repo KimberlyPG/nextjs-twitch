@@ -23,11 +23,11 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, image, display_
                     <UserImage imageUrl={image} user={display_name} extraStyle={"h-8"} />
                     <span>
                         <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{display_name}</h4>
-                        <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{game_name}</h4>
+                        {game_name && <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{game_name}</h4>}
                     </span>
                     <div className="flex right-0">
                         <RiRadioButtonLine className="text-red-500 text-xs" />
-                        <h4 className="text-xs pl-1">{viewersFormat(viewer_count)}</h4>  
+                        {viewer_count && <h4 className="text-xs pl-1">{viewersFormat(viewer_count)}</h4>}
                     </div>
                 </div>
             </Link>

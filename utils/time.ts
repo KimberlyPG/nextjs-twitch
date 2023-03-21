@@ -1,10 +1,9 @@
-export function time(duration) {
+export const time = (duration: string) => {
     const format = duration.replace('h', ':').replace('m', ':').replace('s','');
 
-
     if(format.split(":")[2] === undefined) {
-        const minutes = format.split(":")[0];
-        const seconds = format.split(":")[1];
+        const minutes: string = format.split(":")[0];
+        const seconds: number = parseInt(format.split(":")[1]);
 
         if(minutes.length < 2 && seconds < 10 )
             return duration = format.slice(0, 2) + "0" + format.slice(2);
@@ -19,8 +18,8 @@ export function time(duration) {
     }
     else{
         const hours = format.split(":")[0]
-        const minutes = format.split(":")[1];
-        const seconds = format.split(":")[2];
+        const minutes: number = parseInt(format.split(":")[1]);
+        const seconds: number = parseInt(format.split(":")[2]);
 
         if(minutes < 10 && seconds > 9 ) {
             return duration = format.slice(0, hours.length+1) + "0" + format.slice(hours.length+1);
