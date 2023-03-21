@@ -16,7 +16,7 @@ const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
     return (
         <div className="cursor-pointer text-xs text-slate-400 mb-10 h-full w-full">
             <Link href={`/stream/${user_name}`}>
-                <>
+                <div>
                     <StreamImage 
                         thumbnailUrl={thumbnail_url} 
                         viewerCount={viewer_count}
@@ -29,7 +29,7 @@ const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
                         game_name={game_name} 
                         type={type} 
                     />
-                </>
+                </div>
             </Link>
         </div>
     )
