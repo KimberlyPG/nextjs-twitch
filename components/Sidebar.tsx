@@ -42,7 +42,7 @@ const Sidebar = () => {
 	useEffect(() => {
 		const getFollows = async () => {
 			if (currentToken && userId) {
-				await twitch.get(`/users/follows?from_id=${userId}&first=50`,
+				await twitch.get(`/users/follows?from_id=${userId}&first=80`,
 				{
 					headers: {
 					"Authorization": `Bearer ${currentToken}`,
