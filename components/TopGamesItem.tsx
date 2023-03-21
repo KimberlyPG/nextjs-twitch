@@ -10,17 +10,15 @@ type TopGamesItem = {
 const TopGamesItem: FC<TopGamesItem> = ({ games }) => {
     return (
         <Link href={`/game/${games.id}`}>
-            <div className="cursor-pointer mb-5 mx-1">
+            <div className="relative cursor-pointer mb-5 mx-1">
                 <Image 
-                    className="hover:w-56 ease-in duration-200 hover:opacity-80" 
+                    className="hover:w-56 ease-in duration-200 hover:opacity-80 h-full w-full" 
                     src={games.box_art_url.slice(0, -21)+".jpg"}
                     alt={`${games.name} image`}
-                    layout="responsive"
-                    objectFit="contain"
-                    height='100%'
-                    width='75%'
+                    width={200}
+                    height={260}
                 />
-                <h4 className="w-full truncate text-white sm:text-sm xs:text-xs">{games.name}</h4>
+                <h4 className="w-full truncate text-white sm:text-sm xs:text-xs bottom-0">{games.name}</h4>
             </div>
         </Link>
     )

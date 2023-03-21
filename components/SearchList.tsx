@@ -58,14 +58,13 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
             </Link>
             ):(  
             <Link href={{pathname: `/profile/${streams.id}`, query: {state:(state)}}}>
-                <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer">
-                    <div className="flex sm:w-64 xs:w-36 justify-center">
+                <div className="flex flex-row items-center text-white mb-5 sm:ml-20 cursor-pointer">
+                    <div className="relative flex sm:w-64 xs:w-36 justify-center">
                         <Image 
                             className="rounded-full cursor-pointer" 
                             src={streams.thumbnail_url}
-                            layout="fixed"
-                            width="90%"
-                            height="90%"
+                            width={100}
+                            height={100}
                             alt="streamer image" 
                         /> 
                     </div>
