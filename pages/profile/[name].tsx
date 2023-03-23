@@ -84,9 +84,8 @@ const Profile: NextPage = () => {
                             <Image 
                                 className="rounded-full cursor-pointer" 
                                 src={userData?.profile_image_url}
-                                layout="fixed"
-                                width="70rem"
-                                height="70rem"
+                                width={70}
+                                height={70}
                                 alt="user image" 
                             /> 
                             <h3 className='pl-5'>{userData?.display_name}</h3>

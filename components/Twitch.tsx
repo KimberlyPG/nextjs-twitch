@@ -48,13 +48,13 @@ const Twitch = () => {
                 {followedStreamersLive.length > 0 &&
                     <StreamCardContainer description="Followed Live Channels">
                         {followedStreamersLive.slice(0, 5).map((streamer) => (                
-                            <StreamCard key={streamer.id} streamer={streamer} type='followed'/>
+                            <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} type='followed'/>
                         ))}
                     </StreamCardContainer> 
                 }
                 <StreamCardContainer description="Recommended Channels">
                     {streamsFiltered &&  streamsFiltered.slice(0, 5).map((streamer) => (
-                        <StreamCard key={streamer.id} streamer={streamer} type='recommended'/>
+                        <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} type='recommended'/>
                     ))}
                 </StreamCardContainer>
                 <TopGames topGames={topGames}/>
