@@ -12,7 +12,7 @@ type StreamDescriptionProps = {
     title: string;
     user_name: string;
     game_name: string | null;
-    profile_image: string | undefined;
+    profile_image: string;
     type: string;
 }
 
@@ -24,7 +24,7 @@ const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_na
     const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id);
 
     return (
-        <div className="flex">  
+        <div className="flex relative">  
             {type === 'followed' &&
                 <UserImage 
                     extraStyle={"h-10 my-2 mr-2"} 

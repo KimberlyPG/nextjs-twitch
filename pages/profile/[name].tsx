@@ -86,6 +86,7 @@ const Profile: NextPage = () => {
                                 src={userData?.profile_image_url}
                                 width={70}
                                 height={70}
+                                priority
                                 alt="user image" 
                             /> 
                             <h3 className='pl-5'>{userData?.display_name}</h3>
@@ -94,7 +95,7 @@ const Profile: NextPage = () => {
                     {video && video.length > 0 &&
                         <div className='md:p-5'>              
                         <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
-                            <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 space-x-3'>
+                            <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1'>
                                 {video && video.map((item) => (
                                     <VideoCard key={item.id} item={item} />  
                                 ))

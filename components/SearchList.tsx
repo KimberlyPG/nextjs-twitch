@@ -34,17 +34,19 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
             getStream();
         }
     }, [state, currentToken, streams.id])
- 
+
     return ( 
         <>
         {state ? (
              <Link href={`/stream/${streams.display_name}`}>
                 <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
                     <div className="relative sm:w-64 xs:w-36">
-                        <img 
+                        <Image 
                             className="w-full"
-                            src={data?.thumbnail_url?.slice(0, -21)+".jpg"} 
+                            src={data?.thumbnail_url?.split("-{width}x{height}").join('')} 
                             alt={`${streams.display_name} image`} 
+                            width={200}
+                            height={100}
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>
@@ -63,9 +65,9 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
                         <Image 
                             className="rounded-full cursor-pointer" 
                             src={streams.thumbnail_url}
+                            alt={`${streams.display_name} image`} 
                             width={100}
                             height={100}
-                            alt="streamer image" 
                         /> 
                     </div>
                     <div className="w-1/2 xs:ml-2 sm:ml-10">
