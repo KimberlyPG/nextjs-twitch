@@ -4,10 +4,9 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  
   theme: {
-    extend: {},
-    gridAutoRows: {
-      '1fr': 'minmax(0, 0fr)',
+    extend: {
     },
     fontFamily: {
       'roboto': ['Roboto', 'sans-serif'],

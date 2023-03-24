@@ -10,6 +10,7 @@ type StreamImageProps = {
 }
 
 const StreamImage: FC<StreamImageProps> = ({ thumbnailUrl, viewerCount }) => {
+    console.log(thumbnailUrl.slice(0, -21)+".jpg")
 
     return (
         <div className='relative font-roboto mx-1'> 

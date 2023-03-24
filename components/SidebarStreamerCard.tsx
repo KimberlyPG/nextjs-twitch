@@ -54,11 +54,11 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, category, game_
         <>
         {game_name ? (
             <Link href={`/stream/${streamerData.display_name}`}>
-                <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData.profile_image_url} 
                         user={streamerData.display_name} 
-                        extraStyle={"h-8"} 
+                        extraStyle={"h-8 w-8"} 
                     />
                     <span>
                         <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData.display_name}</h4>
@@ -72,11 +72,11 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, category, game_
             </Link>
             ):(
             <Link href={{pathname: `/profile/${id}`, query: {state:(false)}}}>
-                <div className="flex flex-row text-white w-full py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData.profile_image_url} 
                         user={streamerData.display_name} 
-                        extraStyle={"h-8 grayscale"} 
+                        extraStyle={"h-8 w-8 grayscale"} 
                     />
                     <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData.display_name}</h4>
                     <h3 className="right-0 text-xs">offline</h3>

@@ -1,7 +1,8 @@
 import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import Image from "next/image";
 
 import Layout from '../../components/Layout';
 import GameCards from "../../components/GameCard";
@@ -55,16 +56,16 @@ const Game: NextPage = () => {
     return (
         <Layout>
             <div className="text-white font-roboto sm:p-5">
-                <header className="p-10">
-                    <span className="flex items-center lg:h-56 md:h-44 xs:h-36">
-                        <img
-                            className="lg:h-56 md:h-44 xs:h-36 bg-purple-500 shadow-lg shadow-purple-500/50" 
-                            src={game?.box_art_url?.slice(0, -21)+".jpg"} 
-                            alt={`${game?.name} image`} 
-                        />
-                        <h1 className="lg:text-4xl md:text-2xl sm:text-xl pl-5">{game?.name}</h1>                        
-                    </span>
-                </header>
+                <div className="flex relative items-center my-10 m-10">
+                    <Image
+                        className="bg-purple-500 shadow-lg shadow-purple-500/50 object-contain lg:h-56 md:h-44 xs:h-36 w-fit" 
+                        src={game?.box_art_url?.split("-{width}x{height}").join('')} 
+                        alt={`${game?.name} image`} 
+                        width={168}
+                        height={224}
+                    />
+                    <h1 className="lg:text-4xl md:text-2xl sm:text-xl ml-5 w-full">{game?.name}</h1>                        
+                </div>
 
                 <h2 className="text-sm my-5 font-semibold">Live channels we think you will like</h2>
                 <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1">

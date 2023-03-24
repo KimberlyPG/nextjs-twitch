@@ -1,6 +1,7 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import Image from "next/image";
 import { BsTwitch, BsArrowBarLeft, BsArrowBarRight } from "react-icons/bs";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
@@ -53,11 +54,15 @@ const Topbar = () => {
                 >
                     <div className="flex items-center hover:opacity-80 cursor-pointer">
                         <h4 className="text-xs pr-2 hover:text-purple-500 xs:hidden lg:flex">{session?.user.name}</h4>
-                        <img 
-                            className="rounded-full md:w-8 md:h-8 xs:h-6 xs:w-6" 
-                            src={session?.user.image} 
-                            alt={`${session?.user.name} image`}
-                        />
+                        {session && 
+                            <Image 
+                                className="rounded-full md:w-8 md:h-8 xs:h-6 xs:w-6" 
+                                src={session.user.image} 
+                                alt={`${session?.user.name} image`}
+                                width={100}
+                                height={100}
+                            />
+                        }
                     </div>
                 </Link>
             </div>
