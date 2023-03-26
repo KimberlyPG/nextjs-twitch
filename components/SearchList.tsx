@@ -39,10 +39,10 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
         <>
         {state ? (
              <Link href={`/stream/${streams.display_name}`}>
-                <div className="flex flex-row text-white mb-5 sm:ml-20 cursor-pointer w-full">
-                    <div className="relative sm:w-64 xs:w-36">
+                <div className="flex flex-row text-white mb-5 xs:mx-5 sm:ml-20 cursor-pointer">
+                    <div className="flex relative">
                         <Image 
-                            className="w-full"
+                            className="w-36"
                             src={data?.thumbnail_url?.split("-{width}x{height}").join('')} 
                             alt={`${streams.display_name} image`} 
                             width={200}
@@ -52,9 +52,9 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
                     </div>
                     <div className="w-1/2 xs:ml-2 sm:ml-10">                 
                         <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h4>
-                        <h3 className="xs:text-xs sm:text-sm text-gray-300">{streams.game_name}</h3>
-                        <p className="xs:text-xs sm:text-sm text-gray-300">{viewersFormat(data?.viewer_count)} viewers</p>
-                        <h3 className="xs:text-xs sm:text-sm truncate text-gray-300">{streams.title}</h3>
+                        <h3 className="xs:text-xs sm:text-sm text-gray-300 truncate">{streams.game_name}</h3>
+                        <p className="xs:text-xs sm:text-sm text-gray-300 truncate">{viewersFormat(data?.viewer_count)} viewers</p>
+                        <h3 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">{streams.title}</h3>
                     </div> 
                 </div>  
             </Link>
