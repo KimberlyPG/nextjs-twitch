@@ -39,42 +39,42 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
         <>
         {state ? (
              <Link href={`/stream/${streams.display_name}`}>
-                <div className="flex flex-row text-white mb-5 xs:mx-5 sm:ml-20 cursor-pointer">
-                    <div className="flex relative">
+                <div className="flex text-white mb-5 cursor-pointer lg:ml-10 xs:ml-5">
+                    <div className="flex relative lg:w-1/3 sm:w-1/2 xs:w-full">
                         <Image 
-                            className="w-36"
+                            className="lg:w-96 xs:w-full"
                             src={data?.thumbnail_url?.split("-{width}x{height}").join('')} 
                             alt={`${streams.display_name} image`} 
-                            width={200}
-                            height={100}
+                            width={300}
+                            height={150}
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>
-                    <div className="w-1/2 xs:ml-2 sm:ml-10">                 
-                        <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h4>
-                        <h3 className="xs:text-xs sm:text-sm text-gray-300 truncate">{streams.game_name}</h3>
+                    <div className="w-full xs:ml-3 lg:ml-5">                 
+                        <h3 className="xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h3>
+                        <p className="xs:text-xs sm:text-sm text-gray-300 truncate">{streams.game_name}</p>
                         <p className="xs:text-xs sm:text-sm text-gray-300 truncate">{viewersFormat(data?.viewer_count)} viewers</p>
-                        <h3 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">{streams.title}</h3>
+                        <p className="xs:text-xs sm:text-sm text-gray-300 xs:hidden sm:flex">{streams.title}</p>
                     </div> 
                 </div>  
             </Link>
             ):(  
             <Link href={{pathname: `/profile/${streams.id}`, query: {state:(state)}}}>
-                <div className="flex flex-row items-center text-white mb-5 sm:ml-20 cursor-pointer">
-                    <div className="relative flex sm:w-64 xs:w-36 justify-center">
+                <div className="flex items-center text-white mb-5 cursor-pointer lg:ml-10 xs:ml-5">
+                    <div className="flex relative lg:w-1/3 sm:w-1/2 xs:w-full items-center justify-center">
                         <Image 
-                            className="rounded-full cursor-pointer" 
+                            className="rounded-full cursor-pointer lg:w-28 xs:w-16" 
                             src={streams.thumbnail_url}
                             alt={`${streams.display_name} image`} 
                             width={100}
                             height={100}
                         /> 
                     </div>
-                    <div className="w-1/2 xs:ml-2 sm:ml-10">
-                        <h4 className="md:w-60 xs:w-32 xs:text-xs sm:text-sm font-semibold hover:text-purple-400">{streams.display_name}</h4>
-                        <h4 className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">Lo último de {streams.display_name}</h4>
-                        <h4 className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.game_name}</h4>
-                        <h4 className="xs:text-xs sm:text-sm w-full truncate text-purple-500 hover:text-white xs:hidden sm:flex">{streams.title}</h4>
+                    <div className="w-full xs:ml-3 lg:ml-5">
+                        <h3 className="xs:text-xs sm:text-sm font-semibold hover:text-purple-400">{streams.display_name}</h3>
+                        <p className="xs:text-xs sm:text-sm truncate text-gray-300 xs:hidden sm:flex">Lo último de {streams.display_name}</p>
+                        <p className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.game_name}</p>
+                        <p className="xs:text-xs sm:text-sm text-purple-500 hover:text-white xs:hidden sm:flex">{streams.title}</p>
                     </div>
                 </div>        
             </Link>
