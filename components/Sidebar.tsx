@@ -27,6 +27,7 @@ const Sidebar = () => {
 	const [recommendationsList, setRecommendationsList] = useState<LiveStreamsData[]>([])
 
 	const toggleSidebar = useAppSelector(selectToggle);
+	console.log(toggleSidebar)
 
 	const followedOffline  = useIsFollowLive(follows, followedLive);
 	const recommendations = useStreamsFilter(follows, recommendationsList);

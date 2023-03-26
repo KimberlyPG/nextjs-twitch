@@ -9,39 +9,43 @@ import SearchBar from "./SearchBar";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { selectToggle, createToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
+import { useState } from "react";
 
 const Topbar = () => { 
     const router = useRouter();
     const { data: session, status } = useSession();
     const dispatch = useAppDispatch(); 
-
     const toggleSidebar = useAppSelector(selectToggle);
-    const toggleButton = () => dispatch(createToggle(!toggleSidebar));
 
+    const [clickSearch, setClickSearch] = useState(false);
+
+    const toggleButton = () => dispatch(createToggle(!toggleSidebar));
     const navigateHome = () => router.push('/');
+    const openSearchBar = () => setClickSearch(true);
+    const hideSearchBar = () => setClickSearch(false);
+    
 
     return (
-        <div className="flex flex-row text-white justify-between items-center py-2 px-5">
-            <div className="flex justify-start cursor-pointer text-xs space-x-5">
+        <div className="flex text-white justify-between items-center py-2 px-5">
+            <div className={`flex justify-start text-xs space-x-20 ${clickSearch? 'xs:hidden sm:flex':'xs:flex'}`}>
                 {toggleSidebar ? (
                     <BsArrowBarLeft 
                         onClick={toggleButton}
-                        className="text-purple-400 text-sm hover:opacity-80"
+                        className="text-purple-400 text-lg hover:opacity-80 cursor-pointer"
                     />
                 ):(
                     <BsArrowBarRight 
                         onClick={toggleButton} 
-                        className="text-purple-400 text-sm hover:opacity-80"
+                        className="text-purple-400 text-lg hover:opacity-80 cursor-pointer"
                     />               
-                )
-                }
+                )}
                 <BsTwitch 
-                    className="text-purple-800 md:text-2xl xs:text-xl hover:opacity-80"
+                    className={`text-purple-800 md:text-2xl xs:text-xl hover:opacity-80 cursor-pointer`}
                     onClick={navigateHome}
                 />
             </div>
-            <SearchBar />       
-            <div className="flex flex-row justify-end text-white items-center">
+            <SearchBar openSearchBar={openSearchBar} clickSearch={clickSearch} hideSearchBar={hideSearchBar} />       
+            <div className={`flex flex-row justify-end text-white items-center ${clickSearch? 'xs:hidden sm:flex':'flex'}`}>
                 <RiLogoutCircleRLine 
                     className="cursor-pointer mr-10 text-white sm:text-2xl sm:flex xs:hidden hover:text-purple-500"
                     onClick={() => signOut({callbackUrl: "/login" })}
@@ -58,7 +62,7 @@ const Topbar = () => {
                             <Image 
                                 className="rounded-full md:w-8 md:h-8 xs:h-6 xs:w-6" 
                                 src={session.user.image} 
-                                alt={`${session?.user.name} image`}
+                                alt={`${session.user.name} image`}
                                 width={100}
                                 height={100}
                             />
