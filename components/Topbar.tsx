@@ -27,7 +27,7 @@ const Topbar = () => {
 
     return (
         <div className="flex text-white justify-between items-center py-2 px-5">
-            <div className={`flex justify-start text-xs space-x-20 ${clickSearch? 'xs:hidden sm:flex':'xs:flex'}`}>
+            <div className={`flex justify-start text-xs space-x-20 sm:w-1/3 ${clickSearch? 'xs:hidden sm:flex':'xs:flex'}`}>
                 {toggleSidebar ? (
                     <BsArrowBarLeft 
                         onClick={toggleButton}
@@ -45,7 +45,7 @@ const Topbar = () => {
                 />
             </div>
             <SearchBar openSearchBar={openSearchBar} clickSearch={clickSearch} hideSearchBar={hideSearchBar} />       
-            <div className={`flex flex-row justify-end text-white items-center ${clickSearch? 'xs:hidden sm:flex':'flex'}`}>
+            <div className={`flex flex-row justify-end items-center text-white sm:w-1/3 ${clickSearch && 'xs:hidden sm:flex'}`}>
                 <RiLogoutCircleRLine 
                     className="cursor-pointer mr-10 text-white sm:text-2xl sm:flex xs:hidden hover:text-purple-500"
                     onClick={() => signOut({callbackUrl: "/login" })}
@@ -71,7 +71,7 @@ const Topbar = () => {
                 </Link>
             </div>
         </div>
-    )
+    );
 }
 
 export default Topbar;
