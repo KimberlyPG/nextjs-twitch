@@ -1,27 +1,32 @@
 import { FC, ReactNode } from 'react';
 import { BsSuitHeart, BsCameraVideo } from "react-icons/bs";
+import { useAppSelector } from '../store/hooks';
+import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 
 type SidebarContainerProps = {
-	title: string;
-   	children: ReactNode;
+    title: string;
+    children: ReactNode;
 }
 
 const SidebarContainer: FC<SidebarContainerProps> = ({ title, children }) => {
-  return (
-    <>
-        <h4 className="text-sm font-semibold pl-4 xs:hidden lg:grid">{title}</h4>
-        {title === "followed" ? (
-            <BsSuitHeart className="text-gray-500 lg:hidden w-full" />
-        ):(
-            <BsCameraVideo className="text-gray-500 lg:hidden w-full mt-4" />
-        )}
-        <div className="flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide xs:max-w-[4rem] md:max-w-[4rem] lg:max-w-[14rem]">
-			<div className="border-r border-gray-900">
-				{children}
-			</div>
-        </div>
-    </>
-  )
+    const toggleSidebar = useAppSelector(selectToggle);
+
+    return (
+        <>
+            <h4 className={`text-sm font-semibold pl-4 xs:hidden ${toggleSidebar ? "lg:flex":"lg:hidden"}`}>{title}</h4>
+            {title === "followed" ? (
+                <BsSuitHeart className={`text-gray-500 w-full lg:hidden ${toggleSidebar ? "xs:flex":"xs:hidden"}`} />
+            ):(
+                <BsCameraVideo className={`text-gray-500 w-full lg:hidden mt-4 ${toggleSidebar ? "xs:flex":"xs:hidden"}`} />
+            )}
+            <div className={`flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide 
+            ${toggleSidebar ? "lg:max-w-[14rem] xs:max-w-[4rem]":"lg:hidden xs:hidden"}`}>
+                <div className="border-r border-gray-900">
+                    {children}
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default SidebarContainer;
