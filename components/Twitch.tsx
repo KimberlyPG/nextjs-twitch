@@ -1,8 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import StreamCardContainer from "./StreamCardContainer";
-import StreamCard from "./StreamCard";
+import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
@@ -45,22 +44,24 @@ const Twitch = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedStreamersLive.length > 0 &&
-                    <StreamCardContainer description="Followed Live Channels">
-                        {followedStreamersLive.slice(0, 5).map((streamer) => (                
-                            <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} type='followed'/>
-                        ))}
-                    </StreamCardContainer> 
+                {followedStreamersLive.length > 0 && 
+                    <StreamCardsContainer 
+                        description="Followed Live Channels"
+                        streamerData={followedStreamersLive}
+                        type='followed'
+                    />
                 }
-                <StreamCardContainer description="Recommended Channels">
-                    {streamsFiltered &&  streamsFiltered.slice(0, 5).map((streamer) => (
-                        <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} type='recommended'/>
-                    ))}
-                </StreamCardContainer>
+                {streamsFiltered.length > 0 && 
+                <StreamCardsContainer 
+                    description="Recommended Channels"
+                    streamerData={streamsFiltered}
+                    type='recommended'
+                />
+                }
                 <TopGames topGames={topGames}/>
             </div>
         </div>
-    )
+    );
 } 
 
 export default Twitch;
