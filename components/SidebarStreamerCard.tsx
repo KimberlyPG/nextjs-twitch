@@ -60,11 +60,11 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, category, game_
                         user={streamerData.display_name} 
                         extraStyle={"h-8 w-8"} 
                     />
-                    <span>
-                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData.display_name}</h4>
-                        {game_name && <h4 className="w-28 pl-5 text-xs text-gray-300 truncate">{game_name}</h4>}
-                    </span>
-                    <div className="flex right-0">
+                    <div>
+                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold xs:hidden lg:flex">{streamerData.display_name}</h4>
+                        {game_name && <h4 className="w-28 pl-5 text-xs text-gray-300 truncate xs:hidden lg:flex">{game_name}</h4>}
+                    </div>
+                    <div className="flex right-0 xs:hidden lg:flex">
                         <RiRadioButtonLine className="text-red-500 text-xs" />
                         {viewer_count && <h4 className="text-xs pl-1">{viewersFormat(viewer_count)}</h4>}
                     </div>
@@ -78,8 +78,10 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, category, game_
                         user={streamerData.display_name} 
                         extraStyle={"h-8 w-8 grayscale"} 
                     />
-                    <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData.display_name}</h4>
-                    <h3 className="right-0 text-xs">offline</h3>
+                    <div className="flex xs:hidden lg:flex">
+                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData.display_name}</h4>
+                        <h3 className="right-0 text-xs">offline</h3>
+                    </div>
                 </div>
             </Link>
             ) 

@@ -9,10 +9,9 @@ import { Follow, LiveStreamsData } from "../types/types";
 
 import { useIsFollowLive } from "../hooks/useIsFollowLive";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
 import { addList } from "../store/slices/recommended/recommendedSlice";
 import { addFollowedData } from "../store/slices/followedLive/followedLiveSlice";
-import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 import { addFollowed } from "../store/slices/followed/followedSlice";
 
 const Sidebar = () => {
@@ -25,8 +24,6 @@ const Sidebar = () => {
 	const [followedLive, setFollowedLive] = useState<LiveStreamsData[]>([])
 	const [follows, setFollows] = useState<Follow[]>([]);
 	const [recommendationsList, setRecommendationsList] = useState<LiveStreamsData[]>([])
-
-	const toggleSidebar = useAppSelector(selectToggle);
 
 	const followedOffline  = useIsFollowLive(follows, followedLive);
 	const recommendations = useStreamsFilter(follows, recommendationsList);
@@ -92,45 +89,41 @@ const Sidebar = () => {
     }, [currentToken, dispatch, userId])
 
 	return (
-		<>
-		{toggleSidebar && (
-			<div className="text-white pt-10 h-screen space-y-5">
+		<div className="text-white pt-10 h-screen space-y-5">
 			{follows && (
-				<SidebarContainer title="followed">
-					{followedLive && followedLive?.map((streamer) =>  (
-						<SidebarStreamerCard
-							key={streamer.id}
-							id={streamer.user_id}
-							category="followed"
-							game_name={streamer.game_name}
-							viewer_count={streamer.viewer_count}
-						/>
-					))}
-					{followedOffline && followedOffline?.map((streamer) => (
-						<SidebarStreamerCard
-							key={streamer.to_id}
-							id={streamer.to_id}
-							category="followed"
-							game_name={null}
-							viewer_count={null}
-						/>
-					))}
-				</SidebarContainer>
+			<SidebarContainer title="followed">
+				{followedLive && followedLive?.map((streamer) =>  (
+					<SidebarStreamerCard
+						key={streamer.id}
+						id={streamer.user_id}
+						category="followed"
+						game_name={streamer.game_name}
+						viewer_count={streamer.viewer_count}
+					/>
+				))}
+				{followedOffline && followedOffline?.map((streamer) => (
+					<SidebarStreamerCard
+						key={streamer.to_id}
+						id={streamer.to_id}
+						category="followed"
+						game_name={null}
+						viewer_count={null}
+					/>
+				))}
+			</SidebarContainer>
 			)} 
-				<SidebarContainer title="recomended">
-					{recommendations && recommendations.map((streamer) => (
-						<SidebarStreamerCard
-							key={streamer.id} 
-							id={streamer.user_id} 
-							category="recommended"
-							game_name={streamer.game_name} 
-							viewer_count={streamer.viewer_count}
-						/>
-					))}
-				</SidebarContainer>
-			</div>
-		)}
-		</>
+			<SidebarContainer title="recomended">
+				{recommendations && recommendations.map((streamer) => (
+					<SidebarStreamerCard
+						key={streamer.id} 
+						id={streamer.user_id} 
+						category="recommended"
+						game_name={streamer.game_name} 
+						viewer_count={streamer.viewer_count}
+					/>
+				))}
+			</SidebarContainer>
+		</div>
 	);
 }
 
