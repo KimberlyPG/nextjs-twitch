@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.14",
     "@reduxjs/toolkit": "^1.8.3",
@@ -20,9 +21,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-loading-skeleton": "^3.2.0",
     "react-redux": "^8.0.2",
     "react-twitch-embed-video": "^3.0.2",
     "redux": "^4.2.0",
+    "swr": "^2.1.1",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
