@@ -55,7 +55,6 @@ export default NextAuth({
                     id: token.sub
                 };
             }
-            console.log("token", token);
 
             // Return previous token if the access token has not expired yet
             if (Date.now() < token.accessTokenExpires) {
