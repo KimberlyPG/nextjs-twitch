@@ -1,7 +1,9 @@
 import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 import { TopGameData } from "../types/types";
+import { shimmer, toBase64 } from '../utils/shimmerImage';
 
 type TopGamesItem = {
     games: TopGameData;
@@ -17,6 +19,8 @@ const TopGamesItem: FC<TopGamesItem> = ({ games }) => {
                     alt={`${games.name} image`}
                     width={200}
                     height={260}
+                    placeholder="blur"
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                 />
                 <h4 className="w-full truncate text-white sm:text-sm xs:text-xs bottom-0">{games.name}</h4>
             </div>

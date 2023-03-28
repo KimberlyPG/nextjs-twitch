@@ -4,6 +4,8 @@ import { RiRadioButtonLine } from "react-icons/ri";
 
 import { viewersFormat } from '../utils/viewersFormat';
 
+import { shimmer, toBase64 } from '../utils/shimmerImage';
+
 type StreamImageProps = {
     thumbnailUrl: string;
     viewerCount: number;
@@ -20,6 +22,8 @@ const StreamImage: FC<StreamImageProps> = ({ thumbnailUrl, viewerCount }) => {
                 priority={true}
                 width={550}
                 height={250}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
             />
             <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
             <div className="flex flex-inline items-center text-white bg-black bg-opacity-60 absolute bottom-0 ml-2 mb-2">

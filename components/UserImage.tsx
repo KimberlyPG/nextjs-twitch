@@ -1,18 +1,13 @@
 import { FC } from "react";
 import Image from "next/image";
 
+import { shimmer, toBase64 } from "../utils/shimmerImage";
+
 type UserImageProps = {
     imageUrl: string;
     user: string
     extraStyle: string
 }
-const images = [
-    {
-      src: "https://i.ibb.co/5MMtXQQ/masahiro-miyagi-t-Hz-Ai-Axe-GBo-unsplash.jpg",
-      blurUrl: "mokjmin2kl/9j/4AAQSk…"
-    }
-  ]
-  
 
 const UserImage: FC<UserImageProps> = ({ imageUrl, user, extraStyle }) => {
     return (
@@ -25,7 +20,7 @@ const UserImage: FC<UserImageProps> = ({ imageUrl, user, extraStyle }) => {
                     width={50}
                     height={50}
                     placeholder="blur"
-                    blurDataURL={images[0].blurUrl}
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                 />
             }
         </>
