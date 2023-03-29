@@ -7,6 +7,7 @@ import twitch from "../pages/api/twitch";
 import { SearchChannels, LiveStreamsData} from "../types/types";
 import { InitialStreamDataValues } from "../initialValues/intialDataValues";
 import { viewersFormat } from "../utils/viewersFormat";
+import { shimmer, toBase64 } from "../utils/shimmerImage";
 
 type SearchListProps = {
     streams: SearchChannels;
@@ -47,6 +48,8 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
                             alt={`${streams.display_name} image`} 
                             width={300}
                             height={150}
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         />
                         <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
                     </div>
@@ -68,6 +71,8 @@ const SearchList: FC<SearchListProps> = ({ streams }) => {
                             alt={`${streams.display_name} image`} 
                             width={100}
                             height={100}
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         /> 
                     </div>
                     <div className="w-full xs:ml-3 lg:ml-5">
