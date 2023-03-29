@@ -5,7 +5,7 @@ module.exports = {
   env:{
     clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
     clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
-    secret: process.env.JWT_SECRET
+    secret: process.env.NEXTAUTH_SECRET
   },
   i18n: {
     locales: ['en', 'esp'],
