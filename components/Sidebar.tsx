@@ -1,13 +1,12 @@
 import { useSession } from "next-auth/react";
+import useSWR from 'swr';
 
 import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
 
-import twitch from "../pages/api/twitch";
 import { Follow, LiveStreamsData } from "../types/types";
 
-import useSWR from 'swr';
 import { useIsFollowLive } from "../hooks/useIsFollowLive";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
 
@@ -22,7 +21,6 @@ const Sidebar = () => {
 
 	const followedOffline  = useIsFollowLive(follows, followedLive);
 	const recommendations = useStreamsFilter(follows, recommendationsList);
-	console.log(followedOffline)
 
 	if (followedLiveError || followsError || recommendationsListError) return <div>failed to load</div>
     if (!follows || !followedLive || !recommendationsList) return <SidebarSkeleton />
@@ -33,7 +31,6 @@ const Sidebar = () => {
 					<SidebarStreamerCard
 						key={streamer.id}
 						id={streamer.user_id}
-						category="followed"
 						game_name={streamer.game_name}
 						viewer_count={streamer.viewer_count}
 					/>
@@ -42,7 +39,6 @@ const Sidebar = () => {
 					<SidebarStreamerCard
 						key={streamer.to_id}
 						id={streamer.to_id}
-						category="followed"
 						game_name={null}
 						viewer_count={null}
 					/>
@@ -53,7 +49,6 @@ const Sidebar = () => {
 					<SidebarStreamerCard
 						key={streamer.id} 
 						id={streamer.user_id} 
-						category="recommended"
 						game_name={streamer.game_name} 
 						viewer_count={streamer.viewer_count}
 					/>

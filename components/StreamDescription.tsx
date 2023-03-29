@@ -1,10 +1,8 @@
 import { FC } from "react";
+import useSWR from 'swr';
 
 import UserImage from "./UserImage";
 
-import { useSelector } from "react-redux";
-import { selectStreamer } from "../store/slices/streamer/streamerSlice";
-import { selectRecommendedUserData } from "../store/slices/recommendedUserData/recommendedUserDataSlice";
 import { UserData } from "../types/types";
 
 type StreamDescriptionProps = {
@@ -17,25 +15,22 @@ type StreamDescriptionProps = {
 }
 
 const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_name, game_name, profile_image, type }) => {
-    const streamerData: UserData[] = useSelector(selectStreamer);
-    const recommendedData: UserData[] = useSelector(selectRecommendedUserData);
+    const { data: streamerData, error: streamerDataError } = useSWR<UserData[], Error>(`/users?id=${user_id}`);
 
-    const findStreamer = streamerData.findIndex((streamerid) => streamerid.id == user_id);
-    const findRecommended = recommendedData.findIndex((streamerid) => streamerid.id == user_id);
-
+    if (!streamerData) return <div>Loading...</div>
     return (
         <div className="flex relative">  
             {type === 'followed' &&
                 <UserImage 
                     extraStyle={"h-10 my-2 mr-2"} 
-                    imageUrl={streamerData[findStreamer]?.profile_image_url} 
+                    imageUrl={streamerData[0].profile_image_url} 
                     user={user_name} 
                 />
             }
             {type === 'recommended' &&   
                 <UserImage 
                     extraStyle={"h-10 my-2 mr-2"}
-                    imageUrl={recommendedData[findRecommended]?.profile_image_url} 
+                    imageUrl={streamerData[0].profile_image_url} 
                     user={user_name}
                 /> 
             }  
