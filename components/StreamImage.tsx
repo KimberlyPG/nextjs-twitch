@@ -20,8 +20,8 @@ const StreamImage: FC<StreamImageProps> = ({ thumbnailUrl, viewerCount }) => {
                 src={thumbnailUrl.slice(0, -21)+".jpg"} 
                 alt="stream image"
                 priority={true}
-                width={550}
-                height={250}
+                width={562}
+                height={316}
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
             />
