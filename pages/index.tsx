@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
 	return (
 		<div className='bg-black h-100 w-100 flex'>
-			<SWRConfig value={{ fetcher }}>
+			<SWRConfig value={{  refreshInterval: 120000, fetcher }} >
 				<Layout>
 					<Twitch />
 				</Layout>
