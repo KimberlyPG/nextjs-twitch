@@ -5,25 +5,25 @@ import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
-import { LiveStreamsData, TopGameData } from "../types/types";
+import { LiveStreamsData, TopGameData, Follow } from "../types/types";
 import { useStreamsFilter } from "../hooks/useStreamsFilter";
-import { useAppSelector } from "../store/hooks";
-import { selectRecommended } from "../store/slices/recommended/recommendedSlice";
-import { selectFollowedLive } from "../store/slices/followedLive/followedLiveSlice";
-import { selectFollowed } from "../store/slices/followed/followedSlice";
+
+import useSWR from 'swr';
 
 const Twitch = () => {
     const { data: session, status } = useSession();
 
     const currentToken = session?.user?.token;
+    const userId = session?.user.id;
     
     const [topGames, setTopGames] = useState<TopGameData[]>([]);
 
-    const recommendedStreams = useAppSelector(selectRecommended);
-    const followedStreamersLive = useAppSelector(selectFollowedLive);
-    const followed = useAppSelector(selectFollowed)
+    const { data: follows, error: followsError } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
+	const { data: followedLive, error: followedLiveError } = useSWR<LiveStreamsData[], Error>(`/streams/followed?user_id=${userId}`);
+	const { data: recommendationsList, error: recommendationsListError } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
 
-    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(followed, recommendedStreams)!;
+
+    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(follows, recommendationsList)!;
 
     useEffect(() => {
         if(currentToken) {
@@ -41,13 +41,14 @@ const Twitch = () => {
         }
     }, [currentToken]);
 
+    if (!follows || !followedLive || !recommendationsList) return <div>Loading...</div>
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedStreamersLive.length > 0 && 
+                {followedLive.length > 0 && 
                     <StreamCardsContainer 
                         description="Followed Live Channels"
-                        streamerData={followedStreamersLive}
+                        streamerData={followedLive}
                         type='followed'
                     />
                 }
