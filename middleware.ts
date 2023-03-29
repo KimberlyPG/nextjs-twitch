@@ -11,9 +11,9 @@ export async function middleware(req: NextRequest) {
     if (isPathPrivate) {
         const token = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET });
         if (!token) {
-        const url = new URL(`/login`, req.url);
-        url.searchParams.set("callbackUrl", pathname);
-        return NextResponse.redirect(url);
+            const url = new URL(`/login`, req.url);
+            // url.searchParams.set("callbackUrl", pathname);
+            return NextResponse.redirect(url);
         } 
     }
     return res;
