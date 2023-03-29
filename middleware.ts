@@ -17,6 +17,6 @@ export async function middleware(req: NextRequest) {
     }
     return res;
 }
-export { default } from "next-auth/middleware"
-export const config = {matcher: ["/", "/game/:path*", "/profile/:path*", "/search/:path*", "/stream/:path*", "/videos/:path*"]} 
+
+export const config = {matcher: ["/game/:path*", "/profile/:path*", "/search/:path*", "/stream/:path*", "/videos/:path*"]} 
 
