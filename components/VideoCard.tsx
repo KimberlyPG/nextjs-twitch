@@ -6,6 +6,7 @@ import { viewersFormat } from "../utils/viewersFormat";
 import { time } from "../utils/time";
 import { days } from "../utils/days";
 import { Video } from "../types/types";
+import { shimmer, toBase64 } from "../utils/shimmerImage";
 
 type VideoCardProps = {
     item: Video;
@@ -23,6 +24,8 @@ const VideoCard: FC<VideoCardProps> = ({ item }) => {
                             priority={true}
                             width={570}
                             height={318}
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         />
                         <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute top-0">{time(item.duration)}</p>
                         <p className="m-2 text-sm text-white bg-black bg-opacity-60 absolute bottom-0">{viewersFormat(item.view_count)} views</p>
