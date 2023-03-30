@@ -1,6 +1,6 @@
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { NextPage } from "next";
+import { NextPage, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -9,35 +9,21 @@ import GameCards from "../../components/GameCard";
 
 import twitch from "../api/twitch";
 import { GameData, LiveStreamsData } from "../../types/types";
-import { InitialGameDataValues } from "../../initialValues/intialDataValues";
 import { shimmer, toBase64 } from "../../utils/shimmerImage";
 
-const Game: NextPage = () => {
+type GameProps = {
+    game: GameData;
+}
+
+const Game: NextPage<GameProps> = ({ game }) => {
     const { data: session, status } = useSession();
     const currentToken = session?.user.token;
 
     const router = useRouter();
     const gameId = router.query.id;
 
-    const [game, setGame] = useState<GameData>(InitialGameDataValues);
     const [channel, setChannel] = useState<LiveStreamsData[]>([]);
 
-    useEffect(() => {
-        if(gameId && currentToken) {
-        const getGameData = async() => {
-                await twitch.get(`/games?id=${gameId}`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                    }
-                })
-                .then(res => setGame(res.data.data[0]));
-            }
-            getGameData();
-        }
-    }, [gameId, currentToken])
- 
     useEffect(() => {
         if(gameId && currentToken) {
         const getChannels = async () => {
@@ -81,5 +67,22 @@ const Game: NextPage = () => {
         </Layout>
     );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getSession(context);
+    const currentToken = session?.user.token;
+    const gameId = context.query.id;
+
+    const res = await twitch.get(`/games?id=${gameId}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${currentToken}`,
+                "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+            }
+        })
+    const game = await res.data.data[0];
+
+    return { props: { game } }
+}
 
 export default Game;
