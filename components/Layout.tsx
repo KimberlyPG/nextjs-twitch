@@ -14,7 +14,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     const fetcher = useFetcher();
     return (
         <SWRConfig value={{  refreshInterval: 120000, fetcher }} >
-        <div className='flex h-screen w-screen overflow-y-scroll scrollbar-hide bg-black'>
+        <div className='flex h-screen w-screen overflow-y-scroll scrollbar-hide bg-black text-white font-roboto'>
             <Sidebar />
             <div className='flex flex-col h-full w-full'>
                 <Topbar />
