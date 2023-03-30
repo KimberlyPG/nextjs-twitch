@@ -1,14 +1,12 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import useSWR from 'swr';
 
 import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
 
 import twitch from "../pages/api/twitch"
 import { LiveStreamsData, TopGameData, Follow } from "../types/types";
-import { useStreamsFilter } from "../hooks/useStreamsFilter";
-
-import useSWR from 'swr';
 
 const Twitch = () => {
     const { data: session, status } = useSession();
@@ -22,8 +20,7 @@ const Twitch = () => {
 	const { data: followedLive, error: followedLiveError } = useSWR<LiveStreamsData[], Error>(`/streams/followed?user_id=${userId}`);
 	const { data: recommendationsList, error: recommendationsListError } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
 
-
-    const streamsFiltered: LiveStreamsData[] = useStreamsFilter(follows, recommendationsList)!;
+    const streamsRecommended = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!
 
     useEffect(() => {
         if(currentToken) {
@@ -45,17 +42,17 @@ const Twitch = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedLive.length > 0 && 
+                {followedLive && followedLive.length > 0 && 
                     <StreamCardsContainer 
                         description="Followed Live Channels"
                         streamerData={followedLive}
                         type='followed'
                     />
                 }
-                {streamsFiltered.length > 0 && 
+                {recommendationsList && recommendationsList.length > 0 && 
                 <StreamCardsContainer 
                     description="Recommended Channels"
-                    streamerData={streamsFiltered}
+                    streamerData={streamsRecommended}
                     type='recommended'
                 />
                 }

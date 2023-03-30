@@ -17,10 +17,11 @@ type SidebarStreamerCardProps = {
 const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, viewer_count }) => {
     const { data: streamerData, error: streamerDataError } = useSWR<UserData[], Error>(`/users?id=${id}`);
 
-    if (!streamerData) return <div>Loading...</div>
+    // if (!streamerData) return <div>Loading...</div>
     return (
         <>
         {game_name ? (
+            streamerData &&
             <Link href={`/stream/${streamerData[0].display_name}`}>
                 <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
@@ -39,6 +40,7 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
                 </div>
             </Link>
             ):(
+            streamerData &&
             <Link href={{pathname: `/profile/${id}`, query: {state:(false)}}}>
                 <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
@@ -52,8 +54,8 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
                     </div>
                 </div>
             </Link>
-            ) 
-        }
+            )
+        } 
         </>
     );
 }

@@ -6,11 +6,9 @@ import Twitch from "../components/Twitch";
 
 const Home: NextPage = () => {
 	return (
-		<div className='bg-black h-100 w-100 flex'>
-			<Layout>
-				<Twitch />
-			</Layout>
-		</div>
+		<Layout>
+			<Twitch />
+		</Layout>
 	);
 	}
 

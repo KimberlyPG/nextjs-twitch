@@ -7,9 +7,6 @@ import SidebarSkeleton from "./SidebarSkeleton";
 
 import { Follow, LiveStreamsData } from "../types/types";
 
-import { useIsFollowLive } from "../hooks/useIsFollowLive";
-import { useStreamsFilter } from "../hooks/useStreamsFilter";
-
 const Sidebar = () => {
 	const { data: session, status } = useSession();
 
@@ -19,10 +16,8 @@ const Sidebar = () => {
 	const { data: followedLive, error: followedLiveError } = useSWR<LiveStreamsData[], Error>(`/streams/followed?user_id=${userId}`);
 	const { data: recommendationsList, error: recommendationsListError } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
 
-	const followedOffline  = useIsFollowLive(follows, followedLive);
-	const recommendations = useStreamsFilter(follows, recommendationsList);
+	const streamsRecommended = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!;
 
-	if (followedLiveError || followsError || recommendationsListError) return <div>failed to load</div>
     if (!follows || !followedLive || !recommendationsList) return <SidebarSkeleton />
 	return (
 		<div className="text-white pt-10 h-screen space-y-5">
@@ -35,7 +30,7 @@ const Sidebar = () => {
 						viewer_count={streamer.viewer_count}
 					/>
 				))}
-				{followedOffline.map((streamer) => (
+				{follows.filter(item => !followedLive.some(id => id.user_id === item.to_id)).map((streamer) => (
 					<SidebarStreamerCard
 						key={streamer.to_id}
 						id={streamer.to_id}
@@ -45,7 +40,7 @@ const Sidebar = () => {
 				))}
 			</SidebarContainer>
 			<SidebarContainer title="recomended">
-				{recommendations.map((streamer) => (
+				{streamsRecommended.map((streamer) => (
 					<SidebarStreamerCard
 						key={streamer.id} 
 						id={streamer.user_id} 
