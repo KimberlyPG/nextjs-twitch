@@ -17,7 +17,6 @@ type SidebarStreamerCardProps = {
 const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, viewer_count }) => {
     const { data: streamerData, error: streamerDataError } = useSWR<UserData[], Error>(`/users?id=${id}`);
 
-    // if (!streamerData) return <div>Loading...</div>
     return (
         <>
         {game_name ? (
