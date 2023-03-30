@@ -7,10 +7,9 @@ import { LiveStreamsData } from "../types/types";
 
 type StreamCardProps = {
     streamer: LiveStreamsData;
-    type: string;
 }
 
-const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
+const StreamCard: FC<StreamCardProps> = ({ streamer }) => {
     const { user_id, thumbnail_url, user_name, game_name, viewer_count, title } = streamer;
 
     return (
@@ -25,9 +24,7 @@ const StreamCard: FC<StreamCardProps> = ({ streamer, type }) => {
                         user_id={user_id} 
                         title={title} 
                         user_name={user_name} 
-                        profile_image=""
                         game_name={game_name} 
-                        type={type} 
                     />
                 </div>
             </Link>

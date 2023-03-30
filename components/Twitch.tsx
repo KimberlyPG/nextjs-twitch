@@ -21,19 +21,17 @@ const Twitch = () => {
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedLive && followedLive.length > 0 && 
+                {followedLive &&
                     <StreamCardsContainer 
                         description="Followed Live Channels"
                         streamerData={followedLive}
-                        type='followed'
                     />
                 }
-                {recommendationsList && recommendationsList.length > 0 && 
-                <StreamCardsContainer 
-                    description="Recommended Channels"
-                    streamerData={streamsRecommended}
-                    type='recommended'
-                />
+                {recommendationsList &&
+                    <StreamCardsContainer 
+                        description="Recommended Channels"
+                        streamerData={streamsRecommended}
+                    />
                 }
                 <TopGames topGames={topGames}/>
             </div>

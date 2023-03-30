@@ -10,6 +10,7 @@ import GameCards from "../../components/GameCard";
 import twitch from "../api/twitch";
 import { GameData, LiveStreamsData } from "../../types/types";
 import { InitialGameDataValues } from "../../initialValues/intialDataValues";
+import { shimmer, toBase64 } from "../../utils/shimmerImage";
 
 const Game: NextPage = () => {
     const { data: session, status } = useSession();
@@ -63,6 +64,9 @@ const Game: NextPage = () => {
                         alt={`${game?.name} image`} 
                         width={168}
                         height={224}
+                        priority={true}
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                     />
                     <h1 className="lg:text-4xl md:text-2xl sm:text-xl ml-5 w-full">{game?.name}</h1>                        
                 </div>
