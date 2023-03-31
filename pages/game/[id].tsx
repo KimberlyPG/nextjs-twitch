@@ -6,6 +6,7 @@ import useSWR from 'swr';
 
 import Layout from '../../components/Layout';
 import GameCards from "../../components/GameCard";
+import GameSkeleton from "../../components/GameSkeleton";
 
 import twitch from "../api/twitch";
 import { GameData, LiveStreamsData } from "../../types/types";
@@ -19,15 +20,12 @@ type GameProps = {
 
 const Game: NextPage<GameProps> = ({ game }) => {
     const fetcher = useFetcher();
-    const { data: session, status } = useSession();
-    const currentToken = session?.user.token;
-
     const router = useRouter();
     const gameId = router.query.id;
  
     const { data: channel, error: followsError } = useSWR<LiveStreamsData[], Error>(`/streams?game_id=${gameId}&first=15`, fetcher, {refreshInterval: 120000});
 
-    if(!channel) return <div>Loading...</div>
+    if(!channel) return <Layout><GameSkeleton /></Layout>
     return (
         <Layout>
             <div className="text-white font-roboto sm:p-5">
