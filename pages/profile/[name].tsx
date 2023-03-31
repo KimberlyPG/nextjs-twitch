@@ -6,7 +6,6 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic'
 import Image from 'next/image';
 
-import Layout from '../../components/Layout';
 import VideoCard from '../../components/VideoCard';
 
 import twitch from '../api/twitch';
@@ -60,7 +59,7 @@ const Profile: NextPage = () => {
     }, [currentToken, id]);
 
     return (
-        <Layout>
+        <>
             {userData &&
                 <ReactTwitchEmbedVideo 
                     channel={userData.display_name}
@@ -103,7 +102,7 @@ const Profile: NextPage = () => {
                     </div>         
                 }
             </div>
-        </Layout>
+        </>
     );
 };
 

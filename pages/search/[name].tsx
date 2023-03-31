@@ -4,7 +4,6 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import SearchList from "../../components/SearchList";
-import Layout from '../../components/Layout';
 
 import twitch from "../api/twitch";
 import { SearchChannels } from "../../types/types";
@@ -35,13 +34,11 @@ const Search: NextPage = () => {
     }, [userName, currentToken])
 
     return (
-        <Layout>
-            <div className="pt-10 font-roboto">
-                {results && results?.map((streams: SearchChannels) => (
-                    <SearchList key={streams.id} streams={streams}/>
-                ))}
-            </div>
-        </Layout>
+        <div className="pt-10 font-roboto">
+            {results && results?.map((streams: SearchChannels) => (
+                <SearchList key={streams.id} streams={streams}/>
+            ))}
+        </div>
     );
 };
 
