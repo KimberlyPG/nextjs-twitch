@@ -1,11 +1,19 @@
 import { SessionProvider } from "next-auth/react"
 import Head from 'next/head';
 import type { AppProps } from 'next/app'
+import { useRouter } from "next/router";
+
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
+
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
+	const router = useRouter();
+	if (!session) {
+		router.push("/login");
+	}
+
   return(
 	<>
 		<Head>
@@ -24,4 +32,4 @@ function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   )
 }
 
-export default MyApp
+export default MyApp;
