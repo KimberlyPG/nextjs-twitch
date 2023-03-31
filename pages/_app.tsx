@@ -7,12 +7,16 @@ import { Provider } from 'react-redux';
 import { store } from '../store/store';
 
 import '../styles/globals.css'
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
+
 	const router = useRouter();
-	if (!session) {
-		router.push("/login");
-	}
+	useEffect(() => {
+		if (!session) {
+			router.push("/login");
+		}
+	}, [router, session])
 
   return(
 	<>
