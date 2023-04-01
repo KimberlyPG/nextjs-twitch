@@ -13,8 +13,6 @@ const Search: NextPage = () => {
 
     const { data: results, error: followsError } = useSWR<SearchChannels[]>(`/search/channels?query=${userName}&first=8`);
 
-    console.log(results)
-
     if(followsError) return <div>Something went wrong</div>
     if(!results) return <div>Loading...</div>
     return (
