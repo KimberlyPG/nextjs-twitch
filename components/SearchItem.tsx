@@ -16,10 +16,9 @@ const SearchItem: FC<SearchListProps> = ({ streams }) => {
 
     const { data: data, error: followsError } = useSWR<LiveStreamsData[]>(`/streams?&user_id=${streams.id}`);
 
-    if(!data) return <div>Loading...</div>
     return ( 
         <>
-        {state ? (
+        {data && state ? (
              <Link href={`/stream/${streams.display_name}`}>
                 <div className="flex text-white mb-5 cursor-pointer lg:ml-10 xs:ml-5">
                     <div className="flex relative lg:w-1/3 sm:w-1/2 xs:w-full">
