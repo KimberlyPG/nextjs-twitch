@@ -24,7 +24,6 @@ const Topbar = () => {
     const openSearchBar = () => setClickSearch(true);
     const hideSearchBar = () => setClickSearch(false);
     
-
     return (
         <div className="flex text-white justify-between items-center py-2 px-5">
             <div className={`flex justify-start text-xs space-x-20 sm:w-1/3 ${clickSearch? 'xs:hidden sm:flex':'xs:flex'}`}>

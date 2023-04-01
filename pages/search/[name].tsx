@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from 'swr';
 import { MdSearchOff } from 'react-icons/md';
 
-import SearchList from "../../components/SearchList";
+import SearchItem from "../../components/SearchItem";
 
 import { SearchChannels } from "../../types/types";
 
@@ -13,14 +13,13 @@ const Search: NextPage = () => {
 
     const { data: results, error: followsError } = useSWR<SearchChannels[]>(`/search/channels?query=${userName}&first=8`);
 
-    if(followsError) return <div>Something went wrong</div>
     if(!results) return <div>Loading...</div>
     return (
         <>
             {results.length > 0 ? (    
                 <div className="pt-10 font-roboto">
                     {results.map((streams: SearchChannels) => (
-                        <SearchList key={streams.id} streams={streams}/>
+                        <SearchItem key={streams.id} streams={streams}/>
                     ))}
                 </div>
             ):(
