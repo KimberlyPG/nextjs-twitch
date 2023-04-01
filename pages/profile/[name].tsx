@@ -1,10 +1,10 @@
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { NextPage } from 'next';
+import { getSession } from 'next-auth/react';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import dynamic from 'next/dynamic'
 import Image from 'next/image';
+import useSWR from 'swr';
 
 import VideoCard from '../../components/VideoCard';
 
@@ -15,60 +15,29 @@ const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), 
     ssr: false,
   })
 
-const Profile: NextPage = () => {
+type ProfileProps = {
+    userData: UserData;
+    userId: string;
+}
+
+const Profile: NextPage<ProfileProps> = ({ userData }) => {
     const router = useRouter();
-    const id = router.query.name as string;
     const state = router.query.state;
+    const userId = router.query.name;
 
-    const { data: session, status } = useSession();
-    const currentToken = session?.user.token;
+    const { data: video, error: followsError } = useSWR<Video[]>(`/videos?user_id=${userId}&first=5`);
 
-    const [userData, setUserData] = useState<UserData>();
-    const [video, setVideo] = useState<Video[]>([]);
-
-    useEffect(() => {
-        if(currentToken && id) {
-            const getStreamerInfo = async() => {
-                await twitch.get(`/users?id=${id}`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                    }
-                })
-                .then(res => setUserData(res.data.data[0]))
-            };
-            getStreamerInfo();
-        }
-    }, [currentToken, id]);
-
-    useEffect(() => {
-        if(currentToken && id) {
-            const getVideos = async () => {
-                await twitch.get(`/videos?user_id=${id}&first=5`,
-                    {
-                        headers: {
-                            "Authorization": `Bearer ${currentToken}`,
-                            "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                        }
-                    }
-                    ).then(res => setVideo(res?.data?.data));
-                }
-            getVideos();
-        }
-    }, [currentToken, id]);
-
+    if(followsError) return <div>Something went wrong</div>
+    if(!video || !video) return <div>Loading...</div>
     return (
         <>
-            {userData &&
-                <ReactTwitchEmbedVideo 
-                    channel={userData.display_name}
-                    allowfullscreen={Boolean(state)}
-                    width="100%"
-                    height="450px"
-                    layout='video'
-                /> 
-            }
+            <ReactTwitchEmbedVideo 
+                channel={userData.display_name}
+                allowfullscreen={Boolean(state)}
+                width="100%"
+                height="450px"
+                layout='video'
+            /> 
             <div>
                 {state === "true" &&
                     <div className='pl-3'>
@@ -77,24 +46,22 @@ const Profile: NextPage = () => {
                         </Link>
                     </div>
                 }
-                {userData &&
-                    <div className='flex flex-row items-center m-5'>
-                        <Image 
-                            className="rounded-full cursor-pointer" 
-                            src={userData?.profile_image_url}
-                            width={70}
-                            height={70}
-                            priority
-                            alt="user image" 
-                        /> 
-                        <h3 className='pl-5'>{userData?.display_name}</h3>
-                    </div>
-                }
-                {video && video.length > 0 &&
+                <div className='flex flex-row items-center m-5'>
+                    <Image 
+                        className="rounded-full cursor-pointer" 
+                        src={userData?.profile_image_url}
+                        width={70}
+                        height={70}
+                        priority
+                        alt="user image" 
+                    /> 
+                    <h3 className='pl-5'>{userData?.display_name}</h3>
+                </div>
+                {video.length > 0 &&
                     <div className='md:p-5'>              
                     <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
                         <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1'>
-                            {video && video.map((item) => (
+                            {video.map((item) => (
                                 <VideoCard key={item.id} item={item} />  
                             ))
                             }
@@ -105,5 +72,22 @@ const Profile: NextPage = () => {
         </>
     );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getSession(context);
+    const currentToken = session?.user.token;
+    const userId = context.query.name;
+
+    const res = await twitch.get(`/users?id=${userId}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${currentToken}`,
+                "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
+            }
+        })
+    const userData = await res.data.data[0];
+
+    return { props: { userData } }
+}
 
 export default Profile;

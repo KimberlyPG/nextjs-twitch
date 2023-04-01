@@ -1,44 +1,39 @@
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import useSWR from 'swr';
+import { MdSearchOff } from 'react-icons/md';
 
-import SearchList from "../../components/SearchList";
+import SearchItem from "../../components/SearchItem";
 
-import twitch from "../api/twitch";
 import { SearchChannels } from "../../types/types";
 
 const Search: NextPage = () => {
-    const { data: session, status } = useSession();
-    const currentToken = session?.user.token;
-
     const router = useRouter();
     const userName = router?.query?.name;
 
-    const [results, setResults] = useState([]);
+    const { data: results, error: followsError } = useSWR<SearchChannels[]>(`/search/channels?query=${userName}&first=8`);
 
-    useEffect(() => {
-        if(userName && currentToken) {
-            const searchUsers = async() => {
-                await twitch.get(`/search/channels?query=${userName}&first=8`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${currentToken}`,
-                        "Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-                    }
-                })
-                .then((data) => setResults(data.data.data)) 
-            }
-            searchUsers();
-        }
-    }, [userName, currentToken])
-
+    if(!results) return <div>Loading...</div>
     return (
-        <div className="pt-10 font-roboto">
-            {results && results?.map((streams: SearchChannels) => (
-                <SearchList key={streams.id} streams={streams}/>
-            ))}
-        </div>
+        <>
+            {results.length > 0 ? (    
+                <div className="pt-10 font-roboto">
+                    {results.map((streams: SearchChannels) => (
+                        <SearchItem key={streams.id} streams={streams}/>
+                    ))}
+                </div>
+            ):(
+                <div className="flex flex-col h-full w-full items-center justify-center pb-20 px-5">
+                    <MdSearchOff className="text-purple-500 md:text-8xl xs:text-6xl" />
+                    <p className="text-center md:text-2xl xs:text-sm font-bold">
+                        No results found for <span className="text-orange-500">{userName}</span>
+                    </p>
+                    <p className="text-center md:text-xl xs:text-xs font-semibold">
+                        Make sure all words are spelled correctly or try different keywords
+                    </p>
+                </div>
+            )}
+        </>
     );
 };
 
