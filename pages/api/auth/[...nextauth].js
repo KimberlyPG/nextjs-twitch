@@ -10,7 +10,7 @@ async function refreshAccessToken(token) {
         return {
             ...token,
             accessToken: refreshedToken.access_token,
-            accessTokenExpires: Date.now + refreshedToken.expires_in * 1000, 
+            accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000, 
             refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
         };
   
@@ -75,7 +75,7 @@ export default NextAuth({
                     ...token,
                     accessToken: account.access_token,
                     username: token.name,
-                    accessTokenExpires: account.expires_at * 1000,
+                    accessTokenExpires: Date.now() + account.expires_at * 1000,
                     id: token.sub,
                     refreshToken: account.refresh_token
                 };
@@ -89,13 +89,16 @@ export default NextAuth({
 
             // New access token when the access token has expired
             console.log("ACCESS TOKEN HAS EXPIRED, REFRESHING...");
-            return await refreshAccessToken(token, account);
+            return await refreshAccessToken(token);
         },
 
         async session({ session, token }) {   
-            session.user.token = token.accessToken;
-            session.user.name = token.username;
-            session.user.id = token.sub;
+            if(token) {
+                session.user.token = token.accessToken;
+                session.user.name = token.username;
+                session.user.id = token.sub;
+                session.error = token.error;
+            }
             return session;
         },
     },

@@ -5,6 +5,7 @@ import twitch from "../pages/api/twitch";
 const useFetcher = () => {
     const { data: session, status } = useSession();
 	const currentToken = session?.user?.token;
+	console.log("currentToken", currentToken)
 
 	const fetcher = async(url: string) => {
 		return await twitch.get(url, 

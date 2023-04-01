@@ -3,6 +3,7 @@ import useSWR from 'swr';
 
 import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
+import TwitchSkeleton from "./TwitchSkeleton";
 
 import { LiveStreamsData, TopGameData, Follow } from "../types/types";
 
@@ -17,7 +18,7 @@ const Twitch = () => {
     
     const streamsRecommended = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!
 
-    if (!follows || !followedLive || !recommendationsList || !topGames) return <div>Loading...</div>
+    if (!follows || !followedLive || !recommendationsList || !topGames) return <TwitchSkeleton />
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
