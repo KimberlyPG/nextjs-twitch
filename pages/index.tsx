@@ -3,7 +3,18 @@ import { getSession } from 'next-auth/react';
 
 import Twitch from "../components/Twitch";
 
+import { useSession, signIn } from "next-auth/react";
+import { useEffect } from "react";
+
 const Home: NextPage = () => {
+	const { data: session, status } = useSession();
+
+	useEffect(() => {
+		if (session?.error === "RefreshAccessTokenError") {
+			signIn();
+		}
+	}, [session]);
+
 	return (
 		<Twitch />
 	);
@@ -11,15 +22,6 @@ const Home: NextPage = () => {
 
 export async function getServerSideProps(context: {}) {
 const session = await getSession(context);
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/login',
-				permanent: false,
-			},
-    	}
-	}
 	return {
 			props: {
 				session

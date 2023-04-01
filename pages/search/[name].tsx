@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { MdSearchOff } from 'react-icons/md';
 
 import SearchItem from "../../components/SearchItem";
+import SearchSkeleton from "../../components/SearchSkeleton";
 
 import { SearchChannels } from "../../types/types";
 
@@ -13,7 +14,7 @@ const Search: NextPage = () => {
 
     const { data: results, error: followsError } = useSWR<SearchChannels[]>(`/search/channels?query=${userName}&first=8`);
 
-    if(!results) return <div>Loading...</div>
+    if(!results) return <SearchSkeleton />
     return (
         <>
             {results.length > 0 ? (    
