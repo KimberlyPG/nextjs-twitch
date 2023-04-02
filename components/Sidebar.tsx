@@ -49,7 +49,7 @@ const Sidebar = () => {
 					>
 						<FaHeart className="text-4xl text-purple-600" />
 						Follow Recommended Channels!
-						<span className="text-xs font-light">They will appear here to easy access!</span>
+						<span className="text-xs font-light">They&apos;ll show up here for easy access!</span>
 					</div>
 				</SidebarContainer>
 			)		
