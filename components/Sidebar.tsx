@@ -55,7 +55,7 @@ const Sidebar = () => {
 			)		
 			}
 			<SidebarContainer title="Recommended Channels">
-				{streamsRecommended.map((streamer) => (
+				{streamsRecommended && streamsRecommended.map((streamer) => (
 					<SidebarStreamerCard
 						key={streamer.id} 
 						id={streamer.user_id} 
