@@ -16,7 +16,7 @@ const Twitch = () => {
 	const { data: recommendationsList, error: recommendationsListError, isLoading: recommendationsListIsLoading } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
     const { data: topGames, error: topGamesError, isLoading: topGamesIsLoading } = useSWR<TopGameData[], Error>(`/games/top?first=9`);
     
-    const streamsRecommended = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!
+    const recommendedStreams = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!
 
     if (followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading || topGamesIsLoading || !topGames) return <TwitchSkeleton />
     return (
@@ -31,7 +31,7 @@ const Twitch = () => {
                 {recommendationsList &&
                     <StreamCardsContainer 
                         description="Recommended Channels"
-                        streamerData={streamsRecommended}
+                        streamerData={recommendedStreams}
                     />
                 }
                 <TopGames topGames={topGames}/>
