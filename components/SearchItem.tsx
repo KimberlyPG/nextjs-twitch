@@ -31,7 +31,7 @@ const SearchItem: FC<SearchListProps> = ({ streams }) => {
                             placeholder="blur"
                             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         />
-                        <p className="m-1 bg-red-500 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0">LIVE</p>
+                        <p className="m-1 bg-red-600 text-white w-10 h-4 text-xs rounded-md text-center absolute top-0 font-semibold">LIVE</p>
                     </div>
                     <div className="w-full xs:ml-3 lg:ml-5">                 
                         <h3 className="xs:text-xs sm:text-sm font-semibold hover:text-purple-400 cursor-pointer">{streams.display_name}</h3>
