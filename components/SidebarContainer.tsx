@@ -4,22 +4,23 @@ import { useAppSelector } from '../store/hooks';
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 
 type SidebarContainerProps = {
-    title: string;
+    title?: string;
     children: ReactNode;
 }
 
-const SidebarContainer: FC<SidebarContainerProps> = ({ title, children }) => {
+const SidebarContainer: FC<SidebarContainerProps> = ({ title = "", children }) => {
     const toggleSidebar = useAppSelector(selectToggle);
 
     return (
         <>
             <h4 className={`text-sm font-semibold pl-4 xs:hidden ${toggleSidebar ? "lg:flex":"lg:hidden"}`}>{title}</h4>
-            {title === "followed" ? (
+            {title === "Followed Channels" && 
                 <BsSuitHeart className={`text-gray-500 w-full lg:hidden ${toggleSidebar ? "xs:flex":"xs:hidden"}`} />
-            ):(
+            }
+            {title === "Recommended Channels" &&
                 <BsCameraVideo className={`text-gray-500 w-full lg:hidden mt-4 ${toggleSidebar ? "xs:flex":"xs:hidden"}`} />
-            )}
-            <div className={`flex flex-col h-2/5 w-80 overflow-y-scroll scrollbar-hide 
+            }
+            <div className={`flex flex-col max-h-[40%] w-80 overflow-y-scroll scrollbar-hide 
             ${toggleSidebar ? "lg:max-w-[14rem] xs:max-w-[4rem]":"lg:hidden xs:hidden"}`}>
                 <div className="border-r border-gray-900">
                     {children}
