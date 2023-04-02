@@ -24,6 +24,21 @@ async function refreshAccessToken(token) {
     }
 }
 
+const scopes = [
+    "openid",
+    "user:read:email",
+    "user:read:follows",
+    "user:edit",
+    "user:edit:follows",
+    "user:read:subscriptions",
+    "clips:edit",
+    "bits:read",
+    "channel:read:hype_train",
+    "channel:read:vips",
+    "chat:edit",
+    "chat:read",
+].join(" "); //all the string will be one string separated by space
+
 export default NextAuth({
   // provider configuration
     providers: [
@@ -36,7 +51,7 @@ export default NextAuth({
             type: "oauth",
             authorization: {
                 params: {
-                scope: "openid user:read:email user:read:follows",
+                scope: scopes,
                     claims: {
                         id_token: {
                         email: null,
@@ -83,7 +98,7 @@ export default NextAuth({
 
             // Return previous token if the access token has not expired yet
             if (Date.now() < token.accessTokenExpires) {
-                console.log("EXISTING ACCESS TOKEN IS VALID");
+                console.log("EXISTING ACCESS TOKEN IS VALID");          
                 return token;
             }
 
