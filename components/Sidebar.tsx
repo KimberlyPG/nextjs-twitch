@@ -17,9 +17,9 @@ const Sidebar = () => {
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
 	const { data: recommendationsList, error: recommendationsListError, isLoading: recommendationsListIsLoading } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
 
-	const streamsRecommended = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!;
+	const recommendedStreams = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!;
 
-    if (followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading) return <SidebarSkeleton />
+    if (followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading || !recommendedStreams) return <SidebarSkeleton />
 	return (
 		<div className="text-white pt-10 h-screen space-y-5">
 			{follows && followedLive ? 	(
@@ -55,7 +55,7 @@ const Sidebar = () => {
 			)		
 			}
 			<SidebarContainer title="Recommended Channels">
-				{streamsRecommended && streamsRecommended.map((streamer) => (
+				{recommendedStreams &&recommendedStreams.map((streamer) => (
 					<SidebarStreamerCard
 						key={streamer.id} 
 						id={streamer.user_id} 
