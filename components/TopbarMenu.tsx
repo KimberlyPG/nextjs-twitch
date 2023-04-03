@@ -10,14 +10,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
-import { createTheme, makeStyles, styled } from '@mui/material';
-
-const CssMenu = styled(Menu)({
-	'& account-menu': {
-	  backgroundColor: '#060C0C',
-	},
-
-});
 
 export default function TopbarMenu() {
     const { data: session, status } = useSession();
@@ -38,12 +30,12 @@ export default function TopbarMenu() {
         router.push({
             pathname: `/profile/${session?.user.id}`,
             query: {state:(false)}, 
-        })
+        });
     }
 
     const logout = () => {
         handleClose();
-        signOut({callbackUrl: "/login" })
+        signOut({callbackUrl: "/login" });
     }
     
     return (
@@ -65,7 +57,7 @@ export default function TopbarMenu() {
                     </div>
                 </Tooltip>
             </Box>
-            <Menu
+            <Menu 
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -74,6 +66,7 @@ export default function TopbarMenu() {
                 PaperProps={{
                 elevation: 0,
                 sx: {
+                    bgcolor: '#0F131A',
                     overflow: 'visible',
                     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                     mt: 1.5,
@@ -91,16 +84,17 @@ export default function TopbarMenu() {
                     right: 14,
                     width: 10,
                     height: 10,
-                    bgcolor: 'white',
+                    bgcolor: '#0F131A',
                     transform: 'translateY(-50%) rotate(45deg)',
                     zIndex: 0,
+                    color: "#fff"
                     },
                 },
                 }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={navigateToProfile}>
+                <MenuItem onClick={navigateToProfile} sx={{":hover": {bgcolor: "#1a1d24"}, color: "#EFEFF1"}}>
                     {session && 
                         <div className='px-2'>
                             <Image 
@@ -117,9 +111,9 @@ export default function TopbarMenu() {
                     <p className='xs:flex lg:hidden'>{session?.user.name}</p>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={logout}>
+                <MenuItem onClick={logout} sx={{":hover": {bgcolor: "#1a1d24"}, color: "#EFEFF1"}}>
                     <ListItemIcon>
-                        <Logout fontSize="small" />
+                        <Logout fontSize="small" sx={{color: "#EFEFF1"}} />
                     </ListItemIcon>
                     Logout
                 </MenuItem>
