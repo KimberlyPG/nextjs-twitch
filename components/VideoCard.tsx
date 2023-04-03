@@ -12,6 +12,7 @@ type VideoCardProps = {
     item: Video;
 }
 const VideoCard: FC<VideoCardProps> = ({ item }) => {
+    if(item.thumbnail_url === "https://vod-secure.twitch.tv/_404/404_processing_%{width}x%{height}.png") return null;
     return (
         <div className='cursor-pointer hover:opacity-80 mb-5 mx-1'>
             <Link href={`/videos/${item.id}`}>
