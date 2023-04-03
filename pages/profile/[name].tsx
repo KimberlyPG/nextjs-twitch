@@ -27,7 +27,6 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
 
     const { data: video, error: followsError } = useSWR<Video[]>(`/videos?user_id=${userId}&first=5`);
 
-    if(followsError) return <div>Something went wrong</div>
     if(!video || !video) return <div>Loading...</div>
     return (
         <>
@@ -42,7 +41,7 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
                 {state === "true" &&
                     <div className='pl-3'>
                         <Link href={`/stream/${userData?.display_name}`}>
-                            <a className='bg-red-600 rounded-sm font-bold font-roboto p-1 hover:opacity-50'>GO TO LIVE</a>
+                            <p className='bg-red-600 rounded-sm font-bold font-roboto p-1 hover:opacity-50'>GO TO LIVE</p>
                         </Link>
                     </div>
                 }
