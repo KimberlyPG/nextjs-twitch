@@ -20,8 +20,8 @@ const SidebarContainer: FC<SidebarContainerProps> = ({ title = "", children }) =
             {title === "Recommended Channels" &&
                 <BsCameraVideo className={`text-gray-500 w-full lg:hidden mt-4 ${toggleSidebar ? "xs:flex":"xs:hidden"}`} />
             }
-            <div className={`flex flex-col max-h-[40%] w-80 overflow-y-scroll scrollbar-hide 
-            ${toggleSidebar ? "lg:max-w-[14rem] xs:max-w-[4rem]":"lg:hidden xs:hidden"}`}>
+            <div className={`flex flex-col ${title === "Recommended Channels" ? "":" max-h-[40%] overflow-y-scroll"} w-80 scrollbar-hide 
+            ${toggleSidebar ? "lg:max-w-[15rem] xs:max-w-[4rem]":"lg:hidden xs:hidden"}`}>
                 <div className="border-r border-gray-900">
                     {children}
                 </div>
