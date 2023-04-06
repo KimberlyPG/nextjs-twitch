@@ -14,4 +14,4 @@ https://silly-manatee-cc57df.netlify.app/
 ![image](https://user-images.githubusercontent.com/65067847/193160629-544753f9-1f33-45a4-b400-d4c642ac677e.png)
 
 ## Use the app in your phone 
-![image](https://user-images.githubusercontent.com/65067847/193160715-6fc72b75-768f-4db3-ac57-fa1dfa1c227e.png)
+![image](https://user-images.githubusercontent.com/65067847/230252127-1d3b95ce-a906-442e-8dd3-2520a96f26d7.png)
