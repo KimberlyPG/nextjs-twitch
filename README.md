@@ -5,7 +5,7 @@
 https://silly-manatee-cc57df.netlify.app/
 
 ## Home page
-![image](https://user-images.githubusercontent.com/65067847/193160553-60c8cf61-2227-429b-8f14-fa7470e093a7.png)
+![image](https://user-images.githubusercontent.com/65067847/230535903-943af3f5-3377-4c12-85f5-e317dcf03fd0.png)
 
 ## Stream page
 ![image](https://user-images.githubusercontent.com/65067847/193160589-0967ef34-0170-4a67-bfea-fe11740c0636.png)
