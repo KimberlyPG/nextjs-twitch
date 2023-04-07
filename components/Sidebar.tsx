@@ -8,44 +8,38 @@ import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
 
 import { Follow, LiveStreamsData, StreamersData } from "../types/types";
-import { useState } from "react";
-import twitch from "../pages/api/twitch";
+import { useEffect, useState } from "react";
+import usePaginationFetcher from "../hooks/usePaginationFetcher";
 
 const Sidebar = () => {
 	const { data: session, status } = useSession();
 	const userId = session?.user.id;
-	const currentToken = session?.user?.token;
+	const fetcher = usePaginationFetcher();
 	const [showMore, setShowMore] = useState(true);
 
-	const fetcher = async(url: string) => {
-		return await twitch.get(url, 
-			{
-				headers: {
-					"Authorization": `Bearer ${currentToken}`,
-					"Client-Id": process.env.NEXT_PUBLIC_CLIENT_ID as string,
-				},
-			})
-			.then((res) => res.data)
-	}
 	const getKey = (pageIndex: number, previousPageData: StreamersData) => {
 		if(pageIndex == 0) {
-			return `/streams?first=6`
+			return `/streams?first=5`
 		}
 		if (previousPageData && previousPageData?.pagination?.cursor) {
-			console.log(previousPageData)
-			setShowMore(true);
-			return  `/streams?&first=3&after=${previousPageData.pagination.cursor}`
+			if(pageIndex < 2) {
+				setShowMore(false);
+				return  `/streams?&first=3&after=${previousPageData.pagination.cursor}`
+			}
+			else if(pageIndex >= 2){
+				setShowMore(true);
+				setSize(1)
+			}
 		} 
-		// reached the end
-		if (recommendationsList && Object.keys(recommendationsList[recommendationsList.length - 1].pagination).length === 0) {
-			setShowMore(false);
-			return null;
-		}
+
 	}
-	const {data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading} = useSWRInfinite(getKey , fetcher);
+	const {data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading} = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
 	const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
-	// const { data: recommendationsList, error: recommendationsListError, isLoading: recommendationsListIsLoading } = useSWR<LiveStreamsData[], Error>(`/streams?first=12`);
+
+	useEffect(() => {
+		
+	}, [showMore])
 
     if ( !follows || followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading) return <SidebarSkeleton />
 	return (
@@ -86,21 +80,23 @@ const Sidebar = () => {
 			}
 			<SidebarContainer title="Recommended Channels">
 				{recommendationsList && recommendationsList.map((item) => {
-					return (
-						item.data
-						.filter((item: LiveStreamsData) => !follows?.some(id => id.to_id === item.user_id))
-						.map((streamer: LiveStreamsData) => (
-							<SidebarStreamerCard
-								key={streamer.id} 
-								id={streamer.user_id} 
-								game_name={streamer.game_name} 
-								viewer_count={streamer.viewer_count}
-							/>
-						))
-					)
-				})}
+						return (
+							item.data
+							.filter((item: LiveStreamsData) => !follows?.some(id => id.to_id === item.user_id))				
+							.map((streamer: LiveStreamsData) => (
+								<SidebarStreamerCard
+									key={streamer.id} 
+									id={streamer.user_id} 
+									game_name={streamer.game_name} 
+									viewer_count={streamer.viewer_count}
+								/>
+							))
+						)
+					})}
 			</SidebarContainer>
-			<button className="m-5 text-purple-500 text-sm" onClick={() => setSize(size + 1)}>{showMore ? "Show more" : "No more"}</button>
+			<button className="m-5 text-purple-500 text-sm" onClick={() => setSize(size + 1)}>
+				{showMore ? "Show more" : "Show less"}
+			</button>
 		</div>
 	);
 }
