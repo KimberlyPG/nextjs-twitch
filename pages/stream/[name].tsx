@@ -7,8 +7,8 @@ const ReactTwitchEmbedVideo = dynamic(() => import('react-twitch-embed-video'), 
 })
 
 const Stream: NextPage = () => {
-  const router = useRouter();
-  const streamer = router.query.name as string;
+	const router = useRouter();
+	const streamer = router.query.name as string;
 
     return (
 		<ReactTwitchEmbedVideo 
