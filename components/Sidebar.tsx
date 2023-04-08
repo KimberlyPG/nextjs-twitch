@@ -8,7 +8,7 @@ import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
 
 import { Follow, LiveStreamsData, StreamersData } from "../types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import usePaginationFetcher from "../hooks/usePaginationFetcher";
 
 const Sidebar = () => {
@@ -19,12 +19,12 @@ const Sidebar = () => {
 
 	const getKey = (pageIndex: number, previousPageData: StreamersData) => {
 		if(pageIndex == 0) {
-			return `/streams?first=5`
+			return `/streams?first=6`
 		}
 		if (previousPageData && previousPageData?.pagination?.cursor) {
 			if(pageIndex < 2) {
 				setShowMore(false);
-				return  `/streams?&first=3&after=${previousPageData.pagination.cursor}`
+				return  `/streams?&first=5&after=${previousPageData.pagination.cursor}`
 			}
 			else if(pageIndex >= 2){
 				setShowMore(true);
@@ -39,7 +39,7 @@ const Sidebar = () => {
 
     if ( !follows || followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading) return <SidebarSkeleton />
 	return (
-		<div className="text-white pt-10 h-screen space-y-5 overflow-y-scroll scrollbar-hide">
+		<div className="text-white py-10 h-screen w-64 space-y-5 overflow-y-scroll scrollbar-hide">
 			{follows && followedLive ? 	(
 			<>
 				<SidebarContainer title="Followed Channels">
@@ -90,7 +90,7 @@ const Sidebar = () => {
 						)
 					})}
 			</SidebarContainer>
-			<button className="m-5 text-purple-500 text-sm" onClick={() => setSize(size + 1)}>
+			<button className="m-5 text-purple-500 text-xs hover:text-white" onClick={() => setSize(size + 1)}>
 				{showMore ? "Show more" : "Show less"}
 			</button>
 		</div>
