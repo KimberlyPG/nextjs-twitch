@@ -17,12 +17,13 @@ const Twitch = () => {
     const { data: topGames, error: topGamesError, isLoading: topGamesIsLoading } = useSWR<TopGameData[], Error>(`/games/top?first=9`);
     
     const recommendedStreams = recommendationsList?.filter(item => !follows?.some(id => id.to_id === item.user_id))!
+    console.log(followedLive)
 
     if (followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading || topGamesIsLoading || !topGames) return <TwitchSkeleton />
     return (
         <div className="flex md:p-5">
             <div className="text-white font-roboto">        
-                {followedLive &&
+                {followedLive && followedLive.length > 0 &&
                     <StreamCardsContainer 
                         description="Followed Live Channels"
                         streamerData={followedLive}
