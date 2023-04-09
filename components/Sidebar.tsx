@@ -31,7 +31,6 @@ const Sidebar = () => {
 				setSize(1)
 			}
 		} 
-
 	}
 	const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
 	const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
@@ -39,7 +38,7 @@ const Sidebar = () => {
 
     if ( !follows || followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading) return <SidebarSkeleton />
 	return (
-		<div className="text-white py-10 h-screen w-64 space-y-5 overflow-y-scroll scrollbar-hide">
+		<div className="text-white py-10 h-screen lg:w-64 space-y-5 overflow-y-scroll scrollbar-hide">
 			{follows && followedLive ? 	(
 			<>
 				<SidebarContainer title="Followed Channels">
@@ -88,9 +87,9 @@ const Sidebar = () => {
 								/>
 							))
 						)
-					})}
+				})}
 			</SidebarContainer>
-			<button className="m-5 text-purple-500 text-xs hover:text-white" onClick={() => setSize(size + 1)}>
+			<button className="m-5 text-purple-500 text-xs hover:text-white lg:flex xs:hidden" onClick={() => setSize(size + 1)}>
 				{showMore ? "Show more" : "Show less"}
 			</button>
 		</div>

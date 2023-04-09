@@ -22,7 +22,7 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
         {game_name ? (
             streamerData &&
             <Link href={`/stream/${streamerData[0].display_name}`}>
-                <div className="flex flex-row w-full relative text-white py-2 ml-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row w-full relative text-white py-2 mx-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData[0].profile_image_url} 
                         user={streamerData[0].display_name} 
@@ -41,7 +41,7 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
             ):(
             streamerData &&
             <Link href={{pathname: `/profile/${id}`, query: {state:(false)}}}>
-                <div className="flex flex-row w-full relative text-white py-2 ml-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row w-full relative text-white py-2 mx-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData[0].profile_image_url} 
                         user={streamerData[0].display_name} 
