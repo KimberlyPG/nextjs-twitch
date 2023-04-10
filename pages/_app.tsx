@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import Layout from "../components/Layout";
 import '../styles/globals.css'
+import { FilterProvider } from "../context/filter.context";
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
 	const router = useRouter();
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
 			</Head>
 			<SessionProvider session={session}>
 				<Provider store={store}>
+					<FilterProvider>
 					{router.pathname === "/login" ? (
 						<Component {...pageProps} />
 					):(
@@ -29,6 +31,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
 							<Component {...pageProps} />
 						</Layout>
 					)}
+					</FilterProvider>
 				</Provider>
 			</SessionProvider>
 		</>
