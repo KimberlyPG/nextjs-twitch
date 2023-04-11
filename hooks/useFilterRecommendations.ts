@@ -4,7 +4,7 @@ import { FilterContext } from "../context/filter.context";
 import { LiveStreamsData, StreamersData } from "../types/types";
 
 const useFilterRecommendations = 
-(recommendationsList: StreamersData[], followedLive: LiveStreamsData[], size: number) => {
+(recommendationsList: StreamersData[] | undefined, followedLive: LiveStreamsData[] | undefined, size: number) => {
     const { setFirst, first, second, setSecond } = useContext(FilterContext);
 
     const recommended: Array<LiveStreamsData[]> = [];

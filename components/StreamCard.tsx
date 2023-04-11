@@ -7,8 +7,6 @@ import { LiveStreamsData } from "../types/types";
 
 type StreamCardProps = {
     streamer: LiveStreamsData;
-    changeSize: () => void;
-    category: string;
 }
 
 const StreamCard: FC<StreamCardProps> = ({ streamer }) => {

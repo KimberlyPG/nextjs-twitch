@@ -6,7 +6,7 @@ import { LiveStreamsData, StreamersData } from "../types/types";
 
 type StreamCardContainerProps = {
     description: string;
-	streamerData: StreamersData[];
+	streamerData: LiveStreamsData[];
 }
 
 const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, streamerData }) => {
@@ -22,7 +22,7 @@ const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, stream
 				streamerData.map((item) => {
 					return (
 						item.length === 5 && 
-						item.map((streamer) => (
+						item.map((streamer: LiveStreamsData) => (
 							<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
 						))
 					)
