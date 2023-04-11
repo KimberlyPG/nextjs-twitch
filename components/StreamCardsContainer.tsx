@@ -21,6 +21,7 @@ const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, stream
 			):(
 				streamerData.map((item) => {
 					return (
+						item.length === 5 && 
 						item.map((streamer) => (
 							<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
 						))
