@@ -4,12 +4,16 @@ import { FilterContext } from "../context/filter.context";
 import { LiveStreamsData, StreamersData } from "../types/types";
 
 const useFilterRecommendations = 
-(recommendationsList: StreamersData[] | undefined, followedLive: LiveStreamsData[] | undefined, size: number) => {
+(recommendationsList: StreamersData[] | undefined, followedLive: LiveStreamsData[][] | undefined, size: number) => {
     const { setFirst, first, second, setSecond } = useContext(FilterContext);
 
     const recommended: Array<LiveStreamsData[]> = [];
     recommendationsList?.forEach((element) => {
-        recommended.push(element.data.filter((item: LiveStreamsData) => !followedLive?.some(id => id.user_id === item.user_id)))
+        if(followedLive){
+            recommended.push(element.data.filter((item: LiveStreamsData) => !followedLive[0]?.some(id => id.user_id === item.user_id)))
+        } else {
+            recommended.push(element.data);
+        }
     })   
 
     let secondPage = recommended[1]?.length;
