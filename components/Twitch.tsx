@@ -29,10 +29,10 @@ const Twitch = () => {
 
     const getFollowedLiveKey = (pageIndex: number, previousPageData: StreamersData) => {
         if(pageIndex == 0) {
-            return `/streams/followed?user_id=${userId}&first=15`
+            return follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=15` : null
         }
         if (previousPageData && previousPageData?.pagination?.cursor) {
-            return `/streams/followed?user_id=${userId}&first=10&after=${previousPageData.pagination.cursor}`
+            return follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=10&after=${previousPageData.pagination.cursor}`: null
         } 
     }
 
