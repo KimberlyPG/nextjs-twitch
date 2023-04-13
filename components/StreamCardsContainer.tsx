@@ -17,7 +17,7 @@ const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, stream
 			{streamerData.map((item) => {
 				return (
 					description === "Recommended Channels" ? 
-					(item.length === 5 && item.map((streamer: LiveStreamsData) => (
+					(item.map((streamer: LiveStreamsData) => (
 						<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
 					)))
 					:
