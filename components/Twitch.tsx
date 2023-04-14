@@ -23,12 +23,6 @@ const Twitch = () => {
         } 
     }
 
-    const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
-    const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
-    const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = 
-    useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=10`: null);  
-    const { data: topGames, error: topGamesError, isLoading: topGamesIsLoading } = useSWR<TopGameData[], Error>(`/games/top?first=9`);
-    
     const changeSize = () => {
         if(size === 2) {
             setSize(size - 1);
@@ -37,7 +31,14 @@ const Twitch = () => {
             setSize(size + 1);
         }
     }
+    
+    const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
+    const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
+    const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = 
+    useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=11`: null);  
+    const { data: topGames, error: topGamesError, isLoading: topGamesIsLoading } = useSWR<TopGameData[], Error>(`/games/top?first=9`);
 
+    
     if(followsError || followedLiveError || topGamesError) return <div>Something went wrong</div>
     if (followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading || topGamesIsLoading || !topGames) return <TwitchSkeleton />
     return (
@@ -49,6 +50,9 @@ const Twitch = () => {
                         followedData={followedLive}
                     />
                 }
+                <button className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 10 && "hidden"}`} >
+                    Show all
+                </button>
                 {recommendationsList &&
                     <StreamCardsContainer 
                         description="Recommended Channels"
