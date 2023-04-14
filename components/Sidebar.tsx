@@ -8,30 +8,31 @@ import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
 
 import { Follow, LiveStreamsData, StreamersData } from "../types/types";
-import { useState } from "react";
 import usePaginationFetcher from "../hooks/usePaginationFetcher";
 
 const Sidebar = () => {
 	const { data: session, status } = useSession();
 	const userId = session?.user.id;
 	const fetcher = usePaginationFetcher();
-	const [showMore, setShowMore] = useState(true);
 
 	const getKey = (pageIndex: number, previousPageData: StreamersData) => {
 		if(pageIndex == 0) {
 			return `/streams?first=6`
 		}
 		if (previousPageData && previousPageData?.pagination?.cursor) {
-			if(pageIndex < 2) {
-				setShowMore(false);
-				return  `/streams?&first=5&after=${previousPageData.pagination.cursor}`
-			}
-			else if(pageIndex >= 2){
-				setShowMore(true);
-				setSize(1)
-			}
+			return  `/streams?&first=5&after=${previousPageData.pagination.cursor}`
 		} 
 	}
+
+	const changeSize = () => {
+        if(size === 2) {
+            setSize(size - 1);
+        } 
+        if(size === 1) {
+            setSize(size + 1);
+        }
+    }
+
 	const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
 	const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
@@ -76,9 +77,7 @@ const Sidebar = () => {
 			<SidebarContainer title="Recommended Channels">
 				{recommendationsList && recommendationsList.map((item) => {
 						return (
-							item.data
-							.filter((item: LiveStreamsData) => !follows?.some(id => id.to_id === item.user_id))				
-							.map((streamer: LiveStreamsData) => (
+							item.data.map((streamer: LiveStreamsData) => (
 								<SidebarStreamerCard
 									key={streamer.id} 
 									id={streamer.user_id} 
@@ -89,8 +88,8 @@ const Sidebar = () => {
 						)
 				})}
 			</SidebarContainer>
-			<button className="m-5 text-purple-500 text-xs hover:text-white lg:flex xs:hidden" onClick={() => setSize(size + 1)}>
-				{showMore ? "Show more" : "Show less"}
+			<button className="m-5 text-purple-500 text-xs hover:text-white lg:flex xs:hidden" onClick={() => changeSize()}>
+				{size === 1 ? "Show more": recommendationsListIsLoading ? "Loading" : "Show less"}
 			</button>
 		</div>
 	);
