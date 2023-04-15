@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import useSWR from 'swr';
 import useSWRInfinite from "swr/infinite";
 
@@ -13,6 +14,7 @@ const Twitch = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const fetcher = usePaginationFetcher();
+    const router = useRouter();
     
     const getKey = (pageIndex: number, previousPageData: StreamersData) => {
         if(pageIndex == 0) {
@@ -30,6 +32,10 @@ const Twitch = () => {
         if(size === 1) {
             setSize(size + 1);
         }
+    }
+
+    const handleShowAll = () => {
+        router.push("/following/live");
     }
     
     const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
@@ -50,7 +56,10 @@ const Twitch = () => {
                         followedData={followedLive}
                     />
                 }
-                <button className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 10 && "hidden"}`} >
+                <button 
+                    className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 10 && "hidden"}`} 
+                    onClick={() => handleShowAll()}
+                >
                     Show all
                 </button>
                 {recommendationsList &&
