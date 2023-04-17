@@ -24,7 +24,7 @@ const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, recomm
 					})
 			}
 			{description === "Followed Live Channels" &&
-				followedData?.slice(0, 10).map((streamer) => (
+				followedData?.slice(0, 5).map((streamer) => (
 					<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
 				))
 			}	

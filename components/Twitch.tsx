@@ -41,7 +41,7 @@ const Twitch = () => {
     const { data: recommendationsList, size, setSize, isLoading: recommendationsListIsLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
     const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
     const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = 
-    useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=11`: null);  
+    useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}&first=6`: null);  
     const { data: topGames, error: topGamesError, isLoading: topGamesIsLoading } = useSWR<TopGameData[], Error>(`/games/top?first=9`);
 
     
@@ -57,7 +57,7 @@ const Twitch = () => {
                     />
                 }
                 <button 
-                    className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 10 && "hidden"}`} 
+                    className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 5 && "hidden"}`} 
                     onClick={() => handleShowAll()}
                 >
                     Show all
