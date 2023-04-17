@@ -69,7 +69,7 @@ const Twitch = () => {
                     />
                 }
                 <button className="text-sm text-purple-500 text-center w-full" onClick={() => changeSize()}>
-                    {size === 1 ? "Show more": recommendationsListIsLoading ? "Loading":"Show less"}
+                    {size === 1 ? "Show more": recommendationsList && !recommendationsList[1]?.data ? "Loading":"Show less"}
                 </button>
                 <TopGames topGames={topGames}/>
             </div>

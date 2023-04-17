@@ -37,9 +37,9 @@ const Sidebar = () => {
 	const { data: follows, error: followsError, isLoading: followsIsLoading } = useSWR<Follow[], Error>(`/users/follows?from_id=${userId}&first=80`);
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
 
-    if ( !follows || followsIsLoading || follosLiveIsLoading || recommendationsListIsLoading) return <SidebarSkeleton />
+    if ( !follows || followsIsLoading || follosLiveIsLoading || !recommendationsList || recommendationsListIsLoading) return <SidebarSkeleton />
 	return (
-		<div className="text-white py-10 h-screen lg:w-64 space-y-5 overflow-y-scroll scrollbar-hide">
+		<div className="text-white py-10 h-screen lg:w-64 space-y-5 overflow-y-scroll scrollbar-hide self-start sticky top-0 col-span-1">
 			{follows && followedLive ? 	(
 			<>
 				<SidebarContainer title="Followed Channels">
@@ -76,16 +76,16 @@ const Sidebar = () => {
 			}
 			<SidebarContainer title="Recommended Channels">
 				{recommendationsList && recommendationsList.map((item) => {
-						return (
-							item.data.map((streamer: LiveStreamsData) => (
-								<SidebarStreamerCard
-									key={streamer.id} 
-									id={streamer.user_id} 
-									game_name={streamer.game_name} 
-									viewer_count={streamer.viewer_count}
-								/>
-							))
-						)
+					return (
+						item.data.map((streamer: LiveStreamsData) => (
+							<SidebarStreamerCard
+								key={streamer.id} 
+								id={streamer.user_id} 
+								game_name={streamer.game_name} 
+								viewer_count={streamer.viewer_count}
+							/>
+						))
+					)
 				})}
 			</SidebarContainer>
 			<button className="m-5 text-purple-500 text-xs hover:text-white lg:flex xs:hidden" onClick={() => changeSize()}>
