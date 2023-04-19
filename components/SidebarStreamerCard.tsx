@@ -22,17 +22,17 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
         {game_name ? (
             streamerData &&
             <Link href={`/stream/${streamerData[0].display_name}`}>
-                <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row xs:justify-center lg:justify-start relative text-white py-2 lg:pl-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData[0].profile_image_url} 
                         user={streamerData[0].display_name} 
                         extraStyle={"h-8 w-8"} 
                     />
                     <div>
-                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold xs:hidden lg:flex">{streamerData[0].display_name}</h4>
-                        {game_name && <h4 className="w-28 pl-5 text-xs text-gray-300 truncate xs:hidden lg:flex">{game_name}</h4>}
+                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-4 truncate text-xs font-semibold xs:hidden lg:flex">{streamerData[0].display_name}</h4>
+                        {game_name && <h4 className="w-28 pl-4 text-xs text-gray-300 truncate xs:hidden lg:flex">{game_name}</h4>}
                     </div>
-                    <div className="flex right-0 xs:hidden lg:flex">
+                    <div className="flex right-0 xs:hidden lg:flex w-24">
                         <RiRadioButtonLine className="text-red-500 text-xs" />
                         {viewer_count && <h4 className="text-xs pl-1">{viewersFormat(viewer_count)}</h4>}
                     </div>
@@ -41,14 +41,14 @@ const SidebarStreamerCard: FC<SidebarStreamerCardProps> = ({ id, game_name, view
             ):(
             streamerData &&
             <Link href={{pathname: `/profile/${id}`, query: {state:(false)}}}>
-                <div className="flex flex-row relative text-white py-2 pl-4 pr-2 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
+                <div className="flex flex-row xs:justify-center lg:justify-start relative text-white py-2 lg:px-4 hover:bg-slate-900 hover:opacity-70 cursor-pointer">
                     <UserImage 
                         imageUrl={streamerData[0].profile_image_url} 
                         user={streamerData[0].display_name} 
                         extraStyle={"h-8 w-8 grayscale"} 
                     />
                     <div className="flex xs:hidden lg:flex">
-                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-5 truncate text-xs font-semibold">{streamerData[0].display_name}</h4>
+                        <h4 className="w-28 hover:text-purple-400 cursor-pointer pl-4 truncate text-xs font-semibold">{streamerData[0].display_name}</h4>
                         <h3 className="right-0 text-xs">offline</h3>
                     </div>
                 </div>

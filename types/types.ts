@@ -99,3 +99,12 @@ export type Twitch = {
     signinUrl:   string;
     callbackUrl: string;
 }
+
+export interface StreamersData {
+    data:       LiveStreamsData[];
+    pagination: Pagination;
+}
+
+export interface Pagination {
+    cursor: string;
+}

@@ -38,7 +38,7 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
                 height="450px"
                 layout='video'
             /> 
-            <div>
+            <div className='w-full'>
                 {state === "true" &&
                     <div className='pl-3'>
                         <Link href={`/stream/${userData?.display_name}`}>
