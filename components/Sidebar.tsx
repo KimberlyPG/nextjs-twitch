@@ -43,7 +43,7 @@ const Sidebar = () => {
     if ( !follows || followsIsLoading || follosLiveIsLoading || !recommendationsList || recommendationsListIsLoading) return <SidebarSkeleton />
 	console.log(toggleSidebar)
 	return (
-		<div className={`py-10 h-screen space-y-5 ${toggleSidebar ? "lg:w-64 xs:w-16":"hidden"}`}>
+		<div className={`py-10 h-screen overflow-y-scroll scrollbar-hide space-y-5 ${toggleSidebar ? "lg:w-64 xs:w-16":"hidden"}`}>
 			{follows && followedLive ? 	(
 			<>
 				<SidebarContainer title="Followed Channels">
