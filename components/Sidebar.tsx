@@ -7,6 +7,8 @@ import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
 
+import { useAppSelector } from "../store/hooks";
+import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
 import { Follow, LiveStreamsData, StreamersData } from "../types/types";
 import usePaginationFetcher from "../hooks/usePaginationFetcher";
 
@@ -14,6 +16,7 @@ const Sidebar = () => {
 	const { data: session, status } = useSession();
 	const userId = session?.user.id;
 	const fetcher = usePaginationFetcher();
+	const toggleSidebar = useAppSelector(selectToggle);
 
 	const getKey = (pageIndex: number, previousPageData: StreamersData) => {
 		if(pageIndex == 0) {
@@ -38,8 +41,9 @@ const Sidebar = () => {
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
 
     if ( !follows || followsIsLoading || follosLiveIsLoading || !recommendationsList || recommendationsListIsLoading) return <SidebarSkeleton />
+	console.log(toggleSidebar)
 	return (
-		<div className="text-white py-10 h-screen lg:w-64 space-y-5 overflow-y-scroll scrollbar-hide self-start sticky top-0 col-span-1">
+		<div className={`py-10 h-screen space-y-5 ${toggleSidebar ? "lg:w-64 xs:w-16":"hidden"}`}>
 			{follows && followedLive ? 	(
 			<>
 				<SidebarContainer title="Followed Channels">
@@ -88,7 +92,7 @@ const Sidebar = () => {
 					)
 				})}
 			</SidebarContainer>
-			<button className="m-5 text-purple-500 text-xs hover:text-white lg:flex xs:hidden" onClick={() => changeSize()}>
+			<button className={`m-5 text-purple-500 text-xs hover:text-white xs:hidden ${!toggleSidebar ? "lg:hidden":"lg:flex"}`} onClick={() => changeSize()} >
 				{size === 1 ? "Show more": recommendationsListIsLoading ? "Loading" : "Show less"}
 			</button>
 		</div>
