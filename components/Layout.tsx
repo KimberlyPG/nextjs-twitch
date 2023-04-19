@@ -14,7 +14,6 @@ type LayoutProps = {
 const Layout: FC<LayoutProps> = ({ children }) => {
     const fetcher = useFetcher();
     const router = useRouter();
-    console.log(router.pathname)
     return (
         <SWRConfig value={{  refreshInterval: 120000, fetcher }} >
             <div className='flex bg-black text-white font-roboto'>
