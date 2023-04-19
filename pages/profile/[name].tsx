@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image';
 import useSWR from 'swr';
 
+import ProfileSkeleton from '../../components/ProfileSkeleton';
 import VideoCard from '../../components/VideoCard';
 
 import twitch from '../api/twitch';
@@ -25,9 +26,9 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
     const state = router.query.state;
     const userId = router.query.name;
 
-    const { data: video, error: followsError } = useSWR<Video[]>(`/videos?user_id=${userId}&first=6`);
+    const { data: video, error, isLoading } = useSWR<Video[]>(`/videos?user_id=${userId}&first=6`);
 
-    if(!video) return <div>Loading...</div>
+    if(isLoading) return <ProfileSkeleton />
     return (
         <>
             <ReactTwitchEmbedVideo 
@@ -56,7 +57,7 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
                     /> 
                     <h3 className='pl-5'>{userData?.display_name}</h3>
                 </div>
-                {video.length > 0 && 
+                {video && video.length > 0 && 
                     <div className='md:p-5'>              
                     <h1 className='py-3 text-lg font-semibold'>Recent streams</h1>
                         <div className='grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1'>
