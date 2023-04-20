@@ -41,7 +41,6 @@ const Sidebar = () => {
 	const { data: followedLive, error: followedLiveError, isLoading: follosLiveIsLoading } = useSWR<LiveStreamsData[], Error>(follows && follows?.length > 0 ? `/streams/followed?user_id=${userId}`: null);
 
     if ( !follows || followsIsLoading || follosLiveIsLoading || !recommendationsList || recommendationsListIsLoading) return <SidebarSkeleton />
-	console.log(toggleSidebar)
 	return (
 		<div className={`py-10 h-screen overflow-y-scroll scrollbar-hide space-y-5 ${toggleSidebar ? "lg:w-64 xs:w-16":"hidden"}`}>
 			{follows && followedLive ? 	(
