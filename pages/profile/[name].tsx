@@ -27,7 +27,8 @@ const Profile: NextPage<ProfileProps> = ({ userData }) => {
     const userId = router.query.name;
 
     const { data: video, error, isLoading } = useSWR<Video[]>(`/videos?user_id=${userId}&first=6`);
-
+    const { data: follows } = useSWR<Video[]>(`/channels/followers?broadcaster_id=${userId}`);
+    console.log(follows)
     if(isLoading) return <ProfileSkeleton />
     return (
         <>
