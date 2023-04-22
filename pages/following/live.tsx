@@ -1,12 +1,11 @@
 import { useSession } from 'next-auth/react';
 import useSWRInfinite from "swr/infinite";
 
-import StreamCard from '../../components/StreamCard';
 import Spinner from '../../components/Spinner';
+import ChannelsScroll from '../../components/ChannelsScroll';
 
 import usePaginationFetcher from "../../hooks/usePaginationFetcher";
 import { LiveStreamsData, StreamersData } from '../../types/types';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Live = () => {
     const { data: session, status } = useSession();
@@ -21,7 +20,11 @@ const Live = () => {
             return `/streams/followed?user_id=${userId}&first=5&after=${previousPageData.pagination.cursor}`
         } 
     }
-
+    
+    const changeSize = () => {
+        setSize(size + 1);
+    }
+    
     const { data: followedLive, size, setSize, error, isLoading } = 
     useSWRInfinite<StreamersData>(getFollowedLiveKey, fetcher, {refreshInterval: 20000});
 
@@ -36,25 +39,12 @@ const Live = () => {
         <div id="scrollableDiv" className='h-full overflow-y-scroll scrollbar-hide md:m-5'>
             <h1 className='text-3xl font-bold mb-5'>Following</h1>
             {followedLive &&
-                <InfiniteScroll 
-                    className='scrollbar-hide'
-                    dataLength={followedLiveList.length ?? 0}
-                    next={() =>  setSize(size + 1)} 
-                    hasMore={!isReachedEnd} 
-                    loader={<h3 className='text-center'><Spinner /></h3>}
-                    endMessage={<p className='text-center text-xs'>Reached to the end</p>}
-                    scrollableTarget="scrollableDiv"
-                >
-                    <div className="grid 3xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
-                            {followedLive?.map((item) => {
-                                return (
-                                    item.data.map((streamer) => (
-                                        <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
-                                    )))
-                                })
-                            }
-                    </div>
-                </InfiniteScroll>
+                <ChannelsScroll 
+                    channelsList={followedLiveList} 
+                    channels={followedLive} 
+                    isReachedEnd={isReachedEnd} 
+                    changeSize={changeSize} 
+                />
             }
         </div>   
     );

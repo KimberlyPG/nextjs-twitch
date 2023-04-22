@@ -2,13 +2,15 @@ import { getSession } from "next-auth/react";
 import { NextPage, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import useSWR from 'swr';
+import useSWRInfinite from "swr/infinite";
 
 import GameCards from "../../components/GameCard";
 import GameSkeleton from "../../components/GameSkeleton";
+import ChannelsScroll from "../../components/ChannelsScroll";
 
 import twitch from "../api/twitch";
-import { GameData, LiveStreamsData } from "../../types/types";
+import usePaginationFetcher from "../../hooks/usePaginationFetcher";
+import { GameData, LiveStreamsData, StreamersData } from "../../types/types";
 
 type GameProps = {
     game: GameData;
@@ -17,13 +19,33 @@ type GameProps = {
 
 const Game: NextPage<GameProps> = ({ game }) => {
     const router = useRouter();
+    const fetcher = usePaginationFetcher();
     const gameId = router.query.id;
  
-    const { data: channel, error: followsError } = useSWR<LiveStreamsData[], Error>(`/streams?game_id=${gameId}&first=15`);
+    const getKey = (pageIndex: number, previousPageData: StreamersData) => {
+        if(pageIndex == 0) {
+            return `/streams?game_id=${gameId}&first=15`
+        }
+        if (previousPageData && previousPageData?.pagination?.cursor) {
+            return `/streams?game_id=${gameId}&first=10&after=${previousPageData.pagination.cursor}`
+        } 
+    }
+    
+    const changeSize = () => {
+        setSize(size + 1);
+    }
 
-    if(!channel) return <GameSkeleton />
+    const { data: gameChannels, size, setSize, isLoading } = useSWRInfinite(getKey , fetcher, {refreshInterval: 20000});
+    
+    const isReachedEnd = gameChannels &&  !gameChannels[gameChannels.length -1]?.pagination?.cursor;
+
+    const gameChannelsArray: LiveStreamsData[][] =  [];
+    gameChannels?.forEach((el) => gameChannelsArray.push(el.data));
+    const gameChannelsList = gameChannelsArray.flat();
+
+    if(!gameChannels) return <GameSkeleton />
     return (
-        <div className="text-white font-roboto sm:p-5">
+        <div id="scrollableDiv" className='h-full overflow-y-scroll scrollbar-hide md:m-5'>
             <div className="flex relative items-center my-10 m-10">
                 <Image
                     className="bg-purple-500 shadow-lg shadow-purple-500/50 object-contain lg:h-56 md:h-44 xs:h-36 w-fit" 
@@ -37,11 +59,13 @@ const Game: NextPage<GameProps> = ({ game }) => {
             </div>
 
             <h2 className="text-sm my-5 font-semibold">Live channels we think you will like</h2>
-            <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 xs:grid-cols-1">
-                {channel && channel.map((streamer) => (
-                    <GameCards key={streamer.id} streamer={streamer} />
-                ))}
-            </div>
+            <ChannelsScroll 
+                channelsList={gameChannelsList} 
+                channels={gameChannels} 
+                isReachedEnd={isReachedEnd} 
+                changeSize={changeSize} 
+            />
+
         </div>
     );
 };
