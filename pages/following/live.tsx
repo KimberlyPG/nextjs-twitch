@@ -44,6 +44,7 @@ const Live = () => {
                     channels={followedLive} 
                     isReachedEnd={isReachedEnd} 
                     changeSize={changeSize} 
+                    page="live"
                 />
             }
         </div>   

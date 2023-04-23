@@ -10,9 +10,10 @@ type StreamDescriptionProps = {
     title: string;
     user_name: string;
     game_name: string | null;
+    page: string;
 }
 
-const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_name, game_name }) => {
+const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_name, game_name, page }) => {
     const { data: streamerData, error: streamerDataError } = useSWR<UserData[], Error>(`/users?id=${user_id}`);
 
     if(!streamerData) return <div>Loading...</div>
@@ -26,7 +27,9 @@ const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_na
             <span className="w-full truncate m-2">
                 <p className="truncate text-white sm:text-sm xs:text-xs">{title}</p>
                 <h3 className="text-gray-400 sm:text-sm xs:text-xs">{user_name}</h3>
-                <p className="text-gray-400 sm:text-sm xs:text-xs hover:text-purple-400">{game_name}</p>
+                {page !== "game" &&
+                    <p className="text-gray-400 sm:text-sm xs:text-xs hover:text-purple-400">{game_name}</p>
+                }
             </span>
         </div>   
     );

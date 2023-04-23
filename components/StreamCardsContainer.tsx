@@ -19,13 +19,13 @@ const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, recomm
 				recommendedData?.map((item) => {
 					return (
 						item.data.map((streamer: LiveStreamsData) => (
-							<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
+							<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} page="twitch" />
 						)))
 					})
 			}
 			{description === "Followed Live Channels" &&
 				followedData?.slice(0, 5).map((streamer) => (
-					<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
+					<StreamCard key={streamer.id+streamer.user_id} streamer={streamer} page="twitch" />
 				))
 			}	
         </div>

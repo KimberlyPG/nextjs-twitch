@@ -11,9 +11,10 @@ type ChannelsScrollProps = {
     channels: StreamersData[];
     isReachedEnd: boolean | undefined;
     changeSize: () => void;
+    page: string;
 }
 
-const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isReachedEnd, changeSize }) => {
+const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isReachedEnd, changeSize, page }) => {
   return (
         <InfiniteScroll 
             className='scrollbar-hide'
@@ -28,7 +29,7 @@ const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isRea
                     {channels?.map((item) => {
                         return (
                             item.data.map((streamer) => (
-                                <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} />
+                                <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} page={page} />
                             )))
                         })
                     }

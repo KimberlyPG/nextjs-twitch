@@ -65,6 +65,7 @@ const Game: NextPage<GameProps> = ({ game }) => {
                     channels={gameChannels} 
                     isReachedEnd={isReachedEnd} 
                     changeSize={changeSize} 
+                    page="game"
                 />
             }
         </div>
