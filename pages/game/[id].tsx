@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import useSWRInfinite from "swr/infinite";
 
-import GameCards from "../../components/GameCard";
 import GameSkeleton from "../../components/GameSkeleton";
 import ChannelsScroll from "../../components/ChannelsScroll";
 
