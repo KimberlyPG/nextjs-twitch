@@ -13,13 +13,13 @@ type SearchListProps = {
 
 const SearchItem: FC<SearchListProps> = ({ streams }) => {
     const state = streams.is_live;
-
-    const { data: data, error: followsError } = useSWR<LiveStreamsData[]>(`/streams?&user_id=${streams.id}`);
+    const { data: data } = useSWR<LiveStreamsData[]>(`/streams?&user_id=${streams.id}`);
 
     return ( 
         <>
-        {data && state ? (
+        {state === true ? (
              <Link href={`/stream/${streams.display_name}`}>
+                {data &&
                 <div className="flex text-white mb-5 cursor-pointer lg:ml-10 xs:ml-5">
                     <div className="flex relative lg:w-1/3 sm:w-1/2 xs:w-full">
                         <Image 
@@ -40,6 +40,7 @@ const SearchItem: FC<SearchListProps> = ({ streams }) => {
                         <p className="xs:text-xs sm:text-sm text-gray-300 xs:hidden sm:flex">{streams.title}</p>
                     </div> 
                 </div>  
+                }
             </Link>
             ):(  
             <Link href={{pathname: `/profile/${streams.id}`, query: {state:(state)}}}>

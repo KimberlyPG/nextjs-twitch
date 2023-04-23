@@ -6,7 +6,9 @@ import useSWRInfinite from "swr/infinite";
 import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
 import TwitchSkeleton from "./TwitchSkeleton";
+import Spinner from "./Spinner";
 
+import { BsArrowDownShort, BsArrowUpShort, BsArrowRightShort } from "react-icons/bs";
 import { LiveStreamsData, TopGameData, Follow, StreamersData } from "../types/types";
 import usePaginationFetcher from "../hooks/usePaginationFetcher";
 
@@ -57,10 +59,11 @@ const Twitch = () => {
                     />
                 }
                 <button 
-                    className={`text-sm text-purple-500 text-center w-full ${followedLive && followedLive.length <= 5 && "hidden"}`} 
+                    className={`flex justify-center text-sm text-purple-500 w-full ${followedLive && followedLive.length <= 5 && "hidden"}`} 
                     onClick={() => handleShowAll()}
                 >
                     Show all
+                    <BsArrowRightShort className="text-xl" />
                 </button>
                 {recommendationsList &&
                     <StreamCardsContainer 
@@ -68,8 +71,24 @@ const Twitch = () => {
                         recommendedData={recommendationsList}
                     />
                 }
-                <button className="text-sm text-purple-500 text-center w-full" onClick={() => changeSize()}>
-                    {size === 1 ? "Show more": recommendationsList && !recommendationsList[1]?.data ? "Loading":"Show less"}
+                <button className="flex justify-center text-sm text-purple-500 text-center w-full" onClick={() => changeSize()}>
+                    {size === 1 ? (
+                        <>
+                            Show more
+                            <BsArrowDownShort className="text-xl" />
+                        </>
+                        ):(
+                        recommendationsList && !recommendationsList[1]?.data ? (
+                            <>
+                                <Spinner />
+                            </>
+                        ):(
+                            <>
+                                Show less
+                                <BsArrowUpShort className="text-xl" />
+                            </>
+                        )
+                    )}
                 </button>
                 <TopGames topGames={topGames}/>
             </div>
