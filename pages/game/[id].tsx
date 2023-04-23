@@ -59,13 +59,14 @@ const Game: NextPage<GameProps> = ({ game }) => {
             </div>
 
             <h2 className="text-sm my-5 font-semibold">Live channels we think you will like</h2>
-            <ChannelsScroll 
-                channelsList={gameChannelsList} 
-                channels={gameChannels} 
-                isReachedEnd={isReachedEnd} 
-                changeSize={changeSize} 
-            />
-
+            {gameChannels &&
+                <ChannelsScroll 
+                    channelsList={gameChannelsList} 
+                    channels={gameChannels} 
+                    isReachedEnd={isReachedEnd} 
+                    changeSize={changeSize} 
+                />
+            }
         </div>
     );
 };
