@@ -15,6 +15,7 @@ const usePaginationFetcher = () => {
                 },
             })
             .then((res) => res.data)
+            .catch(error => console.log(error));
     }
 	return fetcher;
 }
