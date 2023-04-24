@@ -20,7 +20,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <Sidebar />
                 <div className='flex h-screen flex-col h-full w-full'>
                     <Topbar />
-                    {router.pathname === "/following/live" ? (
+                    {router.pathname === "/following/live" || router.pathname.startsWith("/game/") ? (
                         children
                     ):(
                         <div className='h-full overflow-y-scroll scrollbar-hide'>{children}</div>

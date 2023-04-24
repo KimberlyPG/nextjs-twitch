@@ -15,6 +15,7 @@ const useFetcher = () => {
 				},
 			})
 			.then((res) => res.data.data)
+			.catch(error => console.log(error));
 	}
 	return fetcher;
 }

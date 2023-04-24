@@ -80,7 +80,7 @@ const Sidebar = () => {
 			<SidebarContainer title="Recommended Channels">
 				{recommendationsList && recommendationsList.map((item) => {
 					return (
-						item.data.map((streamer: LiveStreamsData) => (
+						item?.data?.map((streamer: LiveStreamsData) => (
 							<SidebarStreamerCard
 								key={streamer.id} 
 								id={streamer.user_id} 
