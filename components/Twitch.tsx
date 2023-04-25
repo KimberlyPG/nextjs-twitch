@@ -7,6 +7,7 @@ import StreamCardsContainer from "./StreamCardsContainer";
 import TopGames from "./TopGames";
 import TwitchSkeleton from "./TwitchSkeleton";
 import ShowMoreButton from "./ShowMoreButton";
+import Button from "./Button";
 
 import { BsArrowRightShort } from "react-icons/bs";
 import { LiveStreamsData, TopGameData, Follow, StreamersData } from "../types/types";
@@ -57,16 +58,16 @@ const Twitch = () => {
                         description="Followed Live Channels"
                         followedData={followedLive}
                     />
-                    <button 
-                        className={`flex justify-center text-sm text-purple-500 w-full ${followedLive && followedLive.length <= 5 && "hidden"}`} 
+                    <Button 
+                        styles={`${followedLive && followedLive.length <= 5 && "hidden"}`} 
                         onClick={() => handleShowAll()}
                     >
                         Show all
                         <BsArrowRightShort className="text-xl" />
-                    </button>
+                    </Button>
                 </>
             }
-            {recommendationsList &&
+            {recommendationsList && recommendationsList.length &&
                 <>
                     <StreamCardsContainer 
                         description="Recommended Channels"

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BsArrowDownShort, BsArrowUpShort } from "react-icons/bs";
 
 import Spinner from "./Spinner";
+import Button from "./Button";
 
 import { StreamersData } from "../types/types";
 
@@ -13,10 +14,7 @@ type ShowMoreProps = {
 
 const ShowMoreButton: FC<ShowMoreProps> = ({ size, recommendationsList, changeSize }) => {
   return (
-    <button 
-        className="flex justify-center text-sm text-purple-500 text-center w-full" 
-        onClick={() => changeSize()}
-    >
+    <Button onClick={() => changeSize()}>
         {size === 1 ? (
                 <>
                     Show more
@@ -32,7 +30,7 @@ const ShowMoreButton: FC<ShowMoreProps> = ({ size, recommendationsList, changeSi
                 </>
             )
         )}
-    </button>
+    </Button>
   )
 }
 
