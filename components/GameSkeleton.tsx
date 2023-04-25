@@ -26,9 +26,9 @@ function GameSkeleton() {
                             <div className='h-10 my-2 mr-2'>
                                 <Skeleton circle width={50} height={50} baseColor="#202020" highlightColor="#444" />
                             </div>
-                            <span className="w-full truncate m-2">
+                            <div className="w-full truncate m-2">
                                 <Skeleton count={2} baseColor="#202020" highlightColor="#444" />
-                            </span>
+                            </div>
                         </div>   
                     </div>
                 ))}

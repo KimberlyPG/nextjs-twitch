@@ -18,9 +18,9 @@ const StreamDescription: FC<StreamDescriptionProps> = ({ user_id, title, user_na
 
     if(!streamerData) return <div>Loading...</div>
     return (
-        <div className="flex relative">  
+        <div className="flex relative xs:mx-3 sm:mx-0">  
             <UserImage 
-                extraStyle={"h-10 my-2 mr-2"}
+                extraStyle={"h-10 w-10 my-2 mr-2"}
                 imageUrl={streamerData[0].profile_image_url}
                 user={user_name}
             />                       

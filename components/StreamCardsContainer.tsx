@@ -9,7 +9,7 @@ type StreamCardContainerProps = {
 	recommendedData?: StreamersData[] | undefined;
 	followedData?: LiveStreamsData[] | undefined;
 }
-
+ 
 const StreamCardContainer: FC<StreamCardContainerProps> = ({ description, recommendedData, followedData }) => {
   return (
     <div className="xs:pt-2">

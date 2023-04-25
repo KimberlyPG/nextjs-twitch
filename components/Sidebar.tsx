@@ -6,6 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import SidebarContainer from "./SidebarContainer";
 import SidebarStreamerCard from "./SidebarStreamerCard";
 import SidebarSkeleton from "./SidebarSkeleton";
+import Button from "./Button";
 
 import { useAppSelector } from "../store/hooks";
 import { selectToggle } from "../store/slices/sidebarToggleSlice/sidebarToggleSlice";
@@ -91,7 +92,10 @@ const Sidebar = () => {
 					)
 				})}
 			</SidebarContainer>
-			<button className={`m-5 text-purple-500 text-xs hover:text-white xs:hidden ${!toggleSidebar ? "lg:hidden":"lg:flex"}`} onClick={() => changeSize()} >
+			<button 
+				className={`m-5 text-purple-500 text-xs hover:text-white xs:hidden ${!toggleSidebar ? "lg:hidden":"lg:flex"}`} 
+				onClick={() => changeSize()} 
+			>
 				{size === 1 ? "Show more": recommendationsListIsLoading ? "Loading" : "Show less"}
 			</button>
 		</div>
