@@ -26,13 +26,13 @@ const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isRea
             scrollableTarget="scrollableDiv"
         >
             <div className="grid 3xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1">
-                    {channels?.map((item) => {
-                        return (
-                            item.data.map((streamer) => (
-                                <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} page={page} />
-                            )))
-                        })
-                    }
+                {channels?.map((item) => {
+                    return (
+                        item.data.map((streamer) => (
+                            <StreamCard key={streamer.id+streamer.user_id} streamer={streamer} page={page} />
+                        )))
+                    })
+                }
             </div>
         </InfiniteScroll>
   )
