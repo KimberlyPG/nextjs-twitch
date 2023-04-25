@@ -35,7 +35,7 @@ const SearchBar: FC<SearchBarProps> = ({ openSearchBar, clickSearch, hideSearchB
             />
             <form className="relative xs:w-full xs:text-xs sm:text-sm"  onSubmit={handleSubmit}>
                 <input 
-                onClick={openSearchBar}
+                    onClick={openSearchBar}
                     className={`peer cursor-pointer relative z-10 w-9 h-9 pl-8 xs:rounded-full sm:rounded-r-none sm:border border-gray-600 
                     bg-transparent outline-none focus:pr-4 focus:border-purple-400 sm:w-full sm:pl-8 sm:focus:pl-16 placeholder:italic
                     ${clickSearch && "xs:w-full xs:pl-16 xs:border"}`} 
