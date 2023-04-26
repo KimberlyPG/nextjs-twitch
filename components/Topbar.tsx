@@ -40,7 +40,11 @@ const Topbar = () => {
                     onClick={navigateHome}
                 />
             </div>
-            <SearchBar openSearchBar={openSearchBar} clickSearch={clickSearch} hideSearchBar={hideSearchBar} />       
+            <SearchBar 
+                openSearchBar={openSearchBar} 
+                clickSearch={clickSearch} 
+                hideSearchBar={hideSearchBar} 
+            />       
             <TopbarMenu  />
         </div>
     );

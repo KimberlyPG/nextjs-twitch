@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-function SearchSkeleton() {
+const SearchSkeleton = () => {
     return (
         <div className="pt-10 font-roboto mx-10">
             {Array.from({ length: 9 }, (_, i) => (
@@ -22,7 +22,7 @@ function SearchSkeleton() {
                 </div> 
             ))}
         </div>
-    )
+    );
 }
 
 export default SearchSkeleton;

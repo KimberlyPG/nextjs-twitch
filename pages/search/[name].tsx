@@ -13,7 +13,7 @@ const Search: NextPage = () => {
     const userName = router?.query?.name;
 
     const { data: results, error: followsError } = useSWR<SearchChannels[]>(`/search/channels?query=${userName}&first=8`);
-
+    
     if(!results) return <SearchSkeleton />
     return (
         <>
