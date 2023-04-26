@@ -20,9 +20,9 @@ const ProfileSkeleton = () => {
                             <Skeleton width="100%" height="100%" baseColor="#202020" highlightColor="#444" />
                         </div>
                         <div className="flex">  
-                            <span className="w-full truncate m-1">
+                            <div className="w-full truncate m-1">
                                 <Skeleton count={2} baseColor="#202020" highlightColor="#444" />
-                            </span>
+                            </div>
                         </div>   
                     </div>
                 ))}

@@ -7,12 +7,12 @@ type ButtonProps = {
 
 const Button: FC<ButtonProps> = ({ children, styles = "", ...otherProps }) => {
   return (
-    <button 
-        className={`flex justify-center text-sm text-purple-500 w-full hover:text-white ${styles}`} 
-        {...otherProps}
-    >
-        {children}
-    </button>
+		<button 
+			className={`flex justify-center text-sm text-purple-500 w-full hover:text-white ${styles}`} 
+			{...otherProps}
+		>
+			{children}
+		</button>
   )
 }
 

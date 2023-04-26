@@ -15,7 +15,7 @@ type ChannelsScrollProps = {
 }
 
 const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isReachedEnd, changeSize, page }) => {
-  return (
+    return (
         <InfiniteScroll 
             className='scrollbar-hide'
             dataLength={channelsList.length ?? 0}
@@ -35,7 +35,7 @@ const ChannelsScroll: FC<ChannelsScrollProps> = ({ channelsList, channels, isRea
                 }
             </div>
         </InfiniteScroll>
-  )
+    );
 }
 
 export default ChannelsScroll;
