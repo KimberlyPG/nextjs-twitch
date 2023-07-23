@@ -13,5 +13,10 @@ https://silly-manatee-cc57df.netlify.app/
 ## Profile
 ![image](https://user-images.githubusercontent.com/65067847/193160629-544753f9-1f33-45a4-b400-d4c642ac677e.png)
 
+## Search streamers
+![image](https://github.com/KimberlyPG/nextjs-twitch/assets/65067847/2e07f4c1-f516-40b0-8f90-db0e38c44c99)
+
 ## Use the app in your phone 
 ![image](https://user-images.githubusercontent.com/65067847/230252127-1d3b95ce-a906-442e-8dd3-2520a96f26d7.png)
+
+
